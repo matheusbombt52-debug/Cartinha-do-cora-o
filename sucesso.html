@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pagamento aprovado! 🎉</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0c0c0e;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .card {
+      background: #18181b;
+      border-radius: 24px;
+      padding: 2.5rem 1.75rem;
+      width: 100%; max-width: 380px;
+      border: 1px solid #27272a;
+      animation: fadeUp 0.5s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Ícone de sucesso */
+    .success-icon-wrap {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: #22c55e;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1.5rem;
+      box-shadow: 0 0 0 12px rgba(34,197,94,0.12), 0 0 0 24px rgba(34,197,94,0.06);
+      animation: popIn 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.1s both;
+    }
+    @keyframes popIn {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    .success-icon-wrap svg { width: 40px; height: 40px; stroke: #fff; stroke-width: 3; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+
+    .title { font-size: 24px; font-weight: 900; color: #fff; text-align: center; margin-bottom: 0.5rem; }
+    .subtitle { font-size: 14px; color: #a1a1aa; text-align: center; margin-bottom: 2rem; line-height: 1.6; }
+
+    /* Seção compartilhar */
+    .section-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: #52525b;
+      text-align: center; margin-bottom: 1rem;
+    }
+
+    .btn-share {
+      width: 100%; padding: 15px 20px; border-radius: 14px; border: none;
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      margin-bottom: 10px; transition: all 0.2s; color: #fff;
+    }
+    .btn-share:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .btn-share:active { transform: translateY(0); }
+
+    .btn-copy    { background: linear-gradient(135deg, #e91e8c, #ff6bb5); }
+    .btn-whats   { background: #25D366; }
+    .btn-insta   { background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045); }
+
+    .btn-share svg { width: 20px; height: 20px; fill: #fff; flex-shrink: 0; }
+
+    /* Divisor */
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      margin: 1.5rem 0 1.25rem;
+    }
+    .divider::before, .divider::after {
+      content: ''; flex: 1; height: 1px; background: #27272a;
+    }
+    .divider span { font-size: 11px; font-weight: 700; color: #52525b; letter-spacing: 0.1em; white-space: nowrap; }
+
+    /* Criar outra */
+    .btn-nova {
+      width: 100%; padding: 15px 20px; border-radius: 14px;
+      background: #27272a; border: 1px solid #3f3f46;
+      font-size: 15px; font-weight: 700; color: #e4e4e7;
+      cursor: pointer; display: flex; align-items: center; gap: 10px;
+      transition: all 0.2s;
+    }
+    .btn-nova:hover { background: #3f3f46; }
+    .nova-sub { font-size: 11px; color: #71717a; font-weight: 400; margin-top: 1px; }
+
+    /* Toast */
+    .toast {
+      position: fixed; bottom: 2rem; left: 50%; transform: translateX(-50%) translateY(80px);
+      background: #22c55e; color: #fff; font-size: 14px; font-weight: 700;
+      padding: 12px 24px; border-radius: 50px;
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1);
+      white-space: nowrap; pointer-events: none;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="success-icon-wrap">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+
+    <div class="title">Pagamento aprovado!</div>
+    <p class="subtitle">Sua cartinha está pronta.<br>Compartilhe com quem você ama:</p>
+
+    <div class="section-label">Link da sua cartinha</div>
+
+    <div id="linkBox" style="background:#27272a;border:1px solid #3f3f46;border-radius:12px;padding:12px 14px;margin-bottom:12px;word-break:break-all;font-size:12px;color:#a1a1aa;font-family:monospace;line-height:1.5"></div>
+
+    <a id="btnVerCartinha" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:12px;background:#18181b;border:1.5px solid #e91e8c;color:#e91e8c;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:16px">
+      💌 Ver minha cartinha
+    </a>
+
+    <div class="section-label">Compartilhar</div>
+
+    <button class="btn-share btn-copy" onclick="copiarLink()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="fill:none;stroke:#fff;width:20px;height:20px"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      Copiar link
+    </button>
+
+    <button class="btn-share btn-whats" onclick="compartilharWhatsApp()">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      Enviar por WhatsApp
+    </button>
+
+    <button class="btn-share btn-insta" onclick="compartilharInstagram()">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      Compartilhar no Instagram
+    </button>
+
+    <div class="divider"><span>OU FAÇA MAIS</span></div>
+
+    <p style="font-size:13px;color:#71717a;text-align:center;margin-bottom:1rem">Que tal presentear outra pessoa?</p>
+
+    <button class="btn-nova" onclick="window.location.href='/'">
+      <span style="font-size:20px">✨</span>
+      <div>
+        <div>Criar outra cartinha</div>
+        <div class="nova-sub">Presenteie mais alguém especial</div>
+      </div>
+    </button>
+  </div>
+
+  <!-- Canvas de confete -->
+  <canvas id="confeteCanvas" style="position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999"></canvas>
+
+  <div class="toast" id="toast">✓ Link copiado!</div>
+
+  <script>
+    /* ── FOGOS + CONFETE ── */
+    function tocarFogos() {
+      try {
+        var ctx = new (window.AudioContext || window.webkitAudioContext)();
+        function estourar(tempo, vol) {
+          var buf = ctx.createBuffer(1, ctx.sampleRate * 0.35, ctx.sampleRate);
+          var d = buf.getChannelData(0);
+          for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 1.5);
+          var src = ctx.createBufferSource();
+          src.buffer = buf;
+          var gain = ctx.createGain();
+          gain.gain.setValueAtTime(vol, tempo);
+          gain.gain.exponentialRampToValueAtTime(0.001, tempo + 0.35);
+          src.connect(gain); gain.connect(ctx.destination);
+          src.start(tempo); src.stop(tempo + 0.35);
+        }
+        var t = ctx.currentTime;
+        estourar(t,       0.6);
+        estourar(t + 0.25, 0.4);
+        estourar(t + 0.45, 0.5);
+        estourar(t + 0.65, 0.3);
+        estourar(t + 0.85, 0.4);
+      } catch(e) {}
+    }
+
+    function lancarConfete() {
+      var canvas = document.getElementById('confeteCanvas');
+      var c = canvas.getContext('2d');
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      var cores = ['#e91e8c','#ff6b6b','#ffd700','#4caf50','#2196f3','#9c27b0','#ff9800','#00bcd4','#ff4081'];
+      var particulas = [];
+      for (var i = 0; i < 180; i++) {
+        particulas.push({
+          x:  Math.random() * canvas.width,
+          y:  -20 - Math.random() * 120,
+          w:  7  + Math.random() * 9,
+          h:  4  + Math.random() * 5,
+          cor: cores[Math.floor(Math.random() * cores.length)],
+          rot: Math.random() * Math.PI * 2,
+          vx: (Math.random() - 0.5) * 4,
+          vy: 2.5 + Math.random() * 3.5,
+          vr: (Math.random() - 0.5) * 0.18,
+          op: 1,
+        });
+      }
+
+      function animar() {
+        c.clearRect(0, 0, canvas.width, canvas.height);
+        var vivos = 0;
+        particulas.forEach(function(p) {
+          p.x  += p.vx;
+          p.y  += p.vy;
+          p.vy += 0.07;
+          p.rot += p.vr;
+          if (p.y > canvas.height * 0.75) p.op -= 0.025;
+          if (p.op > 0 && p.y < canvas.height + 20) {
+            vivos++;
+            c.save();
+            c.globalAlpha = Math.max(0, p.op);
+            c.translate(p.x, p.y);
+            c.rotate(p.rot);
+            c.fillStyle = p.cor;
+            c.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+            c.restore();
+          }
+        });
+        if (vivos > 0) requestAnimationFrame(animar);
+        else canvas.style.display = 'none';
+      }
+      animar();
+
+      /* segunda rajada depois de 700ms */
+      setTimeout(function() {
+        var canvas2 = document.getElementById('confeteCanvas');
+        canvas2.style.display = 'block';
+        canvas2.width = window.innerWidth;
+        for (var j = 0; j < 80; j++) {
+          particulas.push({
+            x:  Math.random() * canvas2.width,
+            y:  -10 - Math.random() * 60,
+            w:  6 + Math.random() * 8,
+            h:  3 + Math.random() * 5,
+            cor: cores[Math.floor(Math.random() * cores.length)],
+            rot: Math.random() * Math.PI * 2,
+            vx: (Math.random() - 0.5) * 3,
+            vy: 2 + Math.random() * 3,
+            vr: (Math.random() - 0.5) * 0.15,
+            op: 1,
+          });
+        }
+      }, 700);
+    }
+
+    /* Dispara tudo ao carregar */
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        tocarFogos();
+        lancarConfete();
+      }, 300);
+    });
+
+    var params = new URLSearchParams(window.location.search);
+    var cid = params.get('cid') || localStorage.getItem('cartinhaId') || '';
+    var cartinhaUrl = window.location.origin + '/cartinha.html' + (cid ? '?cid=' + cid : '');
+
+    document.getElementById('linkBox').textContent = cartinhaUrl;
+    document.getElementById('btnVerCartinha').href = cartinhaUrl;
+
+    function mostrarToast(msg) {
+      var t = document.getElementById('toast');
+      t.textContent = msg || '✓ Copiado!';
+      t.classList.add('show');
+      setTimeout(function() { t.classList.remove('show'); }, 2500);
+    }
+
+    function copiarLink() {
+      navigator.clipboard.writeText(cartinhaUrl).then(function() {
+        mostrarToast('✓ Link copiado!');
+      }).catch(function() {
+        var el = document.createElement('textarea');
+        el.value = cartinhaUrl; document.body.appendChild(el);
+        el.select(); document.execCommand('copy'); document.body.removeChild(el);
+        mostrarToast('✓ Link copiado!');
+      });
+    }
+
+    function compartilharWhatsApp() {
+      var texto = '💌 Tenho uma surpresa especial para você! Abra aqui: ' + cartinhaUrl;
+      window.open('https://wa.me/?text=' + encodeURIComponent(texto), '_blank');
+    }
+
+    function compartilharInstagram() {
+      copiarLink();
+      mostrarToast('Link copiado! Cole nos Stories do Instagram 📸');
+    }
+  </script>
+</body>
+</html>

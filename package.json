@@ -1,0 +1,16 @@
+{
+  "name": "cartadocoracao",
+  "version": "1.0.0",
+  "description": "Carta do Coração - Cartinhas digitais com amor",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "axios": "^1.18.1",
+    "dotenv": "^17.4.2",
+    "express": "^4.18.2",
+    "multer": "^2.2.0",
+    "qrcode": "^1.5.4"
+  }
+}

@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💌 Uma surpresa especial para você</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --accent:       #e91e8c;
+      --accent-light: #ff6bb5;
+      --accent-dark:  #c2185b;
+      --accent-50:    #fce4ec;
+      --accent-100:   #f8bbd0;
+      --bg-from:      #fff5fa;
+      --bg-to:        #fef0f7;
+    }
+    body[data-genero="M"] {
+      --accent:       #1565c0;
+      --accent-light: #64b5f6;
+      --accent-dark:  #0d47a1;
+      --accent-50:    #e3f2fd;
+      --accent-100:   #bbdefb;
+      --bg-from:      #f0f7ff;
+      --bg-to:        #e3f2fd;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, var(--bg-from) 0%, var(--bg-to) 100%);
+      min-height: 100vh; color: #1a1a2e; overflow-x: hidden;
+    }
+
+    /* ── LOADING ── */
+    #telaLoading {
+      position: fixed; inset: 0; z-index: 200;
+      background: linear-gradient(135deg, var(--bg-from) 0%, var(--bg-to) 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 1rem;
+    }
+    .loading-heart { font-size: 56px; animation: pulseHeart 1s ease-in-out infinite; }
+    .loading-text { font-size: 14px; color: rgba(0,0,0,0.35); }
+    @keyframes pulseHeart { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+
+    /* ── CAPA ── */
+    #telaCapa {
+      position: fixed; inset: 0; z-index: 100;
+      display: none; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 2rem; text-align: center;
+      background: linear-gradient(135deg, var(--bg-from) 0%, var(--bg-to) 100%);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .capa-emoji {
+      font-size: 108px; line-height: 1; margin-bottom: 2rem;
+      filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12));
+      animation: floatEnv 3s ease-in-out infinite;
+    }
+    @keyframes floatEnv { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-16px)} }
+    .capa-pre {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
+      color: rgba(0,0,0,0.28); text-transform: uppercase; margin-bottom: 0.65rem;
+    }
+    .capa-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(28px,8vw,44px); font-weight: 900;
+      color: #1a1a2e; line-height: 1.15; margin-bottom: 0.6rem;
+    }
+    .capa-sub {
+      font-size: 14px; color: rgba(0,0,0,0.38); font-style: italic; margin-bottom: 2.75rem;
+    }
+    .btn-abrir {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 18px 44px; border-radius: 50px; border: none;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      color: #fff; font-size: 17px; font-weight: 800; cursor: pointer;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+      animation: pulsBtn 2.5s ease-in-out infinite;
+      transition: transform 0.2s;
+    }
+    @keyframes pulsBtn {
+      0%,100% { box-shadow: 0 8px 32px rgba(0,0,0,0.18); }
+      50%      { box-shadow: 0 12px 48px rgba(0,0,0,0.28), 0 0 0 8px rgba(0,0,0,0.06); }
+    }
+    .btn-abrir:hover { transform: translateY(-3px) scale(1.04); animation: none; }
+
+    /* ── CARTA ── */
+    #telaCarta { display: none; min-height: 100vh; padding-bottom: 5rem; }
+
+    .carta-wrap { max-width: 480px; margin: 0 auto; padding: 0 1.25rem; }
+
+    /* HEADER */
+    .carta-header { text-align: center; padding: 3rem 1.5rem 1.5rem; }
+    .carta-dest-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+      color: rgba(0,0,0,0.28); text-transform: uppercase; margin-bottom: 0.5rem;
+    }
+    .carta-destinatario {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px,9vw,54px); font-weight: 900;
+      color: #1a1a2e; line-height: 1.1; margin-bottom: 0.3rem;
+    }
+    .carta-remetente-linha {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(16px,5vw,24px); font-weight: 700;
+      color: var(--accent); font-style: italic; margin-bottom: 1rem;
+    }
+    .carta-ocasiao-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-50); border: 1px solid var(--accent-100);
+      color: var(--accent-dark); border-radius: 30px;
+      font-size: 13px; font-weight: 700; padding: 7px 20px;
+    }
+
+    /* SEPARADOR */
+    .carta-sep {
+      display: flex; align-items: center; gap: 12px;
+      padding: 1rem 2rem; margin-bottom: 0.5rem;
+    }
+    .carta-sep::before, .carta-sep::after {
+      content: ''; flex: 1; height: 1px;
+      background: linear-gradient(to right, transparent, var(--accent-100));
+    }
+    .carta-sep::after { background: linear-gradient(to left, transparent, var(--accent-100)); }
+
+    /* CARD MENSAGEM */
+    .msg-card {
+      background: #fff; border-radius: 24px;
+      padding: 2rem 1.75rem;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.07);
+      border: 1px solid var(--accent-100);
+      margin: 0 0 1.75rem;
+    }
+    .msg-card-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--accent);
+      margin-bottom: 1.25rem; display: flex; align-items: center; gap: 6px;
+    }
+    .msg-para {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 700; color: #1a1a2e; margin-bottom: 1.25rem;
+    }
+    .msg-texto {
+      font-size: 16px; line-height: 1.9; color: #3a3a5c;
+      white-space: pre-wrap; word-break: break-word; min-height: 24px;
+    }
+    .cursor-blink {
+      display: inline-block; width: 2px; height: 18px;
+      background: var(--accent); margin-left: 2px;
+      animation: blink 0.75s step-end infinite; vertical-align: middle;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .msg-assinatura {
+      margin-top: 1.75rem; padding-top: 1.25rem;
+      border-top: 1px solid var(--accent-100);
+      text-align: right;
+      font-family: 'Playfair Display', serif;
+      font-size: 18px; color: var(--accent); font-style: italic;
+      opacity: 0; transition: opacity 1s ease;
+    }
+    .msg-assinatura.visivel { opacity: 1; }
+
+    /* SEÇÃO COM ÍCONE (fotos, áudio, vídeo) */
+    .secao {
+      margin: 0 0 2rem; text-align: center;
+    }
+    .secao-icon {
+      width: 68px; height: 68px; border-radius: 50%;
+      background: var(--accent-50); border: 2px solid var(--accent-100);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; margin: 0 auto 1rem;
+    }
+    .secao-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px; font-weight: 900; color: #1a1a2e; margin-bottom: 0.3rem;
+    }
+    .secao-sub { font-size: 13px; color: rgba(0,0,0,0.38); margin-bottom: 1.5rem; }
+
+    /* ÁLBUM POLAROID */
+    .polaroid-container { position: relative; min-height: 300px; margin-bottom: 1rem; }
+    .polaroid {
+      background: #fff; padding: 14px 14px 52px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.15), 0 2px 8px rgba(0,0,0,0.08);
+      max-width: 270px; width: 88%; margin: 0 auto;
+      transform: rotate(-1.5deg);
+      transition: transform 0.35s cubic-bezier(0.34,1.56,0.64,1), opacity 0.3s;
+    }
+    .polaroid:hover { transform: rotate(0deg) scale(1.03); }
+    .polaroid.saindo { opacity: 0; transform: rotate(-1.5deg) scale(0.92) translateY(10px); }
+    .polaroid.entrando { animation: polaroidIn 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards; }
+    @keyframes polaroidIn {
+      from { opacity:0; transform: rotate(-1.5deg) scale(0.85) translateY(20px); }
+      to   { opacity:1; transform: rotate(-1.5deg) scale(1) translateY(0); }
+    }
+    .polaroid img { width: 100%; display: block; border-radius: 2px; max-height: 280px; object-fit: cover; }
+    .foto-counter { font-size: 14px; font-weight: 700; color: rgba(0,0,0,0.35); margin-bottom: 0.75rem; }
+    .foto-nav {
+      display: flex; align-items: center; justify-content: center; gap: 1rem;
+    }
+    .foto-nav-btn {
+      width: 44px; height: 44px; border-radius: 50%;
+      border: 2px solid var(--accent-100); background: #fff;
+      color: var(--accent); font-size: 22px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; font-weight: 700;
+    }
+    .foto-nav-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .foto-nav-btn:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+
+    /* VINIL */
+    .vinyl-outer { display: flex; justify-content: center; margin-bottom: 1.5rem; }
+    .vinyl {
+      width: 160px; height: 160px; border-radius: 50%; cursor: pointer;
+      background:
+        radial-gradient(circle at 50%, transparent 16%, rgba(255,255,255,0.04) 17%, rgba(255,255,255,0.04) 18%, transparent 19%),
+        radial-gradient(circle at 50%, transparent 26%, rgba(255,255,255,0.04) 27%, rgba(255,255,255,0.04) 28%, transparent 29%),
+        radial-gradient(circle at 50%, transparent 36%, rgba(255,255,255,0.04) 37%, rgba(255,255,255,0.04) 38%, transparent 39%),
+        radial-gradient(circle at 50%, transparent 46%, rgba(255,255,255,0.04) 47%, rgba(255,255,255,0.04) 48%, transparent 49%),
+        radial-gradient(circle at 50%, transparent 56%, rgba(255,255,255,0.04) 57%, rgba(255,255,255,0.04) 58%, transparent 59%),
+        linear-gradient(135deg, #2d2d2d, #1a1a1a);
+      position: relative;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      transition: box-shadow 0.3s;
+    }
+    .vinyl:hover { box-shadow: 0 14px 50px rgba(0,0,0,0.4); }
+    .vinyl.girando { animation: girarVinil 3s linear infinite; }
+    @keyframes girarVinil { from{transform:rotate(0)} to{transform:rotate(360deg)} }
+    .vinyl-centro {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+      width: 58px; height: 58px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      box-shadow: 0 0 0 5px rgba(255,255,255,0.15);
+    }
+    .audio-box {
+      background: #fff; border-radius: 16px; padding: 1rem 1.25rem;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.07); border: 1px solid var(--accent-100);
+    }
+    .audio-box audio { width: 100%; outline: none; }
+
+    /* VÍDEO */
+    .video-box {
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+      border: 3px solid var(--accent-100);
+    }
+    .video-box video { width: 100%; display: block; max-height: 320px; object-fit: cover; }
+
+    /* FECHAMENTO */
+    .fechamento {
+      text-align: center; padding: 2rem 1.5rem 1.5rem;
+    }
+    .fechamento-icon {
+      width: 84px; height: 84px; border-radius: 50%;
+      background: var(--accent-50); border: 2px solid var(--accent-100);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 42px; margin: 0 auto 1.25rem;
+      animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes popIn { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+    .fechamento-titulo {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; font-weight: 900; color: #1a1a2e; margin-bottom: 0.35rem;
+    }
+    .fechamento-desc { font-size: 14px; color: rgba(0,0,0,0.38); margin-bottom: 1.5rem; }
+    .fechamento-amor { font-size: 14px; color: rgba(0,0,0,0.35); margin-bottom: 0.35rem; }
+    .fechamento-nome {
+      font-family: 'Playfair Display', serif;
+      font-size: 26px; font-weight: 700; color: var(--accent);
+      margin-bottom: 1.75rem;
+    }
+    .btn-compartilhar {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 16px 40px; border-radius: 50px;
+      border: 2px solid var(--accent-100);
+      background: #fff; color: var(--accent);
+      font-size: 15px; font-weight: 700; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-compartilhar:hover {
+      background: var(--accent); color: #fff; border-color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER */
+    .carta-footer { text-align: center; padding: 1rem 1.5rem 3rem; }
+    .footer-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(0,0,0,0.04); border: 1px solid rgba(0,0,0,0.07);
+      border-radius: 30px; font-size: 12px; color: rgba(0,0,0,0.28); padding: 8px 18px;
+    }
+
+    /* ANIMAÇÕES DE ENTRADA das seções */
+    .fade-in-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in-up.visivel { opacity: 1; transform: translateY(0); }
+  </style>
+</head>
+<body>
+
+  <div id="telaLoading">
+    <div class="loading-heart">💌</div>
+    <div class="loading-text">Carregando sua surpresa…</div>
+  </div>
+
+  <div id="telaCapa">
+    <div class="capa-emoji">💌</div>
+    <div style="margin-bottom:2.75rem">
+      <div class="capa-pre">Você recebeu um</div>
+      <div class="capa-title">presente especial</div>
+      <div class="capa-sub">Alguém pensou em você com carinho 💕</div>
+    </div>
+    <button class="btn-abrir" id="btnAbrir" onclick="abrirCarta()">
+      💌 Abrir minha cartinha
+    </button>
+  </div>
+
+  <div id="telaCarta">
+
+    <!-- HEADER -->
+    <div class="carta-header fade-in-up" id="secHeader">
+      <div class="carta-dest-label">P A R A</div>
+      <div class="carta-destinatario" id="cartaDest">…</div>
+      <div class="carta-remetente-linha" id="cartaRem"></div>
+      <div class="carta-ocasiao-pill" id="cartaOcasiao">💝 Cartinha Especial</div>
+    </div>
+
+    <div class="carta-sep"><span>💕</span></div>
+
+    <!-- MENSAGEM -->
+    <div class="carta-wrap">
+      <div class="msg-card fade-in-up" id="secMensagem">
+        <div class="msg-card-label">✉️ Mensagem</div>
+        <div class="msg-para" id="msgPara">Para você,</div>
+        <p class="msg-texto" id="msgTexto"></p>
+        <div class="msg-assinatura" id="msgAssinatura"></div>
+      </div>
+    </div>
+
+    <!-- FOTOS -->
+    <div class="carta-wrap">
+      <div class="secao fade-in-up" id="secFotos" style="display:none">
+        <div class="secao-icon">📸</div>
+        <div class="secao-titulo">Nossos Momentos</div>
+        <div class="secao-sub" id="fotosSubtitle">momentos especiais</div>
+        <div class="polaroid-container">
+          <div class="polaroid entrando" id="polaroidCard">
+            <img id="fotoAtual" src="" alt="" />
+          </div>
+        </div>
+        <div class="foto-counter" id="fotoCounter">1 / 1 💕</div>
+        <div class="foto-nav" id="fotoNav" style="display:none">
+          <button class="foto-nav-btn" id="btnPrev" onclick="navFoto(-1)">‹</button>
+          <button class="foto-nav-btn" id="btnNext" onclick="navFoto(1)">›</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ÁUDIO -->
+    <div class="carta-wrap">
+      <div class="secao fade-in-up" id="secAudio" style="display:none">
+        <div class="secao-icon">🎙️</div>
+        <div class="secao-titulo">Mensagem de Voz</div>
+        <div class="secao-sub">Toque no disco para ouvir 💕</div>
+        <div class="vinyl-outer">
+          <div class="vinyl" id="vinyl" onclick="toggleVinyl()">
+            <div class="vinyl-centro">🎙️</div>
+          </div>
+        </div>
+        <div class="audio-box">
+          <audio id="cartaAudio" controls></audio>
+        </div>
+      </div>
+    </div>
+
+    <!-- VÍDEO -->
+    <div class="carta-wrap">
+      <div class="secao fade-in-up" id="secVideo" style="display:none">
+        <div class="secao-icon">🎬</div>
+        <div class="secao-titulo">Nosso Vídeo</div>
+        <div class="secao-sub">Um momento especial guardado para você</div>
+        <div class="video-box">
+          <video id="cartaVideo" controls playsinline></video>
+        </div>
+      </div>
+    </div>
+
+    <!-- FECHAMENTO -->
+    <div class="fechamento fade-in-up" id="secFechamento">
+      <div class="fechamento-icon">🎁</div>
+      <div class="fechamento-titulo">Você é Especial!</div>
+      <div class="fechamento-desc">Este presente foi feito com todo carinho</div>
+      <div class="fechamento-amor">Com amor,</div>
+      <div class="fechamento-nome" id="fechamentoNome">…</div>
+      <button class="btn-compartilhar" onclick="compartilharCarta()">
+        🌸 Compartilhar
+      </button>
+    </div>
+
+    <div class="carta-footer">
+      <div class="footer-badge">💌 Carta do Coração · Feita com amor</div>
+    </div>
+
+  </div>
+
+  <script>
+    var cartaData = null;
+    var fotosArr  = [];
+    var fotoIdx   = 0;
+
+    var ocaMap = {
+      cartinha:'💌 Cartinha Especial', maes:'💐 Dia das Mães', mulheres:'🌸 Dia das Mulheres',
+      'aniv-namoro':'💑 Aniversário de Namoro', namorados:'❤️ Dia dos Namorados',
+      'pedido-casamento':'💍 Pedido de Casamento', 'aniv-casamento':'💒 Casamento',
+      'aniv-amigo':'🎂 Aniversário', agradecimento:'🙏 Agradecimento',
+      lembranca:'✨ Lembrança Especial', pais:'👨 Dia dos Pais',
+      aniversario:'🎉 Aniversário', gratidao:'🙏 Gratidão',
+      natal:'🎄 Natal', 'ano-novo':'🎆 Ano Novo', pascoa:'🐣 Páscoa',
+      outro:'💝 Mensagem Especial',
+    };
+
+    /* ── ABRIR CARTA ── */
+    function abrirCarta() {
+      var capa  = document.getElementById('telaCapa');
+      var carta = document.getElementById('telaCarta');
+      capa.style.opacity   = '0';
+      capa.style.transform = 'scale(0.94)';
+      setTimeout(function() {
+        capa.style.display = 'none';
+        carta.style.display = 'block';
+        window.scrollTo(0, 0);
+        ativarFadeIns();
+        setTimeout(iniciarTypewriter, 400);
+      }, 500);
+    }
+
+    /* ── FADE-IN nas seções ao rolar ── */
+    function ativarFadeIns() {
+      var els = document.querySelectorAll('.fade-in-up');
+      var obs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) { e.target.classList.add('visivel'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function(el) { obs.observe(el); });
+    }
+
+    /* ── TYPEWRITER ── */
+    function iniciarTypewriter() {
+      var el    = document.getElementById('msgTexto');
+      var texto = cartaData ? (cartaData.mensagem || '') : '';
+      var cursor = document.createElement('span');
+      cursor.className = 'cursor-blink';
+      el.textContent = '';
+      el.appendChild(cursor);
+
+      var i = 0;
+      var vel = texto.length > 400 ? 12 : texto.length > 200 ? 20 : 30;
+
+      function digitar() {
+        if (i < texto.length) {
+          cursor.remove();
+          el.textContent = texto.slice(0, i + 1);
+          el.appendChild(cursor);
+          i++;
+          setTimeout(digitar, vel);
+        } else {
+          setTimeout(function() { cursor.remove(); }, 1500);
+          setTimeout(function() {
+            document.getElementById('msgAssinatura').classList.add('visivel');
+          }, 600);
+        }
+      }
+      digitar();
+    }
+
+    /* ── ÁLBUM DE FOTOS ── */
+    function navFoto(dir) {
+      var card = document.getElementById('polaroidCard');
+      card.classList.add('saindo');
+      setTimeout(function() {
+        fotoIdx = (fotoIdx + dir + fotosArr.length) % fotosArr.length;
+        document.getElementById('fotoAtual').src = fotosArr[fotoIdx];
+        document.getElementById('fotoCounter').textContent = (fotoIdx + 1) + ' / ' + fotosArr.length + ' 💕';
+        card.classList.remove('saindo');
+        card.classList.remove('entrando');
+        void card.offsetWidth;
+        card.classList.add('entrando');
+      }, 280);
+    }
+
+    /* ── VINIL DE ÁUDIO ── */
+    function toggleVinyl() {
+      var audio = document.getElementById('cartaAudio');
+      var vinyl = document.getElementById('vinyl');
+      if (audio.paused) {
+        audio.play();
+        vinyl.classList.add('girando');
+      } else {
+        audio.pause();
+        vinyl.classList.remove('girando');
+      }
+    }
+
+    /* ── COMPARTILHAR ── */
+    function compartilharCarta() {
+      var url = window.location.href;
+      if (navigator.share) {
+        navigator.share({ title: 'Uma cartinha especial para você 💌', url: url });
+      } else {
+        navigator.clipboard.writeText(url).then(function() {
+          alert('Link copiado! 💌');
+        });
+      }
+    }
+
+    /* ── RENDERIZAR ── */
+    function renderizarCarta(d) {
+      // Tema de cor por gênero
+      document.body.setAttribute('data-genero', d.genero || 'F');
+
+      document.title = '💌 Para ' + (d.nomeDestinatario || 'você');
+
+      // Header
+      document.getElementById('cartaDest').textContent = 'Para ' + (d.nomeDestinatario || 'Você');
+      document.getElementById('cartaRem').textContent = 'de ' + (d.nomeRemetente || 'Alguém especial');
+      document.getElementById('cartaOcasiao').textContent = ocaMap[d.ocasiao] || '💝 Cartinha Especial';
+
+      // Mensagem
+      document.getElementById('msgPara').textContent = 'Para ' + (d.nomeDestinatario || 'você') + ',';
+      document.getElementById('msgAssinatura').textContent = 'Com amor, ' + (d.nomeRemetente || 'Alguém especial') + ' 💌';
+      document.getElementById('fechamentoNome').textContent = (d.nomeRemetente || 'Alguém especial') + ' 💌';
+
+      // Fotos
+      if (d.fotos && d.fotos.length > 0) {
+        fotosArr = d.fotos;
+        document.getElementById('fotoAtual').src = fotosArr[0];
+        document.getElementById('fotosSubtitle').textContent =
+          fotosArr.length + ' momento' + (fotosArr.length > 1 ? 's' : '') + ' especial' + (fotosArr.length > 1 ? 'is' : '');
+        document.getElementById('fotoCounter').textContent = '1 / ' + fotosArr.length + ' 💕';
+        if (fotosArr.length > 1) document.getElementById('fotoNav').style.display = 'flex';
+        document.getElementById('secFotos').style.display = 'block';
+      }
+
+      // Áudio
+      if (d.audio) {
+        var audioEl = document.getElementById('cartaAudio');
+        audioEl.src = d.audio;
+        audioEl.addEventListener('ended', function() {
+          document.getElementById('vinyl').classList.remove('girando');
+        });
+        document.getElementById('secAudio').style.display = 'block';
+      }
+
+      // Vídeo
+      if (d.video) {
+        document.getElementById('cartaVideo').src = d.video;
+        document.getElementById('secVideo').style.display = 'block';
+      }
+
+      // Mostrar capa
+      document.getElementById('telaLoading').style.display = 'none';
+      document.getElementById('telaCapa').style.display = 'flex';
+    }
+
+    /* ── CARREGAR DADOS ── */
+    var params = new URLSearchParams(window.location.search);
+    var cid    = params.get('cid');
+
+    if (cid) {
+      fetch('/api/cartinha/' + cid)
+        .then(function(r) { return r.json(); })
+        .then(function(json) {
+          if (json.success && json.data) {
+            cartaData = json.data;
+            renderizarCarta(cartaData);
+          } else {
+            document.getElementById('telaLoading').innerHTML =
+              '<div style="font-size:48px">😔</div><div style="color:rgba(0,0,0,0.38);font-size:14px;margin-top:1rem">Cartinha não encontrada</div>';
+          }
+        })
+        .catch(function() {
+          document.getElementById('telaLoading').innerHTML =
+            '<div style="font-size:48px">😔</div><div style="color:rgba(0,0,0,0.38);font-size:14px;margin-top:1rem">Erro ao carregar</div>';
+        });
+    } else {
+      cartaData = {
+        nomeDestinatario: 'Você',
+        nomeRemetente:    'Alguém Especial',
+        mensagem: 'Esta é uma prévia da sua cartinha. Depois do pagamento ela vai aparecer aqui com sua mensagem, fotos e áudio! 💕',
+        genero: 'F', ocasiao: 'cartinha', fotos: [],
+      };
+      renderizarCarta(cartaData);
+    }
+  </script>
+</body>
+</html>
