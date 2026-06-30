@@ -304,6 +304,8 @@
 </head>
 <body>
 
+  <canvas id="bgCanvas" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none"></canvas>
+
   <div id="telaLoading">
     <div class="loading-heart">💌</div>
     <div class="loading-text">Carregando sua surpresa…</div>
@@ -425,6 +427,122 @@
       outro:'💝 Mensagem Especial',
     };
 
+    /* ── ANIMAÇÃO DE FUNDO ── */
+    function iniciarAnimacaoFundo(tipo, corHex) {
+      var canvas = document.getElementById('bgCanvas');
+      var ctx = canvas.getContext('2d');
+      function redimensionar() {
+        canvas.width  = window.innerWidth;
+        canvas.height = document.documentElement.scrollHeight;
+      }
+      redimensionar();
+      window.addEventListener('resize', redimensionar);
+
+      function hexParaRgb(hex) {
+        var v = parseInt(hex.replace('#',''), 16);
+        return { r: (v>>16)&255, g: (v>>8)&255, b: v&255 };
+      }
+      var rgb = hexParaRgb(corHex || '#e91e8c');
+      var rgbStr = rgb.r+','+rgb.g+','+rgb.b;
+
+      var particulas = [];
+      var n = 40;
+
+      if (tipo === 'chuva') {
+        for (var i=0;i<n;i++) particulas.push({
+          x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+          len: 12+Math.random()*16, vy: 3+Math.random()*4, op: 0.15+Math.random()*0.25,
+        });
+      } else if (tipo === 'estrelas') {
+        for (var i=0;i<n;i++) particulas.push({
+          x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+          r: 1+Math.random()*2, fase: Math.random()*Math.PI*2, vel: 0.02+Math.random()*0.03,
+        });
+      } else if (tipo === 'nebulosa') {
+        for (var i=0;i<8;i++) particulas.push({
+          x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+          r: 80+Math.random()*120, vx: (Math.random()-0.5)*0.3, vy: (Math.random()-0.5)*0.3, op: 0.06+Math.random()*0.06,
+        });
+      } else if (tipo === 'pixels') {
+        for (var i=0;i<n;i++) particulas.push({
+          x: Math.random()*canvas.width, y: Math.random()*canvas.height,
+          s: 4+Math.random()*6, vy: 0.3+Math.random()*0.5, fase: Math.random()*Math.PI*2,
+        });
+      } else { // coracoes (padrão)
+        var coracoesEmoji = ['💕','💗','💖','🩷'];
+        for (var i=0;i<24;i++) particulas.push({
+          x: Math.random()*canvas.width, y: canvas.height + Math.random()*canvas.height,
+          tam: 14+Math.random()*14, vy: 0.4+Math.random()*0.6, drift: Math.random()*Math.PI*2,
+          emoji: coracoesEmoji[Math.floor(Math.random()*coracoesEmoji.length)], op: 0.35+Math.random()*0.3,
+        });
+      }
+
+      function animar() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+
+        if (tipo === 'chuva') {
+          particulas.forEach(function(p) {
+            ctx.strokeStyle = 'rgba('+rgbStr+','+p.op+')';
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p.x, p.y + p.len);
+            ctx.stroke();
+            p.y += p.vy;
+            if (p.y > canvas.height) { p.y = -p.len; p.x = Math.random()*canvas.width; }
+          });
+        } else if (tipo === 'estrelas') {
+          particulas.forEach(function(p) {
+            p.fase += p.vel;
+            var op = 0.3 + Math.abs(Math.sin(p.fase)) * 0.5;
+            ctx.fillStyle = 'rgba('+rgbStr+','+op+')';
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+            ctx.fill();
+          });
+        } else if (tipo === 'nebulosa') {
+          particulas.forEach(function(p) {
+            var grad = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r);
+            grad.addColorStop(0, 'rgba('+rgbStr+','+p.op+')');
+            grad.addColorStop(1, 'rgba('+rgbStr+',0)');
+            ctx.fillStyle = grad;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+            ctx.fill();
+            p.x += p.vx; p.y += p.vy;
+            if (p.x < -p.r) p.x = canvas.width+p.r;
+            if (p.x > canvas.width+p.r) p.x = -p.r;
+            if (p.y < -p.r) p.y = canvas.height+p.r;
+            if (p.y > canvas.height+p.r) p.y = -p.r;
+          });
+        } else if (tipo === 'pixels') {
+          particulas.forEach(function(p) {
+            p.fase += 0.03;
+            var op = 0.2 + Math.abs(Math.sin(p.fase)) * 0.3;
+            ctx.fillStyle = 'rgba('+rgbStr+','+op+')';
+            ctx.fillRect(p.x, p.y, p.s, p.s);
+            p.y -= p.vy;
+            if (p.y < -p.s) p.y = canvas.height + p.s;
+          });
+        } else {
+          ctx.font = '16px sans-serif';
+          particulas.forEach(function(p) {
+            ctx.save();
+            ctx.globalAlpha = p.op;
+            ctx.font = p.tam + 'px sans-serif';
+            ctx.fillText(p.emoji, p.x + Math.sin(p.drift)*14, p.y);
+            ctx.restore();
+            p.y -= p.vy;
+            p.drift += 0.02;
+            if (p.y < -30) { p.y = canvas.height + 30; p.x = Math.random()*canvas.width; }
+          });
+        }
+
+        requestAnimationFrame(animar);
+      }
+      animar();
+    }
+
     /* ── ABRIR CARTA ── */
     function abrirCarta() {
       var capa  = document.getElementById('telaCapa');
@@ -524,6 +642,10 @@
     function renderizarCarta(d) {
       // Tema de cor por gênero
       document.body.setAttribute('data-genero', d.genero || 'F');
+
+      // Animação de fundo
+      var corAccent = getComputedStyle(document.body).getPropertyValue('--accent').trim() || '#e91e8c';
+      iniciarAnimacaoFundo(d.animacao || 'coracoes', corAccent);
 
       document.title = '💌 Para ' + (d.nomeDestinatario || 'você');
 
