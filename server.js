@@ -19,6 +19,9 @@ app.use(express.static('.'));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // ── UPLOAD DE VÍDEO / MÍDIA ──
+fs.mkdirSync(path.join(__dirname, 'uploads'), { recursive: true });
+fs.mkdirSync(path.join(__dirname, 'data'),    { recursive: true });
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => cb(null, path.join(__dirname, 'uploads')),
   filename:    (req, file, cb) => cb(null, Date.now() + '_' + Math.random().toString(36).substr(2,6) + path.extname(file.originalname)),
@@ -200,6 +203,7 @@ app.get('/api/pix/check', async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log('✅ Servidor rodando em http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Servidor rodando na porta ${PORT}`);
 });
