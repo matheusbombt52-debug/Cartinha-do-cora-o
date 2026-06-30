@@ -46,6 +46,10 @@ if (fs.existsSync(certPath)) {
   console.warn('⚠️  certificado.p12 não encontrado — coloque na pasta do projeto');
 }
 
+console.log('🔎 EFI_CLIENT_ID definido:', !!process.env.EFI_CLIENT_ID);
+console.log('🔎 EFI_CLIENT_SECRET definido:', !!process.env.EFI_CLIENT_SECRET);
+console.log('🔎 EFI_PIX_KEY definido:', !!process.env.EFI_PIX_KEY);
+
 const EFI_BASE = 'https://pix.api.efipay.com.br';
 let _efiToken = null;
 let _efiTokenExpiry = 0;
