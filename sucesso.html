@@ -134,6 +134,15 @@
       Compartilhar no Instagram
     </button>
 
+    <div class="divider"><span>QR CODE</span></div>
+
+    <p style="font-size:13px;color:#71717a;text-align:center;margin-bottom:1rem">Mostre na tela ou imprima para presentear pessoalmente</p>
+    <div id="qrBox" style="display:flex;flex-direction:column;align-items:center;gap:12px;background:#27272a;border:1px solid #3f3f46;border-radius:16px;padding:1.25rem;margin-bottom:1.5rem">
+      <img id="qrImg" src="" alt="QR Code da cartinha" style="width:180px;height:180px;border-radius:12px;display:none" />
+      <p id="qrLoading" style="font-size:13px;color:#71717a">Gerando QR Code...</p>
+      <button id="btnBaixarQR" onclick="baixarQR()" style="display:none;padding:10px 20px;border-radius:50px;border:1.5px solid #e91e8c;background:transparent;color:#e91e8c;font-size:13px;font-weight:700;cursor:pointer">⬇ Baixar QR Code</button>
+    </div>
+
     <div class="divider"><span>OU FAÇA MAIS</span></div>
 
     <p style="font-size:13px;color:#71717a;text-align:center;margin-bottom:1rem">Que tal presentear outra pessoa?</p>
@@ -289,6 +298,36 @@
     function compartilharInstagram() {
       copiarLink();
       mostrarToast('Link copiado! Cole nos Stories do Instagram 📸');
+    }
+
+    // ── QR CODE ──
+    if (cid) {
+      fetch('/api/qrcode?cid=' + encodeURIComponent(cid))
+        .then(function(r) { return r.json(); })
+        .then(function(d) {
+          if (d.success) {
+            var img = document.getElementById('qrImg');
+            img.src = d.qr;
+            img.style.display = 'block';
+            document.getElementById('qrLoading').style.display = 'none';
+            document.getElementById('btnBaixarQR').style.display = 'inline-block';
+          } else {
+            document.getElementById('qrLoading').textContent = 'QR Code indisponível';
+          }
+        })
+        .catch(function() {
+          document.getElementById('qrLoading').textContent = 'QR Code indisponível';
+        });
+    } else {
+      document.getElementById('qrLoading').textContent = 'QR Code indisponível';
+    }
+
+    function baixarQR() {
+      var img = document.getElementById('qrImg');
+      var a = document.createElement('a');
+      a.href = img.src;
+      a.download = 'qrcode-cartinha.png';
+      a.click();
     }
   </script>
 </body>
