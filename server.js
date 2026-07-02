@@ -5,6 +5,7 @@ const fs      = require('fs');
 const path    = require('path');
 const axios   = require('axios');
 const multer  = require('multer');
+const QRCode  = require('qrcode');
 
 const app = express();
 app.use((req, res, next) => {
@@ -182,6 +183,19 @@ app.post('/api/pix', async (req, res) => {
     const detail = err.response?.data || err.message;
     console.error('Erro Efí PIX:', JSON.stringify(detail));
     res.status(500).json({ error: 'Erro ao gerar PIX', detail });
+  }
+});
+
+// ── QR CODE DA CARTINHA ──
+app.get('/api/qrcode', async (req, res) => {
+  const { cid } = req.query;
+  if (!cid) return res.status(400).json({ error: 'cid obrigatório' });
+  const url = `${req.protocol}://${req.get('host')}/cartinha.html?cid=${encodeURIComponent(cid)}`;
+  try {
+    const dataUrl = await QRCode.toDataURL(url, { width: 280, margin: 2, color: { dark: '#1a0010', light: '#ffffff' } });
+    res.json({ success: true, qr: dataUrl });
+  } catch (err) {
+    res.status(500).json({ error: 'Erro ao gerar QR Code' });
   }
 });
 
