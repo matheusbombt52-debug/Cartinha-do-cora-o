@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Carta do Coração Cartinhas Digitais com Amor</title>
+  <script>if(new URLSearchParams(location.search).get('criar')!==null){document.documentElement.style.opacity='0';}</script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -3852,15 +3853,15 @@
     }
     // Abrir funil direto se vier de ?criar
     if (params.get('criar') !== null) {
-      // Manter a URL /?criar para a pessoa poder favoritar
       setTimeout(function() {
         abrirEscolha();
-        // Mostrar banner "salve este link" apenas para não-assinantes
+        document.documentElement.style.transition = 'opacity 0.15s';
+        document.documentElement.style.opacity = '1';
         if (!window._packMode) {
           var banner = document.getElementById('criarBanner');
           if (banner) banner.style.display = 'flex';
         }
-      }, 100);
+      }, 0);
     }
   })();
 </script>
