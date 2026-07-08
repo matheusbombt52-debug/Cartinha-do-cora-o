@@ -1,0 +1,3868 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carta do Coração Cartinhas Digitais com Amor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    button, a, input, textarea, select { outline: none; -webkit-tap-highlight-color: transparent; }
+    button:focus, a:focus, input:focus, textarea:focus, select:focus { outline: none; }
+
+    :root {
+      --pink: #e91e8c;
+      --pink-light: #ff6bb5;
+      --pink-dark: #c2185b;
+      --pink-bg: #fdf0f6;
+      --pink-100: #fce4ec;
+      --pink-200: #f8bbd0;
+      --bg: #fff5fa;
+      --card: #ffffff;
+      --card2: #fef0f7;
+      --text: #1a0010;
+      --muted: #7d3060;
+      --border: #f8bbd0;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    /* ── TAG PILL ── */
+    .tag-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--pink-100); border: 1px solid var(--pink-200);
+      border-radius: 30px; font-size: 12px; font-weight: 700; color: var(--pink-dark);
+      padding: 5px 14px; margin-bottom: 1.25rem;
+    }
+
+    /* ── HERO PARTICLES ── */
+    .hero { position: relative; }
+    .hero-particles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+    .hero-particles span { position: absolute; border-radius: 50%; animation: floatParticle 6s ease-in-out infinite alternate; }
+    @keyframes floatParticle {
+      0%   { transform: translateY(0) scale(1); opacity: 0.4; }
+      100% { transform: translateY(-30px) scale(1.1); opacity: 0.9; }
+    }
+    .hero-icon-wrap, .hero-eyebrow, .hero h1, .hero-divider, .hero-phrases, .hero-desc, .btn-hero, .hero-scroll { position: relative; z-index: 1; }
+
+    /* ── TOP BAR ── */
+    .topbar {
+      background: linear-gradient(90deg, var(--pink-dark), var(--pink), var(--pink-light));
+      text-align: center; padding: 10px 1rem;
+      font-size: 13px; font-weight: 600; color: #fff; letter-spacing: 0.02em;
+    }
+
+    /* ── NAV ── */
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(180deg, #fce4ec 0%, #fff0f7 60%, var(--bg) 100%);
+      padding: 4rem 1.5rem 3rem; text-align: center;
+    }
+    /* Ícone pulsando */
+    .hero-icon-wrap { position: relative; width: 100px; height: 100px; margin: 0 auto 2rem; }
+    .hero-icon-wrap .ring {
+      position: absolute; border-radius: 50%; border: 2px solid rgba(233,30,140,0.18);
+      animation: pulseRing 2.4s ease-out infinite;
+    }
+    .hero-icon-wrap .ring:nth-child(1) { inset: -12px; animation-delay: 0s; }
+    .hero-icon-wrap .ring:nth-child(2) { inset: -24px; animation-delay: 0.6s; }
+    .hero-icon-wrap .ring:nth-child(3) { inset: -38px; animation-delay: 1.2s; }
+    @keyframes pulseRing {
+      0%   { transform: scale(0.85); opacity: 0; }
+      30%  { opacity: 1; }
+      100% { transform: scale(1.15); opacity: 0; }
+    }
+    .hero-icon {
+      position: relative; z-index: 2;
+      width: 100px; height: 100px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink-light), var(--pink));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 40px;
+      box-shadow: 0 8px 32px rgba(233,30,140,0.3);
+    }
+    .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+    .hero h1 { font-size: clamp(48px, 13vw, 72px); font-weight: 900; line-height: 1.05; color: var(--text); margin-bottom: 0.75rem; }
+    .hero h1 .pink { color: var(--pink); }
+
+    /* Linha curvada */
+    .hero-divider {
+      width: 160px; margin: 0 auto 1rem; display: block; overflow: visible;
+    }
+
+    /* Frases rotativas */
+    .hero-phrases { height: 32px; overflow: hidden; margin-bottom: 1rem; position: relative; }
+    .hero-phrase {
+      position: absolute; width: 100%; left: 0;
+      font-size: 16px; font-style: italic; font-weight: 600;
+      color: var(--muted); opacity: 0;
+      transition: opacity 1.2s ease, transform 1.2s ease;
+      transform: translateY(10px);
+    }
+    .hero-phrase span { color: var(--pink); }
+    .hero-phrase.active { opacity: 1; transform: translateY(0); }
+
+    .hero-desc { font-size: 15px; color: var(--muted); max-width: 320px; margin: 0 auto 2rem; line-height: 1.7; }
+    .btn-hero {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
+      color: #fff; font-size: 16px; font-weight: 700; padding: 16px 36px;
+      border-radius: 50px; box-shadow: 0 8px 32px rgba(233,30,140,0.35);
+      transition: all 0.2s; width: 100%; max-width: 320px; justify-content: center;
+      animation: pulsBtn 2.5s ease-in-out infinite;
+    }
+    @keyframes pulsBtn {
+      0%,100% { box-shadow: 0 8px 32px rgba(233,30,140,0.35); }
+      50%      { box-shadow: 0 8px 48px rgba(233,30,140,0.6), 0 0 0 8px rgba(233,30,140,0.1); }
+    }
+    .btn-hero:hover { transform: translateY(-2px); animation: none; box-shadow: 0 12px 36px rgba(233,30,140,0.5); }
+    .hero-scroll { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 1.5rem; opacity: 0.7; }
+
+
+    /* ── THEME CAROUSEL ── */
+    .themes-track { display: flex; gap: 1rem; overflow-x: auto; padding: 0.5rem 1.5rem 1rem; scrollbar-width: none; scroll-snap-type: x mandatory; }
+    .themes-track::-webkit-scrollbar { display: none; }
+    .theme-card {
+      flex-shrink: 0; width: 200px; border-radius: 18px; overflow: hidden;
+      border: 2px solid var(--border); scroll-snap-align: center;
+      background: var(--card); box-shadow: 0 4px 20px rgba(233,30,140,0.1);
+    }
+
+    /* ── SURPRESA DECK ── */
+    .surpresa-section { padding: 3rem 1.5rem 4rem; background: linear-gradient(160deg, #fce4ec 0%, #fdf0f6 100%); }
+    .surpresa-eyebrow { font-size: 22px; text-align: center; margin-bottom: 0.25rem; }
+    .surpresa-title { font-size: 26px; font-weight: 900; color: var(--pink-900); text-align: center; margin-bottom: 0.4rem; }
+    .surpresa-sub { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 2.5rem; }
+    .surpresa-sub strong { color: var(--text); }
+    .deck-area {
+      position: relative; width: 100%; max-width: 360px;
+      height: 260px; margin: 0 auto 1.5rem;
+      touch-action: none; user-select: none;
+    }
+    .deck-card {
+      position: absolute; inset: 0;
+      background: linear-gradient(145deg, #ff9a6c, #ff6b9d);
+      border-radius: 20px;
+      padding: 1.5rem 1.5rem 1.25rem;
+      box-shadow: 0 8px 32px rgba(233,30,140,0.2);
+      cursor: grab; will-change: transform;
+      transition: box-shadow 0.2s;
+    }
+    .deck-card:active { cursor: grabbing; box-shadow: 0 16px 48px rgba(233,30,140,0.3); }
+    .deck-card h4 { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 10px; text-align: center; text-shadow: 0 1px 4px rgba(0,0,0,0.15); }
+    .deck-card p  { font-size: 13px; color: rgba(255,255,255,0.92); line-height: 1.65; text-align: center; }
+    .deck-counter { text-align: center; font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; }
+    .deck-hint { text-align: center; font-size: 12px; color: var(--muted); margin-top: 0.5rem; opacity: 0.7; }
+
+    /* ── COMO FUNCIONA ── */
+    .how-section { padding: 3rem 1.5rem; background: var(--card2); }
+
+    .how-title { font-size: 28px; font-weight: 900; color: var(--text); margin-bottom: 0.4rem; }
+    .how-title span { color: var(--pink); }
+    .how-sub { font-size: 14px; color: var(--muted); margin-bottom: 2rem; }
+    .steps-list { display: flex; flex-direction: column; gap: 1rem; position: relative; }
+    .steps-list::before {
+      content: ''; position: absolute; left: 27px; top: 0; bottom: 0;
+      width: 2px; background: rgba(233,30,140,0.25); z-index: 0;
+    }
+    .step-item {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.1rem 1.25rem; display: flex; align-items: center; gap: 16px;
+      position: relative; z-index: 1;
+    }
+    .step-num-wrap {
+      width: 48px; height: 48px; border-radius: 16px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px; position: relative;
+    }
+    .step-num-wrap .badge {
+      position: absolute; bottom: -4px; right: -4px;
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--card2); border: 2px solid var(--card2);
+      font-size: 9px; font-weight: 800; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .step-num-wrap.c1 { background: linear-gradient(135deg, #ff6bb5, #e91e8c); }
+    .step-num-wrap.c2 { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
+    .step-num-wrap.c3 { background: linear-gradient(135deg, #fb923c, #ea580c); }
+    .step-num-wrap.c4 { background: linear-gradient(135deg, #34d399, #059669); }
+    .step-body h3 { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+    .step-body p  { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .btn-outline-who {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      border: 1.5px solid var(--pink); color: var(--pink);
+      font-size: 15px; font-weight: 700; padding: 14px 28px;
+      border-radius: 50px; transition: all 0.2s; background: transparent;
+      width: 100%;
+    }
+    .btn-outline-who:hover { background: var(--pink); color: #fff; border-color: var(--pink); }
+    .btn-outline {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      border: 1.5px solid var(--pink); color: var(--pink);
+      font-size: 15px; font-weight: 700; padding: 14px 28px;
+      border-radius: 50px; margin-top: 1.5rem; transition: all 0.2s;
+      background: transparent;
+    }
+    .btn-outline:hover { background: var(--pink); color: #fff; border-color: var(--pink); }
+
+    /* ── AVALIAÇÕES ── */
+    .reviews-section { padding: 3rem 0 3rem; background: var(--bg); overflow: hidden; }
+    .review-hero { margin-bottom: 2rem; text-align: center; padding: 0 1.5rem; }
+    .review-tag { display: inline-flex; align-items: center; gap: 6px; background: var(--pink-100); border: 1px solid var(--pink-200); border-radius: 30px; font-size: 12px; font-weight: 700; color: var(--pink-dark); padding: 5px 14px; margin-bottom: 1.25rem; }
+    .review-big { font-size: clamp(24px,6vw,36px); font-weight: 900; color: var(--text); line-height: 1.15; margin-bottom: 0.75rem; }
+    .review-big span { color: var(--pink); }
+    .review-desc { font-size: 14px; color: var(--muted); margin-bottom: 1.5rem; }
+    .review-score {
+      display: inline-flex; align-items: center; gap: 16px;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 14px 20px;
+    }
+    .score-left { display: flex; flex-direction: column; align-items: flex-start; }
+    .score-num { font-size: 32px; font-weight: 900; color: var(--text); line-height: 1; }
+    .score-stars { color: var(--pink); font-size: 16px; margin-top: 2px; }
+    .score-right { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; }
+    .score-avatars { display: flex; }
+    .score-av { width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--card); display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #fff; margin-left: -8px; }
+    .score-av:first-child { margin-left: 0; }
+    .av-a { background: var(--pink); }
+    .av-b { background: #a78bfa; }
+    .av-c { background: var(--pink-dark); }
+    .av-d { background: var(--pink-light); }
+    .score-count { font-size: 12px; color: var(--muted); font-weight: 600; }
+    .reviews-section { padding: 3rem 0 3rem; background: var(--bg); overflow: hidden; }
+    .reviews-carousel { overflow: hidden; margin-top: 1.5rem; position: relative; }
+    .reviews-carousel::before, .reviews-carousel::after {
+      content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none;
+    }
+    .reviews-carousel::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+    .reviews-carousel::after  { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+    .reviews-track {
+      display: flex; gap: 1rem;
+      width: max-content;
+      animation: autoScroll 35s linear infinite;
+    }
+    .reviews-track:hover { animation-play-state: paused; }
+    @keyframes autoScroll {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .review-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.25rem 1.5rem; width: 290px; flex-shrink: 0;
+    }
+    .rc-stars { color: #f59e0b; font-size: 13px; margin-bottom: 0.6rem; }
+    .rc-text { font-size: 13px; color: var(--text); line-height: 1.7; margin-bottom: 1rem; font-style: italic; }
+    .rc-bottom { display: flex; align-items: center; justify-content: space-between; }
+    .rc-user { display: flex; align-items: center; gap: 10px; }
+    .rc-av { width: 34px; height: 34px; border-radius: 50%; background: var(--pink); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+    .rc-name { font-size: 13px; font-weight: 700; color: var(--text); }
+    .rc-time { font-size: 11px; color: var(--muted); }
+    .rc-badge { background: #d1fae5; color: #065f46; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; display: flex; align-items: center; gap: 4px; white-space: nowrap; }
+
+    /* ── PARA QUEM ── */
+    .who-section { padding: 3rem 1.5rem 3.5rem; background: var(--card2); text-align: center; }
+
+    .who-title { font-size: 28px; font-weight: 900; color: var(--text); margin-bottom: 0.4rem; }
+    .who-title span { color: var(--pink); }
+    .who-sub { font-size: 14px; color: var(--muted); margin-bottom: 1.75rem; line-height: 1.6; }
+    .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; text-align: left; }
+    .who-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 18px;
+      padding: 1.5rem 1.25rem 1.25rem; display: flex; flex-direction: column; gap: 10px;
+      transition: border-color 0.2s;
+    }
+    .who-card:hover { border-color: var(--pink-200); }
+    .who-icon {
+      width: 54px; height: 54px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center; font-size: 26px;
+      margin-bottom: 4px;
+    }
+    .wi-pink   { background: linear-gradient(135deg, #ff6bb5, #e91e8c); }
+    .wi-orange { background: linear-gradient(135deg, #ffb347, #e91e8c); }
+    .wi-teal   { background: linear-gradient(135deg, #f48fb1, #c2185b); }
+    .wi-purple { background: linear-gradient(135deg, #ce93d8, #e91e8c); }
+    .wi-green  { background: linear-gradient(135deg, #f06292, #ad1457); }
+    .wi-blue   { background: linear-gradient(135deg, #f8bbd0, #e91e8c); }
+    .who-card h3 { font-size: 14px; font-weight: 800; color: var(--text); line-height: 1.3; }
+    .who-card p  { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+    /* ── CTA ── */
+    .cta-section { padding: 2rem 1.5rem; background: linear-gradient(160deg, #fce4ec 0%, #fdf0f6 100%); text-align: center; }
+    .cta-box {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 24px; padding: 2.5rem 2rem;
+      max-width: 400px; margin: 0 auto;
+      box-shadow: 0 8px 40px rgba(233,30,140,0.1);
+    }
+    .cta-tag {
+      display: inline-block; background: var(--pink-100); border: 1px solid var(--pink-200);
+      border-radius: 30px; font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--pink-dark); padding: 5px 14px; margin-bottom: 1.25rem;
+    }
+    .cta-section h2 { font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 0.75rem; line-height: 1.2; }
+    .cta-section h2 span { color: var(--pink); }
+    .cta-section p { font-size: 14px; color: var(--muted); margin-bottom: 1.75rem; line-height: 1.6; }
+    .btn-cta-full {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
+      color: #fff; font-size: 16px; font-weight: 700; padding: 16px 24px;
+      border-radius: 50px; box-shadow: 0 8px 32px rgba(233,30,140,0.3);
+      width: 100%; transition: all 0.2s;
+    }
+    .btn-cta-full:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(233,30,140,0.4); }
+
+    /* ── TEMA MASCULINO (azul) nas telas de formulário ── */
+    body[data-genero="M"] #telaEscolha,
+    body[data-genero="M"] #telaForm,
+    body[data-genero="M"] #telaForm2,
+    body[data-genero="M"] #telaForm3,
+    body[data-genero="M"] #telaForm4,
+    body[data-genero="M"] #telaMidia,
+    body[data-genero="M"] #telaForm5,
+    body[data-genero="M"] #telaFinal,
+    body[data-genero="M"] #telaPlanos,
+    body[data-genero="M"] #telaPagamento {
+      --pink: #1565c0;
+      --pink-light: #64b5f6;
+      --pink-dark: #0d47a1;
+      --pink-100: #e3f2fd;
+      --pink-200: #bbdefb;
+      --pink-bg: #e3f2fd;
+      background: linear-gradient(160deg, #e3f2fd 0%, #eff8ff 100%) !important;
+    }
+
+    /* ── FAQ ── */
+    .faq-section { padding: 3rem 1.5rem; background: var(--bg); }
+    .faq-section .tag-pill { display: inline-flex; }
+    .faq-title { font-size: 28px; font-weight: 900; color: var(--text); margin-bottom: 0.4rem; }
+    .faq-title span { color: var(--pink); }
+    .faq-sub { font-size: 14px; color: var(--muted); margin-bottom: 2rem; }
+    .faq-list { display: flex; flex-direction: column; gap: 10px; }
+    .faq-item {
+      background: var(--card); border: 1.5px solid var(--border);
+      border-radius: 16px; overflow: hidden; transition: border-color 0.2s;
+    }
+    .faq-item.open { border-color: var(--pink-200); }
+    .faq-question {
+      width: 100%; padding: 1.1rem 1.25rem; display: flex; align-items: center;
+      justify-content: space-between; gap: 12px; background: none; border: none;
+      cursor: pointer; text-align: left; font-family: inherit;
+    }
+    .faq-question span { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.4; flex: 1; }
+    .faq-icon {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: var(--pink-100); color: var(--pink); font-size: 16px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.25s, background 0.25s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--pink); color: #fff; }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s;
+      padding: 0 1.25rem;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; padding: 0 1.25rem 1.1rem; }
+    .faq-answer p { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--card2); border-top: 1px solid var(--border); padding: 2rem 1.5rem; text-align: center; }
+    .footer-logo { font-size: 18px; font-weight: 800; color: var(--text); margin-bottom: 0.5rem; }
+    .footer-logo span { color: var(--pink); }
+    .footer-tagline { font-size: 13px; color: var(--muted); margin-bottom: 1rem; }
+    .footer-links { display: flex; justify-content: center; gap: 1.5rem; font-size: 13px; color: var(--muted); margin-bottom: 1.25rem; }
+    .footer-links a:hover { color: var(--pink); }
+    .footer-copy { font-size: 12px; color: var(--muted); opacity: 0.7; }
+    /* ── TELA DE ESCOLHA ── */
+    #telaEscolha {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%) !important;
+      overflow: hidden; animation: fadeInTela 0.4s ease;
+    }
+    @keyframes fadeInTela { from{opacity:1;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+    .escolha-wrap {
+      width: 100%; max-width: 400px; margin: 0 auto;
+      height: 100vh; display: grid;
+      grid-template-rows: auto 1fr;
+      padding: 12px 20px 16px; box-sizing: border-box;
+    }
+    /* TOPO */
+    .escolha-top { text-align: center; }
+    .escolha-tag { font-size: 10px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); display: block; margin: 6px 0 3px; }
+    .escolha-title { font-size: 20px; font-weight: 900; color: var(--text); line-height: 1.2; margin-bottom: 2px; }
+    .escolha-sub { font-size: 11.5px; color: var(--muted); line-height: 1.4; }
+
+    /* MEIO carrossel */
+    .tipos-stage { display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; }
+    .tipos-track { position: relative; width: 100%; height: 200px; }
+    .tipo-wrap { position: absolute; left: 50%; top: 0; transition: all 0.35s cubic-bezier(0.4,0,0.2,1); }
+    .tipo-wrap.tc { transform: translateX(-50%) scale(1);     z-index:10; opacity:1; }
+    .tipo-wrap.tl { transform: translateX(-140%) scale(0.7); z-index:5;  opacity:0.22; }
+    .tipo-wrap.tr { transform: translateX(40%)  scale(0.7);  z-index:5;  opacity:0.22; }
+    .tipo-wrap.th { transform: translateX(-50%) scale(0.3);  z-index:1;  opacity:0; pointer-events:none; }
+    .tipo-card {
+      width: 190px; background: var(--card);
+      border: 2px solid var(--pink-200); border-radius: 18px;
+      padding: 1rem 0.9rem 0.9rem; text-align: center;
+      box-shadow: 0 4px 20px rgba(233,30,140,0.1); cursor: pointer;
+    }
+    .tipo-wrap.tc .tipo-card { border-color: var(--pink); box-shadow: 0 6px 28px rgba(233,30,140,0.2); }
+    .tipo-icon-box {
+      width: 52px; height: 52px; border-radius: 14px; margin: 0 auto 0.5rem;
+      display: flex; align-items: center; justify-content: center; font-size: 24px;
+    }
+    .ti-pink   { background: linear-gradient(135deg,#ff6bb5,var(--pink)); }
+    .ti-purple { background: linear-gradient(135deg,#ce93d8,#ab47bc); }
+    .ti-orange { background: linear-gradient(135deg,#ffb347,#f06292); }
+    .ti-teal   { background: linear-gradient(135deg,#80deea,#26c6da); }
+    .tipo-label { font-size: 8px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); margin-bottom: 3px; }
+    .tipo-nome  { font-size: 14px; font-weight: 900; color: var(--text) !important; margin-bottom: 4px; line-height: 1.2; }
+    .tipo-desc  { font-size: 10.5px; color: var(--muted) !important; line-height: 1.4; }
+    .tipo-arrows { display: flex; justify-content: center; gap: 12px; margin-top: 10px; }
+    .tipo-arrow {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--card); border: 1.5px solid var(--pink-200);
+      color: var(--pink); font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .tipo-arrow:hover { background: var(--pink); color: #fff; }
+    .tipo-dots { display: flex; justify-content: center; gap: 5px; margin-top: 7px; }
+    .tipo-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink-200); transition: all 0.3s; }
+    .tipo-dot.on { width: 16px; border-radius: 3px; background: var(--pink); }
+    .escolha-hint { font-size: 10px; color: var(--muted); opacity: 0.5; text-align: center; margin-top: 5px; }
+
+    /* RODAPÉ */
+    .escolha-bottom { }
+    .btn-escolha-criar {
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
+      color: #fff; font-size: 15px; font-weight: 700; padding: 14px;
+      border-radius: 50px; box-shadow: 0 6px 20px rgba(233,30,140,0.3);
+      width: 100%; margin-bottom: 8px; border: none; cursor: pointer;
+    }
+    .btn-voltar { background: none; border: none; font-size: 13px; color: var(--muted); cursor: pointer; width: 100%; padding: 4px; display: flex; align-items: center; justify-content: center; gap: 5px; }
+    /* ── TELA FORMULÁRIO ── */
+    #telaForm {
+      display: none; position: fixed; inset: 0; z-index: 1001;
+      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%) !important;
+      overflow-y: auto; animation: fadeInTela 0.4s ease;
+    }
+    .form-wrap { max-width: 420px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+
+    /* Steps bar */
+    .steps-bar { display: flex; align-items: center; gap: 0; margin-bottom: 2rem; }
+    .step-ball {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 12px; font-weight: 800; transition: all 0.3s;
+    }
+    .step-ball.done { background: var(--pink); color: #fff; }
+    .step-ball.current { background: var(--pink); color: #fff; box-shadow: 0 0 0 4px rgba(233,30,140,0.2); }
+    .step-ball.todo { background: var(--pink-100); color: var(--muted); border: 1.5px solid var(--pink-200); }
+    .step-line { flex: 1; height: 2px; background: var(--pink-200); }
+    .step-line.done { background: var(--pink); }
+
+    /* Balão de mensagem */
+    .msg-balao {
+      background: var(--card); border: 1px solid #e8e8f0;
+      border-radius: 18px; border-top-left-radius: 4px;
+      padding: 1.1rem 1.25rem; margin-bottom: 1.75rem;
+      display: flex; align-items: flex-start; gap: 12px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    }
+    .msg-avatar {
+      width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+      display: flex; align-items: center; justify-content: center; font-size: 24px;
+    }
+    .msg-texto { font-size: 14px; color: var(--text); line-height: 1.6; font-weight: 500; }
+
+    /* Campos */
+    .campo-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; display: block; }
+    .campo-wrap { position: relative; margin-bottom: 1.25rem; }
+    .campo-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; }
+    .campo-input {
+      width: 100%; padding: 14px 14px 14px 42px;
+      border: 1.5px solid var(--pink-200); border-radius: 14px;
+      font-size: 15px; font-family: inherit; color: var(--text);
+      background: var(--card); outline: none; transition: border-color 0.2s;
+    }
+    .campo-input:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .campo-input::placeholder { color: var(--muted); opacity: 0.7; }
+
+    /* Botões do form */
+    .form-btns { display: flex; gap: 10px; margin-top: 0.75rem; }
+    .btn-form-voltar {
+      flex: 1; padding: 14px; border-radius: 50px;
+      border: 1.5px solid var(--pink-200); background: var(--card);
+      font-size: 15px; font-weight: 700; color: var(--muted);
+      cursor: pointer; transition: all 0.2s;
+    }
+    .btn-form-voltar:hover { border-color: var(--pink); color: var(--pink); }
+    .btn-form-continuar {
+      flex: 2; padding: 14px; border-radius: 50px; border: none;
+      background: linear-gradient(135deg, var(--pink, #e91e8c), var(--pink-light, #ff6bb5));
+      font-size: 15px; font-weight: 700; color: #fff;
+      cursor: pointer; box-shadow: 0 6px 24px rgba(233,30,140,0.3);
+      transition: all 0.2s;
+    }
+    .btn-form-continuar:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(233,30,140,0.4); }
+    body[data-genero="M"] .btn-form-continuar {
+      background: linear-gradient(135deg, #1565c0, #64b5f6);
+      box-shadow: 0 6px 24px rgba(21,101,192,0.3);
+    }
+    body[data-genero="M"] .btn-form-continuar:hover { box-shadow: 0 8px 28px rgba(21,101,192,0.4); }
+    body[data-genero="M"] .genero-card.selected {
+      border-color: #1565c0 !important;
+      background: #e3f2fd;
+      box-shadow: 0 0 0 3px rgba(21,101,192,0.15);
+    }
+    body[data-genero="M"] .msg-avatar {
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    }
+    body[data-genero="M"] .opc-sim {
+      background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+    }
+    body[data-genero="M"] .opc-card.selected {
+      background: #e3f2fd;
+      box-shadow: 0 0 0 3px rgba(21,101,192,0.15);
+    }
+    body[data-genero="M"] .opc-card:hover {
+      box-shadow: 0 6px 20px rgba(21,101,192,0.15);
+    }
+    body[data-genero="M"] .cor-item.sel {
+      box-shadow: 0 0 0 3px rgba(21,101,192,0.3);
+    }
+    body[data-genero="M"] .anim-item.sel {
+      box-shadow: 0 0 0 3px rgba(21,101,192,0.3);
+    }
+    body[data-genero="M"] .layout-item.sel {
+      background: #e3f2fd;
+    }
+    body[data-genero="M"] .layout-item:hover { border-color: #1565c0; }
+    body[data-genero="M"] .upload-box:hover,
+    body[data-genero="M"] .upload-box.has-file {
+      background: #e3f2fd;
+    }
+    /* ── PREVIEW CELULAR ── */
+    .phone-preview-wrap { display: flex; justify-content: center; margin: 1.5rem 0 0.5rem; }
+    .phone-preview {
+      width: 180px; height: 360px; border-radius: 36px;
+      background: linear-gradient(160deg, #7c3aed 0%, #2e1065 100%);
+      border: 6px solid #111; position: relative; overflow: hidden;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.35), 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    /* Notch */
+    .pp-notch {
+      position: absolute; top: 10px; left: 50%; transform: translateX(-50%);
+      width: 60px; height: 10px; background: #111; border-radius: 10px; z-index: 5;
+    }
+    /* Barra de status */
+    .pp-status {
+      position: absolute; top: 10px; left: 14px; right: 14px;
+      display: flex; justify-content: space-between; align-items: center; z-index: 4;
+    }
+    .pp-time { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.7); font-family: 'Inter', sans-serif; }
+    .pp-icons { font-size: 8px; color: rgba(255,255,255,0.7); }
+    /* Conteúdo central */
+    .pp-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+    }
+    .pp-envelope {
+      width: 60px; height: 60px; background: linear-gradient(135deg, #fff5f9, #fce4ec);
+      border-radius: 16px; display: flex; align-items: center; justify-content: center;
+      font-size: 32px; box-shadow: 0 8px 32px rgba(233,30,140,0.4);
+      animation: floatEnvelope 3s ease-in-out infinite;
+    }
+    @keyframes floatEnvelope {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+    .pp-para { font-size: 9px; font-weight: 700; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); font-family: 'Inter', sans-serif; text-transform: uppercase; }
+    .pp-nome {
+      font-size: 20px; font-weight: 900; color: #fff; font-family: 'Inter', sans-serif;
+      text-align: center; padding: 0 12px; min-height: 28px;
+      transition: all 0.3s ease;
+    }
+    .pp-nome.vazio { font-size: 14px; font-weight: 500; color: rgba(255,255,255,0.3); }
+    .pp-toque { font-size: 9px; color: rgba(255,255,255,0.3); font-family: 'Inter', sans-serif; font-style: italic; }
+    /* Brilho de fundo */
+    .pp-glow {
+      position: absolute; width: 120px; height: 120px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(233,30,140,0.25) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -60%); pointer-events: none;
+    }
+    /* ── PASSO 2 ── */
+    #telaForm2 {
+      display: none; position: fixed; inset: 0; z-index: 1002;
+      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      overflow-y: auto; animation: fadeInTela 0.4s ease;
+    }
+    .genero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
+    .genero-card {
+      border: 2px solid var(--pink-200); border-radius: 16px;
+      padding: 1.25rem 1rem; text-align: center; cursor: pointer;
+      background: var(--card);
+      transition: border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
+    }
+    .genero-card:hover { border-color: var(--pink-400); }
+    .genero-card.selected { border-color: var(--pink) !important; background: #fff0f7; box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .genero-emoji { font-size: 36px; display: block; margin-bottom: 6px; }
+    .genero-label { font-size: 14px; font-weight: 700; color: var(--text); }
+    .select-wrap { position: relative; margin-bottom: 1.25rem; }
+    .select-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); font-size: 16px; pointer-events: none; }
+    .select-arrow { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; font-size: 12px; }
+    .campo-select {
+      width: 100%; padding: 14px 40px 14px 42px;
+      border: 1.5px solid var(--pink-200); border-radius: 14px;
+      font-size: 15px; font-family: inherit; color: var(--text);
+      background: var(--card); outline: none; appearance: none;
+      cursor: pointer; transition: border-color 0.2s;
+    }
+    .campo-select:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    /* ── TELA FORM 3 ── */
+    #telaForm3 {
+      display: none; position: fixed; inset: 0; z-index: 1003;
+      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      overflow-y: auto; animation: fadeInTela 0.4s ease;
+    }
+    .msg-label-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .btn-ia {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
+      color: #fff; font-size: 12px; font-weight: 700; padding: 7px 14px;
+      border-radius: 30px; border: none; cursor: pointer;
+      box-shadow: 0 4px 14px rgba(233,30,140,0.3); transition: all 0.2s;
+    }
+    .btn-ia:hover { transform: translateY(-1px); }
+    .btn-ia.loading { opacity: 0.7; pointer-events: none; }
+    .campo-textarea {
+      width: 100%; padding: 14px; min-height: 160px;
+      border: 1.5px solid var(--pink-200); border-radius: 14px;
+      font-size: 14px; font-family: inherit; color: var(--text);
+      background: var(--card); outline: none; resize: vertical;
+      transition: border-color 0.2s; line-height: 1.6;
+    }
+    .campo-textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .campo-textarea::placeholder { color: var(--muted); opacity: 0.7; }
+    .char-count { text-align: right; font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .campo-hint { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
+    /* ── PASSO 4 ── */
+    #telaForm4 {
+      display: none; position: fixed; inset: 0; z-index: 1004;
+      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      overflow-y: auto; animation: fadeInTela 0.4s ease;
+    }
+    .opc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.25rem; }
+    .opc-card {
+      border: 1.5px solid var(--pink-200); border-radius: 18px;
+      padding: 2rem 1rem 1.5rem; text-align: center;
+      background: var(--card); cursor: pointer; transition: all 0.2s;
+    }
+    .opc-card:hover { border-color: var(--pink); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(233,30,140,0.12); }
+    .opc-card.selected { border-color: var(--pink); background: #fff0f7; box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .opc-icon-box {
+      width: 56px; height: 56px; border-radius: 16px; margin: 0 auto 0.9rem;
+      display: flex; align-items: center; justify-content: center; font-size: 28px;
+    }
+    .opc-sim  { background: linear-gradient(135deg, #fce4ec, #f8bbd0); }
+    .opc-nao  { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
+    .opc-label { font-size: 14px; font-weight: 700; color: var(--text); }
+    .passo4-title { font-size: 18px; font-weight: 900; color: var(--text); margin-bottom: 0.4rem; line-height: 1.3; }
+    .passo4-sub   { font-size: 13px; color: var(--muted); }
+    /* ── TELA MÍDIA ── */
+    #telaMidia {
+      display: none; position: fixed; inset: 0; z-index: 1005;
+      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      overflow-y: auto; animation: fadeInTela 0.4s ease;
+    }
+    .midia-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+    .upload-box {
+      border: 2px dashed var(--pink-200); border-radius: 16px;
+      background: var(--card); padding: 2rem 1rem;
+      text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 1.25rem;
+    }
+    .upload-box:hover { border-color: var(--pink); background: #fff0f7; }
+    .upload-box.has-file { border-color: var(--pink); background: #fff0f7; border-style: solid; }
+    .upload-icon { font-size: 36px; margin-bottom: 0.6rem; display: block; }
+    .upload-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .upload-text strong { color: var(--pink); }
+    .upload-input { display: none; }
+    .audio-btn {
+      width: 100%; padding: 14px; border-radius: 50px; margin-bottom: 0.6rem;
+      border: 1.5px solid var(--pink-200); background: var(--pink-100);
+      font-size: 15px; font-weight: 700; color: var(--pink-dark);
+      cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+      transition: all 0.2s;
+    }
+    .audio-btn:hover { background: var(--pink); color: #fff; border-color: var(--pink); }
+    .audio-btn.gravando { background: #fee2e2; border-color: #ef4444; color: #ef4444; animation: pulsaGrav 1s infinite; }
+    @keyframes pulsaGrav { 0%,100%{opacity:1} 50%{opacity:0.6} }
+    .audio-hint { font-size: 12px; color: var(--muted); text-align: center; margin-bottom: 1.5rem; }
+    /* ── PREVIEWS DE MÍDIA ── */
+    .preview-fotos-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; }
+    .preview-foto-item {
+      position: relative; width: 90px; height: 90px; border-radius: 12px; overflow: hidden;
+      border: 2px solid var(--pink-200); flex-shrink: 0;
+    }
+    .preview-foto-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .preview-remove {
+      position: absolute; top: 4px; right: 4px;
+      width: 20px; height: 20px; border-radius: 50%;
+      background: #ef4444; color: #fff; border: none;
+      font-size: 12px; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      line-height: 1;
+    }
+    .preview-video-wrap { margin-bottom: 1.25rem; border-radius: 16px; overflow: hidden; border: 2px solid var(--pink-200); position: relative; }
+    .preview-video-wrap video { width: 100%; display: block; max-height: 220px; object-fit: cover; }
+    .preview-video-wrap .preview-remove { position: absolute; top: 8px; right: 8px; width: 26px; height: 26px; font-size: 14px; }
+    .audio-preview-wrap { background: var(--pink-100); border: 1.5px solid var(--pink-200); border-radius: 14px; padding: 12px 14px; margin-bottom: 0.6rem; display: none; align-items: center; gap: 10px; }
+    .audio-preview-wrap audio { flex: 1; height: 36px; }
+    .audio-preview-wrap .preview-remove { position: static; width: 26px; height: 26px; font-size: 14px; flex-shrink: 0; }
+    /* ── PASSO 5 ── */
+    #telaForm5 {
+      display: none; position: fixed; inset: 0; z-index: 1006;
+      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      overflow-y: auto; animation: fadeInTela 0.4s ease;
+    }
+    .opcoes-section { margin-bottom: 1.5rem; }
+    .opcoes-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+    /* Paleta de cores */
+    .cores-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+    .cor-item {
+      width: 52px; height: 52px; border-radius: 16px; cursor: pointer;
+      border: 3px solid transparent; transition: all 0.2s;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: transparent;
+    }
+    .cor-item.sel { border-color: var(--pink); color: #fff; box-shadow: 0 0 0 3px rgba(233,30,140,0.25); }
+    /* Animações */
+    .anim-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+    .anim-item {
+      width: 62px; height: 72px; border-radius: 16px; cursor: pointer;
+      border: 3px solid transparent; background: #0d0520;
+      transition: all 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 5px; overflow: hidden; padding-bottom: 4px;
+    }
+    .anim-item.sel { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.25); }
+    .anim-label { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.8); text-align: center; letter-spacing: 0.02em; line-height: 1; }
+    /* Layout fotos */
+    .layout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .layout-item {
+      border: 2px solid var(--pink-200); border-radius: 16px;
+      padding: 1.25rem 1rem; text-align: center; cursor: pointer;
+      background: var(--card); transition: all 0.2s;
+    }
+    .layout-item:hover { border-color: var(--pink); }
+    .layout-item.sel { border-color: var(--pink); background: #fff0f7; }
+    .layout-item .l-icon { font-size: 28px; display: block; margin-bottom: 6px; }
+    .layout-item .l-nome { font-size: 13px; font-weight: 700; color: var(--text); }
+    /* Preview celular grande */
+    .phone-final-wrap { display: flex; justify-content: center; margin: 1.5rem 0; }
+    .phone-final {
+      width: 200px; height: 400px; border-radius: 40px;
+      background: linear-gradient(160deg, #7c3aed 0%, #2e1065 100%);
+      border: 7px solid #111; position: relative; overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
+    }
+    .pf-notch {
+      position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 64px; height: 10px; background: #111; border-radius: 10px; z-index: 5;
+    }
+    .pf-status {
+      position: absolute; top: 12px; left: 14px; right: 14px;
+      display: flex; justify-content: space-between; align-items: center; z-index: 4;
+    }
+    .pf-time { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.7); font-family: 'Inter',sans-serif; }
+    .pf-icons { font-size: 9px; color: rgba(255,255,255,0.7); }
+    .pf-content {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+    }
+    .pf-envelope {
+      width: 68px; height: 68px; background: linear-gradient(135deg, #fff5f9, #fce4ec);
+      border-radius: 18px; display: flex; align-items: center; justify-content: center;
+      font-size: 36px; box-shadow: 0 8px 32px rgba(233,30,140,0.4);
+      animation: floatEnvelope 3s ease-in-out infinite;
+    }
+    .pf-para { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); font-family: 'Inter',sans-serif; text-transform: uppercase; }
+    .pf-nome { font-size: 22px; font-weight: 900; color: #fff; font-family: 'Inter',sans-serif; text-align: center; padding: 0 14px; }
+    .pf-toque { font-size: 10px; color: rgba(255,255,255,0.3); font-family: 'Inter',sans-serif; font-style: italic; }
+    .pf-glow {
+      position: absolute; width: 130px; height: 130px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(124,58,237,0.4) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%, -60%); pointer-events: none;
+    }
+    /* Botões finais */
+    .form-btns-final { display: flex; gap: 10px; padding: 0 0 2rem; }
+    .campo-erro { border-color: #ef4444 !important; box-shadow: 0 0 0 3px rgba(239,68,68,0.18) !important; outline: 2px solid #ef4444 !important; }
+    .msg-erro { font-size: 12px; color: #ef4444; font-weight: 600; margin-top: 4px; margin-bottom: 4px; display: none; padding-left: 4px; }
+    .shake { animation: shake 0.35s ease; }
+    @keyframes shake { 0%,100%{transform:translateX(0)} 25%{transform:translateX(-6px)} 75%{transform:translateX(6px)} }
+    /* ── TELA FINALIZAÇÃO ── */
+    #telaFinal {
+      display: none; position: fixed; inset: 0; z-index: 1010;
+      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      overflow-y: auto; animation: fadeInTela 0.4s ease;
+    }
+    .final-wrap {
+      max-width: 380px; margin: 0 auto; padding: 3rem 1.5rem 3rem;
+      display: flex; flex-direction: column; align-items: center; text-align: center; min-height: 100vh; justify-content: flex-start; padding-top: 3.5rem;
+    }
+    /* Steps bar tela final */
+    .final-steps { display: flex; align-items: center; gap: 0; margin-bottom: 2.5rem; width: 100%; }
+    .final-step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
+    .final-step-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--pink-200); }
+    .final-step-dot.done { background: var(--pink); }
+    .final-step-dot.active { background: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.3); }
+    .final-step-label { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+    .final-step-label.done { color: var(--pink); }
+    .final-step-label.active { color: var(--pink-dark); }
+    .final-step-line { flex: 1; height: 2px; background: var(--pink-200); margin-bottom: 14px; }
+    .final-step-line.done { background: var(--pink); }
+    /* Avatar cachorro */
+    .final-avatar {
+      width: 90px; height: 90px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--pink), #ff6bb5);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; margin-bottom: 1.5rem;
+      box-shadow: 0 0 0 8px rgba(233,30,140,0.15), 0 0 0 16px rgba(233,30,140,0.07);
+    }
+    /* Mensagem variável */
+    .final-msg {
+      font-size: 20px; font-weight: 700; color: var(--text); line-height: 1.4;
+      margin-bottom: 1rem; min-height: 60px;
+      transition: opacity 0.5s ease;
+    }
+    .final-msg.fade { opacity: 0; }
+    .final-sub { font-size: 14px; color: var(--muted); margin-bottom: 2.5rem; line-height: 1.6; }
+    /* Botão */
+    .btn-comecar {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: linear-gradient(135deg, var(--pink), #ff6bb5);
+      color: #fff; font-size: 16px; font-weight: 700; padding: 16px 32px;
+      border-radius: 50px; border: none; cursor: pointer; width: 100%;
+      box-shadow: 0 8px 32px rgba(233,30,140,0.4); transition: all 0.2s;
+    }
+    .btn-comecar:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(233,30,140,0.5); }
+    /* ── TELA PLANOS ── */
+    #telaPlanos {
+      display: none; position: fixed; inset: 0; z-index: 1011;
+      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      overflow-y: auto; animation: fadeInTela 0.4s ease;
+    }
+    .planos-wrap { max-width: 400px; margin: 0 auto; padding: 2rem 1.25rem 5rem; }
+
+    /* Frase variável sem card, tudo junto */
+    .plano-frase { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.5; text-align: center; margin-bottom: 0.5rem; min-height: 48px; transition: opacity 0.5s ease; }
+    .plano-frase.fade { opacity: 0; }
+
+    /* Emojis flutuantes */
+    .plano-emojis-wrap { display: flex; justify-content: center; gap: 10px; margin-bottom: 1.5rem; }
+    .plano-emoji { font-size: 28px; display: inline-block; }
+    .plano-emoji:nth-child(1) { animation: floatE 2.2s ease-in-out infinite; }
+    .plano-emoji:nth-child(2) { animation: floatE 2.2s ease-in-out infinite 0.4s; }
+    .plano-emoji:nth-child(3) { animation: floatE 2.2s ease-in-out infinite 0.8s; }
+    @keyframes floatE { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+    .plano-titulo { font-size: 26px; font-weight: 900; color: var(--text); text-align: center; margin-bottom: 4px; }
+    .plano-sub { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 1.5rem; }
+
+    /* Card do plano sem borda separada, integrado */
+    .plano-card {
+      border: 2px solid var(--pink); border-radius: 20px;
+      padding: 1.5rem 1.25rem; margin-bottom: 1.25rem;
+      background: var(--card);
+      box-shadow: 0 4px 32px rgba(233,30,140,0.15);
+    }
+    .plano-card-nome { font-size: 18px; font-weight: 900; color: var(--text); text-align: center; margin-bottom: 0.75rem; }
+    .plano-preco-old { font-size: 13px; color: var(--muted); text-align: center; text-decoration: line-through; }
+    .plano-economia { font-size: 13px; font-weight: 700; color: #4ade80; text-align: center; margin-bottom: 4px; }
+    .plano-preco-hint { font-size: 11px; color: var(--muted); text-align: center; margin-bottom: 0.75rem; font-style: italic; }
+    .plano-preco { font-size: 36px; font-weight: 900; color: var(--pink); text-align: center; margin-bottom: 1.25rem; }
+    .plano-items { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .plano-items li { font-size: 13px; color: var(--text); display: flex; align-items: flex-start; gap: 8px; line-height: 1.4; }
+    .plano-items li::before { content: '✓'; color: var(--pink); font-weight: 700; flex-shrink: 0; }
+
+    /* Botão pagamento */
+    .btn-pagamento {
+      width: 100%; padding: 18px; border-radius: 50px; border: none;
+      background: linear-gradient(135deg, var(--pink), #ff6bb5);
+      font-size: 16px; font-weight: 700; color: #fff;
+      cursor: pointer; box-shadow: 0 8px 32px rgba(233,30,140,0.4);
+      transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 2px;
+    }
+    .btn-pagamento:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(233,30,140,0.5); }
+    .btn-pagamento span { font-size: 12px; opacity: 0.8; font-weight: 400; }
+    /* ── MODAL PIX ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,0.55); backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-box {
+      background: var(--card); border-radius: 24px; padding: 2rem 1.5rem;
+      width: 90%; max-width: 380px; box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+      animation: fadeInTela 0.3s ease;
+    }
+    .modal-title { font-size: 20px; font-weight: 900; color: var(--text); text-align: center; margin-bottom: 0.4rem; }
+    .modal-sub { font-size: 13px; color: var(--muted); text-align: center; margin-bottom: 1.5rem; }
+    .modal-campo { margin-bottom: 1rem; }
+    .modal-campo label { font-size: 13px; font-weight: 700; color: var(--text); display: block; margin-bottom: 6px; }
+    .modal-campo input {
+      width: 100%; padding: 13px 16px; border: 1.5px solid var(--pink-200);
+      border-radius: 14px; font-size: 15px; font-family: inherit;
+      color: var(--text); background: var(--bg); outline: none; transition: border-color 0.2s;
+    }
+    .modal-campo input:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .btn-gerar-pix {
+      width: 100%; padding: 15px; border-radius: 50px; border: none;
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
+      font-size: 15px; font-weight: 700; color: #fff; cursor: pointer;
+      box-shadow: 0 6px 24px rgba(233,30,140,0.3); transition: all 0.2s; margin-top: 0.5rem;
+    }
+    .btn-gerar-pix:hover { transform: translateY(-1px); }
+    .btn-gerar-pix:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+    /* PIX gerado */
+    .pix-resultado { display: none; text-align: center; }
+    .pix-qr { width: 180px; height: 180px; margin: 0 auto 1rem; border-radius: 12px; border: 3px solid var(--pink-200); }
+    .pix-codigo-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .pix-codigo-box {
+      background: var(--bg); border: 1.5px solid var(--border); border-radius: 12px;
+      padding: 10px 14px; font-size: 11px; font-family: monospace; color: var(--text);
+      word-break: break-all; margin-bottom: 12px; text-align: left; line-height: 1.5;
+    }
+    .btn-copiar-pix {
+      width: 100%; padding: 13px; border-radius: 50px; border: 1.5px solid var(--pink);
+      background: var(--pink-100); color: var(--pink-dark); font-size: 14px; font-weight: 700;
+      cursor: pointer; transition: all 0.2s; margin-bottom: 8px;
+    }
+    .btn-copiar-pix:hover { background: var(--pink); color: #fff; }
+    .pix-hint { font-size: 11px; color: var(--muted); line-height: 1.5; }
+    .modal-close {
+      position: absolute; top: 14px; right: 16px; background: none; border: none;
+      font-size: 20px; color: var(--muted); cursor: pointer; line-height: 1;
+    }
+    /* ── PASSO 3 ── */
+    #telaForm3 {
+      display: none; position: fixed; inset: 0; z-index: 1003;
+      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      overflow-y: auto; animation: fadeInTela 0.4s ease;
+    }
+    .msg-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .msg-label { font-size: 13px; font-weight: 700; color: var(--text); }
+    .btn-ia {
+      display: flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
+      color: #fff; font-size: 12px; font-weight: 700; padding: 7px 14px;
+      border-radius: 20px; border: none; cursor: pointer;
+      box-shadow: 0 4px 16px rgba(233,30,140,0.25); transition: all 0.2s;
+    }
+    .btn-ia:hover { transform: translateY(-1px); }
+    .msg-textarea {
+      width: 100%; min-height: 160px; padding: 14px;
+      border: 1.5px solid var(--pink-200); border-radius: 16px;
+      font-size: 14px; font-family: inherit; color: var(--text);
+      background: var(--card); outline: none; resize: vertical;
+      transition: border-color 0.2s; line-height: 1.6;
+    }
+    .msg-textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .msg-textarea::placeholder { color: var(--muted); opacity: 0.7; }
+    .msg-counter { font-size: 11px; color: var(--muted); text-align: right; margin-top: 4px; margin-bottom: 1.25rem; }
+    .ia-gerando { display: none; text-align: center; padding: 1rem; font-size: 13px; color: var(--pink); font-weight: 600; }
+    /* ── TELA PAGAMENTO ── */
+    #telaPagamento {
+      display: none; position: fixed; inset: 0; z-index: 1012;
+      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      overflow-y: auto; animation: fadeInTela 0.4s ease;
+    }
+    .pag-wrap { max-width: 420px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
+
+    /* Steps */
+    .pag-steps { display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 1.5rem; }
+    .pag-step { font-size: 12px; font-weight: 700; color: var(--muted); }
+    .pag-step.active { color: var(--pink); }
+    .pag-step-sep { color: var(--pink-200); font-size: 12px; }
+
+    /* Plano resumo */
+    .pag-plano { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .pag-plano-nome { font-size: 14px; font-weight: 700; color: var(--text); }
+    .pag-plano-preco { font-size: 18px; font-weight: 900; color: var(--pink); }
+
+    /* Método de pagamento */
+    .pag-metodo-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .pag-metodos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.5rem; }
+    .pag-metodo-btn {
+      border: 2px solid var(--pink-200); border-radius: 14px; padding: 14px 12px;
+      background: var(--card); cursor: pointer; display: flex; align-items: center; gap: 8px;
+      font-size: 14px; font-weight: 700; color: var(--muted); transition: all 0.2s;
+    }
+    .pag-metodo-btn.active { border-color: var(--pink); color: var(--text); background: #fff0f7; }
+    .pag-metodo-btn .radio { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--pink-200); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
+    .pag-metodo-btn.active .radio { border-color: var(--pink); background: var(--pink); }
+    .pag-metodo-btn.active .radio::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
+
+    /* Formulário PIX */
+    .pag-form-pix { display: block; }
+    .pag-form-card { display: none; }
+    .pag-section-title { font-size: 15px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+    .pag-section-sub { font-size: 12px; color: var(--muted); margin-bottom: 1.25rem; }
+
+    /* Card fields */
+    .card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    /* Urgência */
+    .pag-urgencia { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 1.25rem; margin-bottom: 1.25rem; }
+    .pag-urgencia-title { font-size: 13px; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+    .pag-urgencia ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .urg-frase-wrap { min-height: 72px; display: flex; align-items: center; }
+    .urg-frase { font-size: 13px; color: var(--text); font-weight: 600; line-height: 1.6; transition: opacity 0.5s ease; }
+    .urg-frase.fade { opacity: 0; }
+    .urg-dots { display: flex; gap: 6px; margin-top: 12px; }
+    .urg-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--pink-200); transition: all 0.3s; }
+    .urg-dot.active { width: 18px; border-radius: 4px; background: var(--pink); }
+
+    /* Social proof */
+    .pag-proof { text-align: center; font-size: 12px; color: var(--muted); margin-bottom: 1.25rem; }
+    .pag-proof strong { color: var(--pink); }
+
+    /* Botão pagar */
+    .btn-pagar {
+      width: 100%; padding: 16px; border-radius: 50px; border: none; outline: none;
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
+      font-size: 16px; font-weight: 700; color: #fff; cursor: pointer;
+      box-shadow: 0 8px 32px rgba(233,30,140,0.3); transition: all 0.2s; margin-bottom: 8px;
+    }
+    .btn-pagar:hover { transform: translateY(-2px); }
+    .btn-pagar:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+    .pag-seguro { text-align: center; font-size: 11px; color: var(--muted); margin-bottom: 1.5rem; }
+
+    /* PIX resultado */
+    .pix-result-box { display: none; text-align: center; background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.25rem; }
+    .pix-result-box img { width: 180px; height: 180px; margin: 0 auto 1rem; display: block; border-radius: 12px; border: 2px solid var(--pink-200); }
+    .pix-copia-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+    .pix-copia-box { background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; font-size: 11px; font-family: monospace; color: var(--text); word-break: break-all; text-align: left; margin-bottom: 10px; line-height: 1.5; }
+    .btn-copiar { width: 100%; padding: 12px; border-radius: 50px; border: 1.5px solid var(--pink); background: var(--pink-100); color: var(--pink-dark); font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .btn-copiar:hover { background: var(--pink); color: #fff; }
+    .pix-timer { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    /* ── CARTÃO VISUAL ── */
+    .card-visual-wrap { display: flex; justify-content: center; margin-top: 1.5rem; }
+    .card-visual {
+      width: 280px; height: 170px; border-radius: 18px;
+      background: linear-gradient(135deg, var(--pink-dark), var(--pink), var(--pink-light));
+      padding: 1.25rem 1.5rem; position: relative; overflow: hidden;
+      box-shadow: 0 12px 40px rgba(233,30,140,0.35);
+      color: #fff; font-family: 'Inter', sans-serif;
+    }
+    .card-visual::before {
+      content: ''; position: absolute; top: -40px; right: -40px;
+      width: 160px; height: 160px; border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+    }
+    .card-visual::after {
+      content: ''; position: absolute; bottom: -60px; left: -20px;
+      width: 180px; height: 180px; border-radius: 50%;
+      background: rgba(255,255,255,0.07);
+    }
+    .cv-chip { width: 36px; height: 26px; background: linear-gradient(135deg, #ffd700, #ffa500); border-radius: 5px; margin-bottom: 1rem; }
+    .cv-numero { font-size: 15px; letter-spacing: 3px; font-weight: 600; margin-bottom: 1rem; opacity: 0.95; }
+    .cv-bottom { display: flex; justify-content: space-between; align-items: flex-end; }
+    .cv-label { font-size: 9px; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 2px; }
+    .cv-nome { font-size: 12px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; max-width: 140px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .cv-validade { font-size: 12px; font-weight: 700; }
+    .cv-cvv-wrap { text-align: right; }
+    .cv-cvv { font-size: 12px; font-weight: 700; letter-spacing: 2px; }
+    .cv-seguro { text-align: center; font-size: 11px; color: var(--muted); margin-top: 8px; }
+    /* ── PIX STATUS ── */
+    .pix-status-row {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 0.25rem;
+    }
+    .pix-status-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: #f59e0b;
+      animation: pulseDot 1.2s ease-in-out infinite;
+    }
+    .pix-status-dot.pago { background: #22c55e; animation: none; }
+    @keyframes pulseDot {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0.4; transform: scale(0.8); }
+    }
+
+    /* ── BARRA DE PROGRESSO GLOBAL ── */
+    .progress-bar-wrap {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 2000;
+      background: var(--card); border-top: 1px solid var(--border);
+      padding: 10px 1.5rem 14px;
+      transform: translateY(100%);
+      transition: transform 0.4s ease;
+    }
+    .progress-bar-wrap.visible { transform: translateY(0); }
+    .progress-label { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+    .progress-label span { font-size: 12px; font-weight: 700; color: var(--text); }
+    .progress-label .pct { color: var(--pink); font-size: 13px; }
+    .progress-track { width: 100%; height: 8px; background: var(--pink-100); border-radius: 10px; overflow: hidden; }
+    .progress-fill {
+      height: 100%; border-radius: 10px;
+      background: linear-gradient(90deg, var(--pink), var(--pink-light));
+      transition: width 0.6s cubic-bezier(0.4,0,0.2,1);
+      width: 0%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="topbar">❤️ Transforme uma simples mensagem em uma lembrança eterna</div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-icon-wrap">
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="ring"></div>
+      <div class="hero-icon">💌</div>
+    </div>
+    <p class="hero-eyebrow">Crie cartinhas para uma</p>
+    <h1>PESSOA<br><span class="pink">ESPECIAL</span></h1>
+    <svg class="hero-divider" viewBox="0 0 160 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 4 Q80 22 156 4" stroke="url(#pg)" stroke-width="3" stroke-linecap="round" fill="none"/>
+      <defs>
+        <linearGradient id="pg" x1="0" y1="0" x2="160" y2="0" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#e91e8c"/>
+          <stop offset="100%" stop-color="#ff6bb5"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <div class="hero-phrases" id="heroPhrases">
+      <div class="hero-phrase active">❤️ O presente que ela nunca vai esquecer.</div>
+      <div class="hero-phrase">💌 Mais que uma mensagem.</div>
+      <div class="hero-phrase">✨ Uma surpresa feita por você.</div>
+      <div class="hero-phrase">📸 Suas fotos. Sua história.</div>
+      <div class="hero-phrase">🥹 Prepare os lencinhos.</div>
+      <div class="hero-phrase">🎁 Emocione em poucos minutos.</div>
+      <div class="hero-phrase">❤️ Um presente para guardar para sempre.</div>
+    </div>
+    <p class="hero-desc">Uma cartinha digital personalizada com sua mensagem, fotos e música para criar uma lembrança que ficará para sempre no coração.</p>
+    <a href="#" class="btn-hero" onclick="abrirEscolha();return false;">❤️ Criar Minha Surpresa</a>
+    <p class="hero-scroll">ROLE PARA VER MAIS ↓</p>
+  </section>
+
+  <!-- SURPRESA -->
+  <section class="surpresa-section">
+    <p class="surpresa-eyebrow"></p>
+    <h2 class="surpresa-title">❤️ Muito mais do que uma cartinha.</h2>
+    <p class="surpresa-sub">Descubra todas as formas de transformar uma simples mensagem em uma lembrança inesquecível.</p>
+
+    <div class="deck-area" id="deckArea"></div>
+    <div class="deck-counter" id="deckCounter"></div>
+    <p class="deck-hint">👉 Deslize para descobrir mais ideias.</p>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="how-section">
+    <div class="tag-pill">⏱ Leva menos de 5 minutos</div>
+    <h2 class="how-title">Sua surpresa fica pronta <span>em poucos minutos.</span></h2>
+    <p class="how-sub">Você não precisa instalar nada. Basta seguir quatro passos simples para criar uma cartinha que emociona de verdade.</p>
+    <div class="steps-list">
+      <div class="step-item">
+        <div class="step-num-wrap c1">💌<span class="badge">1</span></div>
+        <div class="step-body">
+          <h3>❤️ Conte o que sente.</h3>
+          <p>Escreva sua mensagem com suas próprias palavras ou deixe nossa IA ajudar você a criar uma declaração inesquecível.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num-wrap c2">📸<span class="badge">2</span></div>
+        <div class="step-body">
+          <h3>📸 Deixe tudo com a cara de vocês.</h3>
+          <p>Adicione fotos, vídeos, música e escolha o visual perfeito para transformar sua cartinha em uma lembrança única.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num-wrap c3">📲<span class="badge">3</span></div>
+        <div class="step-body">
+          <h3>📱 Envie em segundos.</h3>
+          <p>Quando terminar, compartilhe o link pelo WhatsApp. A surpresa chega imediatamente para quem você ama.</p>
+        </div>
+      </div>
+      <div class="step-item">
+        <div class="step-num-wrap c4">❤️<span class="badge">4</span></div>
+        <div class="step-body">
+          <h3>🥹 Veja a reação.</h3>
+          <p>Ela abre a cartinha, vê suas fotos, lê sua mensagem e vive um momento que dificilmente será esquecido.</p>
+        </div>
+      </div>
+    </div>
+    <a href="#" class="btn-outline" onclick="abrirEscolha();return false;">❤️ Criar Minha Cartinha</a>
+  </section>
+
+  <!-- AVALIAÇÕES -->
+  <section class="reviews-section">
+    <div class="review-hero">
+      <div class="review-tag">❤️ Histórias reais</div>
+      <h2 class="review-big">12.450 pessoas já <span>emocionaram alguém.</span></h2>
+      <p class="review-desc">Cada cartinha conta uma história diferente. Veja o que algumas pessoas sentiram ao transformar uma simples mensagem em uma lembrança inesquecível.</p>
+      <div class="review-score">
+        <div class="score-left">
+          <div class="score-num">5,0</div>
+          <div class="score-stars">★★★★★</div>
+          <div style="font-size:11px;color:var(--muted);margin-top:3px;">de satisfação</div>
+        </div>
+        <div class="score-right">
+          <div class="score-avatars">
+            <div class="score-av av-a">A</div>
+            <div class="score-av av-b">L</div>
+            <div class="score-av av-c">M</div>
+            <div class="score-av av-d">P</div>
+            <div class="score-av" style="background:var(--pink);font-size:14px;">❤️</div>
+          </div>
+          <div class="score-count">Mais de 2.847 avaliações verificadas.</div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-carousel">
+      <div class="reviews-track">
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Quando ele abriu a cartinha ficou alguns segundos em silêncio. Depois começou a chorar e me abraçou. Nunca vou esquecer esse momento."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:var(--pink)">C</div>
+                <div><div class="rc-name">Camila R.</div><div class="rc-time">3 dias atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Minha mãe abriu no aniversário dela e ficou emocionada lendo cada palavra. Até hoje ela volta para reler a cartinha."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#ea580c">F</div>
+                <div><div class="rc-name">Fernanda M.</div><div class="rc-time">1 semana atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Usei para pedir desculpas depois de uma discussão. Ela disse que nunca tinha recebido algo tão bonito. A gente se reconciliou."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#7c3aed">R</div>
+                <div><div class="rc-name">Rafael T.</div><div class="rc-time">2 semanas atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Fiz para o meu marido no aniversário de casamento. Ele chorou na frente dos filhos. Disse que foi o melhor presente que já recebeu."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#c2185b">L</div>
+                <div><div class="rc-name">Letícia A.</div><div class="rc-time">1 mês atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Meu pai não é de demonstrar emoção, mas quando abriu a cartinha ficou com os olhos cheios d'água. Não esperava essa reação dele."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#059669">T</div>
+                <div><div class="rc-name">Thiago B.</div><div class="rc-time">3 meses atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Enviei no Dia dos Namorados sem avisar. Ele estava no trabalho e quando abriu me ligou na hora. Disse que estava chorando na frente dos colegas."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#0097a7">A</div>
+                <div><div class="rc-name">Amanda S.</div><div class="rc-time">5 meses atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Meu namorado mostrou a cartinha para toda a família quando chegou em casa. Foi muito mais especial do que eu imaginava."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:var(--pink)">B</div>
+                <div><div class="rc-name">Bruna O.</div><div class="rc-time">7 meses atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Fiz para toda a família no Natal. Cada um recebeu o link com uma mensagem diferente. Minha avó ligou chorando. Foi a melhor lembrança do ano."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#7c3aed">J</div>
+                <div><div class="rc-name">Juliana C.</div><div class="rc-time">9 meses atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <!-- loop duplicado para animação contínua -->
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Quando ele abriu a cartinha ficou alguns segundos em silêncio. Depois começou a chorar e me abraçou. Nunca vou esquecer esse momento."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:var(--pink)">C</div>
+                <div><div class="rc-name">Camila R.</div><div class="rc-time">3 dias atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Minha mãe abriu no aniversário dela e ficou emocionada lendo cada palavra. Até hoje ela volta para reler a cartinha."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#ea580c">F</div>
+                <div><div class="rc-name">Fernanda M.</div><div class="rc-time">1 semana atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Usei para pedir desculpas depois de uma discussão. Ela disse que nunca tinha recebido algo tão bonito. A gente se reconciliou."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#7c3aed">R</div>
+                <div><div class="rc-name">Rafael T.</div><div class="rc-time">2 semanas atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Fiz para o meu marido no aniversário de casamento. Ele chorou na frente dos filhos. Disse que foi o melhor presente que já recebeu."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#c2185b">L</div>
+                <div><div class="rc-name">Letícia A.</div><div class="rc-time">1 mês atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Meu pai não é de demonstrar emoção, mas quando abriu a cartinha ficou com os olhos cheios d'água. Não esperava essa reação dele."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#059669">T</div>
+                <div><div class="rc-name">Thiago B.</div><div class="rc-time">3 meses atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Enviei no Dia dos Namorados sem avisar. Ele estava no trabalho e quando abriu me ligou na hora. Disse que estava chorando na frente dos colegas."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#0097a7">A</div>
+                <div><div class="rc-name">Amanda S.</div><div class="rc-time">5 meses atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Meu namorado mostrou a cartinha para toda a família quando chegou em casa. Foi muito mais especial do que eu imaginava."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:var(--pink)">B</div>
+                <div><div class="rc-name">Bruna O.</div><div class="rc-time">7 meses atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+          <div class="review-card">
+            <div class="rc-stars">★★★★★</div>
+            <p class="rc-text">"Fiz para toda a família no Natal. Cada um recebeu o link com uma mensagem diferente. Minha avó ligou chorando. Foi a melhor lembrança do ano."</p>
+            <div class="rc-bottom">
+              <div class="rc-user">
+                <div class="rc-av" style="background:#7c3aed">J</div>
+                <div><div class="rc-name">Juliana C.</div><div class="rc-time">9 meses atrás</div></div>
+              </div>
+              <div class="rc-badge">✓ Verificado</div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARA QUEM -->
+  <section class="who-section">
+    <div class="tag-pill">💝 Para todos os momentos</div>
+    <h2 class="who-title">Sempre existe alguém que <span>merece essa surpresa.</span></h2>
+    <p class="who-sub">Algumas pessoas merecem saber o quanto são importantes. Escolha a ocasião perfeita e transforme esse momento em uma lembrança inesquecível.</p>
+    <div class="who-grid">
+      <div class="who-card">
+        <div class="who-icon wi-pink">💕</div>
+        <h3>❤️ Para dizer "eu te amo".</h3>
+        <p>Declare seu amor de um jeito que ela nunca vai esquecer.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon wi-orange">🎂</div>
+        <h3>🎂 Para celebrar uma data especial.</h3>
+        <p>Transforme um aniversário em uma surpresa que será lembrada por muitos anos.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon wi-teal">👨‍👩‍👧</div>
+        <h3>👨‍👩‍👧 Para quem sempre esteve ao seu lado.</h3>
+        <p>Mãe, pai, avós ou irmãos. Demonstre carinho com uma lembrança feita especialmente por você.</p>
+      </div>
+      <div class="who-card">
+        <div class="who-icon wi-purple">🙏</div>
+        <h3>🙏 Para recomeçar.</h3>
+        <p>Às vezes um pedido sincero vale mais do que mil mensagens.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="cta-box">
+      <div class="cta-tag">❤️ Em menos de 5 minutos</div>
+      <h2>Faça hoje uma lembrança que ela <span>nunca vai esquecer.</span></h2>
+      <p>Algumas mensagens merecem muito mais do que um simples WhatsApp. Crie uma cartinha feita por você e transforme esse momento em uma lembrança para sempre.</p>
+      <a href="#" class="btn-cta-full" onclick="abrirEscolha();return false;">Criar minha cartinha ↗</a>
+      <p style="font-size:12px;color:var(--muted);margin-top:1rem;">❤️ Mais de 12.450 pessoas já emocionaram alguém.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="faq-section">
+    <div class="tag-pill">💌 Tire suas dúvidas</div>
+    <h2 class="faq-title">Ainda com <span>dúvidas?</span></h2>
+    <p class="faq-sub">Respondemos as dúvidas mais comuns para você criar sua surpresa com total tranquilidade.</p>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>O que é a Carta do Coração?</span>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer"><p>A Carta do Coração é uma experiência digital personalizada onde você cria uma cartinha com sua mensagem, fotos, vídeos, música e muito carinho. Depois é só compartilhar o link e surpreender alguém com uma lembrança que poderá ser revivida sempre.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Como a pessoa recebe a cartinha?</span>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer"><p>Assim que sua cartinha estiver pronta, você recebe um link exclusivo para compartilhar pelo WhatsApp ou qualquer aplicativo de mensagens. Basta abrir o link para viver toda a experiência.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Quanto tempo leva para criar?</span>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer"><p>A maioria das pessoas termina tudo em menos de 5 minutos. O processo é guiado e você ainda pode usar nossa IA para criar uma mensagem emocionante.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Precisa instalar algum aplicativo?</span>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer"><p>Não. Tanto quem cria quanto quem recebe a cartinha precisa apenas abrir o link no navegador. Não é necessário instalar nada.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Posso adicionar fotos, vídeos e música?</span>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer"><p>Sim. Você pode personalizar sua cartinha com fotos, vídeos, música, cores e outros detalhes para deixá-la exatamente como imaginou.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>A cartinha fica disponível para sempre?</span>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer"><p>Sim. Depois de criada, ela continuará disponível para ser aberta novamente sempre que vocês quiserem reviver esse momento especial.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>O pagamento é seguro?</span>
+          <div class="faq-icon">+</div>
+        </button>
+        <div class="faq-answer"><p>Sim. O pagamento é realizado via PIX por uma plataforma segura e sua cartinha é liberada automaticamente após a confirmação.</p></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Carta do <span>Coração</span> 💌</div>
+    <div class="footer-tagline">Cartinhas digitais para quem você ama.</div>
+    <div class="footer-links">
+      <a href="#" onclick="return false;">Termos</a>
+      <a href="#" onclick="return false;">Privacidade</a>
+      <a href="#" onclick="return false;">Suporte</a>
+    </div>
+    <div class="footer-copy">© 2026 Carta do Coração. Todos os direitos reservados.</div>
+  </footer>
+
+  <script>
+  // ── BARRA DE PROGRESSO ──
+  var progressSteps = {
+    'telaEscolha': 10,
+    'telaForm':    20,
+    'telaForm2':   40,
+    'telaForm3':   55,
+    'telaForm4':   65,
+    'telaMidia':   75,
+    'telaForm5':   85,
+    'telaFinal':   95,
+    'telaPlanos':  98,
+    'telaPagamento': 99,
+  };
+
+  function atualizarProgresso(telaId) {
+    var pct = progressSteps[telaId] || 0;
+    var wrap = document.getElementById('progressWrap');
+    var fill = document.getElementById('progressFill');
+    var label = document.getElementById('progressPct');
+    if (!wrap) return;
+    if (pct > 0) {
+      wrap.classList.add('visible');
+      fill.style.width = pct + '%';
+      label.textContent = pct + '% pronta';
+    }
+  }
+
+  // ── FAQ ──
+  function toggleFaq(btn) {
+    var item = btn.parentElement;
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(el) { el.classList.remove('open'); });
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ── SOM DE NOTIFICAÇÃO ──
+  function tocarSomSucesso() {
+    try {
+      var ctx = new (window.AudioContext || window.webkitAudioContext)();
+      var notas = [523, 659, 784, 1047]; // Dó Mi Sol Dó
+      notas.forEach(function(freq, i) {
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain); gain.connect(ctx.destination);
+        osc.frequency.value = freq;
+        osc.type = 'sine';
+        gain.gain.setValueAtTime(0, ctx.currentTime + i * 0.12);
+        gain.gain.linearRampToValueAtTime(0.18, ctx.currentTime + i * 0.12 + 0.05);
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + i * 0.12 + 0.25);
+        osc.start(ctx.currentTime + i * 0.12);
+        osc.stop(ctx.currentTime + i * 0.12 + 0.3);
+      });
+    } catch(e) {}
+  }
+
+  // ── PARTÍCULAS DO HERO ──
+  (function() {
+    var hero = document.querySelector('.hero');
+    if (!hero) return;
+    var wrap = document.createElement('div');
+    wrap.className = 'hero-particles';
+    hero.insertBefore(wrap, hero.firstChild);
+    var colors = ['rgba(233,30,140,0.3)','rgba(255,107,181,0.25)','rgba(248,187,208,0.4)','rgba(233,30,140,0.15)'];
+    for (var i = 0; i < 18; i++) {
+      var s = document.createElement('span');
+      var size = 6 + Math.random() * 14;
+      s.style.cssText = [
+        'position:absolute',
+        'width:' + size + 'px', 'height:' + size + 'px',
+        'left:' + (Math.random()*100) + '%',
+        'top:' + (20 + Math.random()*70) + '%',
+        'background:' + colors[Math.floor(Math.random()*colors.length)],
+        'animation-duration:' + (5 + Math.random()*8) + 's',
+        'animation-delay:' + (Math.random()*6) + 's'
+      ].join(';');
+      wrap.appendChild(s);
+    }
+  })();
+
+  // ── CRONÔMETRO DE URGÊNCIA (só inicia na tela de pagamento) ──
+  var cronoIniciado = false;
+  function iniciarCronometro() {
+    if (cronoIniciado) return;
+    cronoIniciado = true;
+    var total = 14 * 60 + 59;
+    function tick() {
+      var el = document.getElementById('cronoPag');
+      if (!el) return;
+      var m = Math.floor(total / 60);
+      var s = total % 60;
+      el.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+      if (total > 0) { total--; setTimeout(tick, 1000); }
+      else {
+        var cont = document.getElementById('cronoContainer');
+        if (cont) {
+          cont.style.background = '#dcfce7';
+          cont.style.borderColor = '#86efac';
+          cont.innerHTML = '<span style="font-size:14px">🎉</span><span style="font-size:13px;font-weight:700;color:#16a34a">Ainda dá tempo! Garanta agora</span>';
+        }
+      }
+    }
+    tick();
+  }
+
+  // ── FRASES ROTATIVAS DO HERO ──
+  (function() {
+    var phrases = document.querySelectorAll('.hero-phrase');
+    if (!phrases.length) return;
+    var cur = 0;
+    setInterval(function() {
+      phrases[cur].classList.remove('active');
+      cur = (cur + 1) % phrases.length;
+      phrases[cur].classList.add('active');
+    }, 5500);
+  })();
+
+  // ── DECK DE CARDS ARRASTÁVEL ──
+  (function() {
+    var cards = [
+      { title: '❤️ Para aquela pessoa impossível de esquecer.', text: 'Não espere uma data especial. Surpreenda o crush, o namorado(a), seu melhor amigo ou alguém que marcou sua vida com uma cartinha feita por você. Algumas palavras ficam para sempre.' },
+      { title: '👨‍👩‍👧 Para quem sempre esteve ao seu lado.', text: 'Mãe, pai, avós, irmãos ou qualquer pessoa especial. Demonstre carinho de um jeito único e transforme lembranças em um presente que pode ser revivido sempre.' },
+      { title: '🥳 Para celebrar momentos inesquecíveis.', text: 'Aniversários, Dia dos Namorados, pedidos de casamento, reconciliações ou simplesmente um "eu te amo". Sempre existe um motivo para emocionar alguém.' },
+      { title: '📱 Chega em segundos.', text: 'Depois de criar sua cartinha, basta compartilhar o link pelo WhatsApp. Em poucos segundos a surpresa estará nas mãos de quem você ama.' },
+      { title: '❤️ Um presente que nunca desaparece.', text: 'Enquanto mensagens comuns se perdem com o tempo, sua cartinha continuará disponível para ser aberta novamente sempre que bater a saudade.' },
+      { title: '🎁 Fica ainda mais especial.', text: 'Combine sua cartinha com flores, chocolates ou qualquer presente físico. A emoção começa no celular e continua na vida real.' },
+      { title: '✨ Algumas mensagens merecem mais do que um WhatsApp.', text: 'Uma cartinha feita por você não é apenas uma mensagem. É uma lembrança que pode emocionar hoje, amanhã e muitos anos depois.' },
+    ];
+
+    var area = document.getElementById('deckArea');
+    var counter = document.getElementById('deckCounter');
+    if (!area) return;
+
+    var total = cards.length;
+    var current = 0;
+    var els = [];
+
+    function buildDeck() {
+      area.innerHTML = '';
+      els = [];
+      for (var i = total - 1; i >= 0; i--) {
+        var el = document.createElement('div');
+        el.className = 'deck-card';
+        el.innerHTML = '<h4>' + cards[i].title + '</h4><p>' + cards[i].text + '</p>';
+        area.appendChild(el);
+        els.unshift(el);
+      }
+      updatePositions(true);
+    }
+
+    function updatePositions(instant) {
+      for (var i = 0; i < total; i++) {
+        var el = els[i];
+        if (!el) continue;
+        var rel = (i - current + total) % total;
+        el.style.transition = instant ? 'none' : 'transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s';
+        if (rel === 0) {
+          el.style.transform = 'rotate(0deg) translateY(0px) scale(1)';
+          el.style.zIndex = 10; el.style.opacity = '1';
+        } else if (rel === 1) {
+          el.style.transform = 'rotate(2.5deg) translateY(8px) scale(0.97)';
+          el.style.zIndex = 9; el.style.opacity = '0.85';
+        } else if (rel === 2) {
+          el.style.transform = 'rotate(-2deg) translateY(14px) scale(0.94)';
+          el.style.zIndex = 8; el.style.opacity = '0.65';
+        } else if (rel === 3) {
+          el.style.transform = 'rotate(1.5deg) translateY(20px) scale(0.91)';
+          el.style.zIndex = 7; el.style.opacity = '0.4';
+        } else {
+          el.style.transform = 'translateY(24px) scale(0.88)';
+          el.style.zIndex = 1; el.style.opacity = '0';
+        }
+      }
+      if (counter) counter.textContent = (current + 1) + ' / ' + total;
+    }
+
+    function goNext() {
+      current = (current + 1) % total;
+      updatePositions(false);
+    }
+    function goPrev() {
+      current = (current - 1 + total) % total;
+      updatePositions(false);
+    }
+
+    // Drag / swipe
+    var startX = 0, startY = 0, isDragging = false, moved = false;
+    var topCard = function() { return els[current]; };
+
+    function onStart(e) {
+      var touch = e.touches ? e.touches[0] : e;
+      startX = touch.clientX; startY = touch.clientY;
+      isDragging = true; moved = false;
+      topCard().style.transition = 'none';
+    }
+    function onMove(e) {
+      if (!isDragging) return;
+      var touch = e.touches ? e.touches[0] : e;
+      var dx = touch.clientX - startX;
+      var dy = touch.clientY - startY;
+      if (Math.abs(dx) > 5) { moved = true; e.preventDefault(); }
+      var rot = dx * 0.04;
+      topCard().style.transform = 'rotate(' + rot + 'deg) translateX(' + dx + 'px) translateY(' + (dy * 0.2) + 'px)';
+    }
+    function onEnd(e) {
+      if (!isDragging) return;
+      isDragging = false;
+      var touch = e.changedTouches ? e.changedTouches[0] : e;
+      var dx = touch.clientX - startX;
+      topCard().style.transition = 'transform 0.3s, opacity 0.3s';
+      if (Math.abs(dx) > 60) {
+        var dir = dx > 0 ? 1 : -1;
+        topCard().style.transform = 'translateX(' + (dir * 400) + 'px) rotate(' + (dir * 20) + 'deg)';
+        topCard().style.opacity = '0';
+        setTimeout(function() { dx > 0 ? goPrev() : goNext(); }, 280);
+      } else {
+        updatePositions(false);
+      }
+    }
+
+    area.addEventListener('mousedown', onStart);
+    window.addEventListener('mousemove', onMove);
+    window.addEventListener('mouseup', onEnd);
+    area.addEventListener('touchstart', onStart, { passive: true });
+    area.addEventListener('touchmove', onMove, { passive: false });
+    area.addEventListener('touchend', onEnd);
+
+    buildDeck();
+  })();
+
+  // ── CARROSSEL DE TEMAS ──
+  (function() {
+    var themes = [
+      { name: '🎬 Tema Netflix',     sub: 'Estilo cinematográfico com muito drama e amor' },
+      { name: '🌸 Tema Floral',      sub: 'Delicado e romântico, para quem ama flores' },
+      { name: '📷 Tema Vintage',     sub: 'Nostálgico e aconchegante como uma foto antiga' },
+      { name: '💜 Tema Neon',        sub: 'Brilhante e moderno para declarações ousadas' },
+      { name: '🤍 Tema Minimalista', sub: 'Clean e elegante, deixa a mensagem falar' },
+      { name: '🎥 Tema Intro',        sub: 'Um vídeo de introdução cinematográfico para sua cartinha' },
+    ];
+
+    var total = themes.length;
+    var cur = 0;
+    var wraps = document.querySelectorAll('.phone-wrap');
+    var dots  = document.querySelectorAll('#cDots .dot');
+    var tName = document.getElementById('tName');
+    var tSub  = document.getElementById('tSub');
+
+    function mod(n) { return ((n % total) + total) % total; }
+
+    function render() {
+      wraps.forEach(function(w) {
+        var i = parseInt(w.getAttribute('data-i'));
+        var diff = mod(i - cur);
+        w.className = 'phone-wrap';
+        if (diff === 0)            w.classList.add('is-center');
+        else if (diff === 1)       w.classList.add('is-side-r');
+        else if (diff === total-1) w.classList.add('is-side-l');
+        else                       w.classList.add('is-hide');
+      });
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === cur); });
+      if (tName) tName.textContent = themes[cur].name;
+      if (tSub) tSub.textContent  = themes[cur].sub;
+
+      // Vídeo Vimeo sempre carregado só mostra/esconde o frame
+      var mapFrame = document.getElementById('mapVideo');
+      if (mapFrame) {
+        mapFrame.style.opacity = (cur === 5) ? '1' : '0';
+      }
+    }
+
+    var btnL = document.getElementById('arrL');
+    var btnR = document.getElementById('arrR');
+    if (btnL) btnL.addEventListener('click', function() { cur = mod(cur - 1); render(); });
+    if (btnR) btnR.addEventListener('click', function() { cur = mod(cur + 1); render(); });
+
+    wraps.forEach(function(w) {
+      w.addEventListener('click', function() {
+        var i = parseInt(w.getAttribute('data-i'));
+        if (i !== cur) { cur = i; render(); }
+      });
+    });
+
+    render();
+  })();
+  </script>
+
+<!-- BARRA DE PROGRESSO GLOBAL -->
+<div class="progress-bar-wrap" id="progressWrap">
+  <div class="progress-label">
+    <span>💌 Seu presente está ganhando vida...</span>
+    <span class="pct" id="progressPct">0% pronta</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill"></div>
+  </div>
+</div>
+
+<!-- MODAL PIX -->
+<div class="modal-overlay" id="modalPix">
+  <div class="modal-box" style="position:relative">
+    <button class="modal-close" onclick="fecharModalPix()">✕</button>
+
+    <!-- Formulário -->
+    <div id="pixForm">
+      <div class="modal-title">💌 Quase lá!</div>
+      <p class="modal-sub">Preencha para receber seu acesso após o pagamento</p>
+
+      <div class="modal-campo">
+        <label for="pixEmail">📧 Seu email</label>
+        <input type="email" id="pixEmail" placeholder="seu@email.com" />
+      </div>
+      <div class="modal-campo">
+        <label for="pixTelefone">📱 Seu telefone</label>
+        <input type="tel" id="pixTelefone" placeholder="(11) 99999-9999" oninput="formatarTelefone(this)" maxlength="15" />
+      </div>
+
+      <button class="btn-gerar-pix" id="btnGerarPix" onclick="gerarPix()">
+        ✨ Gerar PIX R$ 19,90
+      </button>
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin-top:8px">🔒 Pagamento seguro via PIX</p>
+    </div>
+
+    <!-- Resultado PIX -->
+    <div class="pix-resultado" id="pixResultado">
+      <div class="modal-title">🎉 PIX Gerado!</div>
+      <p class="modal-sub">Escaneie o QR Code ou copie o código</p>
+      <img class="pix-qr" id="pixQrImg" src="" alt="QR Code PIX" />
+      <p class="pix-codigo-label">Pix Copia e Cola:</p>
+      <div class="pix-codigo-box" id="pixCodigoCaixa"></div>
+      <button class="btn-copiar-pix" onclick="copiarPix()">📋 Copiar código PIX</button>
+      <p class="pix-hint">Após o pagamento você receberá o acesso no email informado. O PIX expira em 30 minutos.</p>
+    </div>
+
+  </div>
+</div>
+
+<script src="https://player.vimeo.com/api/player.js"></script>
+
+<!-- TELA FORMULÁRIO -->
+<div id="telaForm">
+  <div class="form-wrap">
+
+    <!-- Steps bar: 5 passos -->
+    <div class="steps-bar">
+      <div class="step-ball current" id="sb1">1</div>
+      <div class="step-line" id="sl1"></div>
+      <div class="step-ball todo" id="sb2">2</div>
+      <div class="step-line" id="sl2"></div>
+      <div class="step-ball todo" id="sb3">3</div>
+      <div class="step-line" id="sl3"></div>
+      <div class="step-ball todo" id="sb4">4</div>
+      <div class="step-line" id="sl4"></div>
+      <div class="step-ball todo" id="sb5">5</div>
+    </div>
+
+    <!-- Balão -->
+    <div class="msg-balao">
+      <div class="msg-avatar">🦊</div>
+      <p class="msg-texto">Você está prestes a criar um presente inesquecível. ❤️<br><br>Vamos começar pelos nomes de vocês.</p>
+    </div>
+
+    <!-- Campos -->
+    <label class="campo-label" for="nomeRemetente">Quem está enviando a surpresa?</label>
+    <div class="campo-wrap">
+      <span class="campo-icon">👤</span>
+      <input class="campo-input" id="nomeRemetente" type="text" placeholder="Seu nome" oninput="atualizarPreviewCompleto()" />
+    </div>
+    <p class="msg-erro" id="erroNomeR" style="margin-bottom:8px">⚠️ Por favor, escreva seu nome.</p>
+
+    <label class="campo-label" for="nomeDestinatario">Quem vai receber esse presente?</label>
+    <div class="campo-wrap">
+      <span class="campo-icon">💕</span>
+      <input class="campo-input" id="nomeDestinatario" type="text" placeholder="Nome da pessoa especial" oninput="atualizarPreviewCompleto()" />
+    </div>
+    <p class="msg-erro" id="erroNomeD" style="margin-bottom:8px">⚠️ Por favor, escreva o nome de quem vai receber.</p>
+
+    <!-- Botões -->
+    <div class="form-btns">
+      <button class="btn-form-voltar" onclick="voltarParaEscolha()">← Voltar</button>
+      <button class="btn-form-continuar" onclick="irParaForm2()">Próximo passo →</button>
+    </div>
+
+    <!-- Preview do celular -->
+    <div class="phone-preview-wrap">
+      <div class="phone-preview">
+        <div class="pp-notch"></div>
+        <div class="pp-status">
+          <span class="pp-time" id="ppTime">5:26</span>
+          <span class="pp-icons">••• ▐</span>
+        </div>
+        <div class="pp-glow"></div>
+        <div class="pp-content">
+          <div class="pp-envelope">💌</div>
+          <div class="pp-para" id="ppPara">P A R A</div>
+          <div class="pp-nome vazio" id="ppNome">Pessoa Especial</div>
+          <div class="pp-toque">toque para abrir</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TELA FORMULÁRIO PASSO 2 -->
+<div id="telaForm2">
+  <div class="form-wrap">
+
+    <!-- Steps bar passo 2 -->
+    <div class="steps-bar">
+      <div class="step-ball done">✓</div>
+      <div class="step-line done"></div>
+      <div class="step-ball current">2</div>
+      <div class="step-line"></div>
+      <div class="step-ball todo">3</div>
+      <div class="step-line"></div>
+      <div class="step-ball todo">4</div>
+      <div class="step-line"></div>
+      <div class="step-ball todo">5</div>
+    </div>
+
+    <!-- Balão -->
+    <div class="msg-balao">
+      <div class="msg-avatar">🦊</div>
+      <p class="msg-texto" id="msgBalao2">Agora vamos dar um significado para essa surpresa. ❤️<br><br>Para quem ela é e qual é a ocasião?</p>
+    </div>
+
+    <!-- Gênero -->
+    <label class="campo-label">Quem vai receber esse presente?</label>
+    <div class="genero-grid">
+      <div class="genero-card" id="genF" onclick="selecionarGenero('F')">
+        <span class="genero-emoji">👩</span>
+        <div class="genero-label">Mulher</div>
+      </div>
+      <div class="genero-card" id="genM" onclick="selecionarGenero('M')">
+        <span class="genero-emoji">👨</span>
+        <div class="genero-label">Homem</div>
+      </div>
+    </div>
+
+    <!-- Para quem -->
+    <label class="campo-label">Qual é a relação dessa pessoa com você?</label>
+    <div class="select-wrap">
+      <span class="select-icon">💝</span>
+      <select class="campo-select" id="paraQuem" onchange="atualizarOcasioes(this.value)">
+        <option value="">Escolha uma opção...</option>
+      </select>
+      <span class="select-arrow">▼</span>
+    </div>
+    <p class="msg-erro" id="erroPQ" style="margin-bottom:8px">⚠️ Por favor, selecione para quem é o presente.</p>
+
+    <!-- Ocasião -->
+    <label class="campo-label">Qual é o motivo dessa surpresa?</label>
+    <div class="select-wrap">
+      <span class="select-icon">🎉</span>
+      <select class="campo-select" id="ocasiao" onchange="atualizarBalaoEtapa2()">
+        <option value="">Escolha uma ocasião...</option>
+      </select>
+      <span class="select-arrow">▼</span>
+    </div>
+    <p class="msg-erro" id="erroOcasiao" style="margin-bottom:8px">⚠️ Por favor, selecione a ocasião.</p>
+
+    <!-- Botões -->
+    <div class="form-btns">
+      <button class="btn-form-voltar" onclick="voltarParaForm1()">← Voltar</button>
+      <button class="btn-form-continuar" onclick="irParaForm4()">Continuar →</button>
+    </div>
+    <p class="msg-erro" id="erroNomeD" style="margin-bottom:8px">⚠️ Por favor, escreva o nome de quem vai receber.</p>
+
+    <!-- Preview do celular -->
+    <div class="phone-preview-wrap">
+      <div class="phone-preview">
+        <div class="pp-notch"></div>
+        <div class="pp-status">
+          <span class="pp-time" id="ppTime2">5:26</span>
+          <span class="pp-icons">••• ▐</span>
+        </div>
+        <div class="pp-glow"></div>
+        <div class="pp-content">
+          <div class="pp-envelope">💌</div>
+          <div class="pp-para">P A R A</div>
+          <div class="pp-nome vazio" id="ppNome2">Pessoa Especial</div>
+          <div class="pp-toque">toque para abrir</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TELA FINAL -->
+<div id="telaFinal">
+  <div class="final-wrap">
+    <div class="final-steps">
+      <div class="final-step"><div class="final-step-dot done"></div><div class="final-step-label done">INÍCIO</div></div>
+      <div class="final-step-line done"></div>
+      <div class="final-step"><div class="final-step-dot done"></div><div class="final-step-label done">ESCOLHER</div></div>
+      <div class="final-step-line done"></div>
+      <div class="final-step"><div class="final-step-dot active"></div><div class="final-step-label active">FINALIZAR</div></div>
+    </div>
+    <div class="final-avatar">🦊</div>
+    <div class="final-msg" id="finalMsg">Você chegou até aqui isso já diz muito sobre você! 🥹</div>
+    <p class="final-sub">Seu presente está pronto. Agora falta apenas liberar a cartinha.</p>
+    <button class="btn-comecar" onclick="abrirPlanos()">❤️ Escolher meu plano</button>
+  </div>
+</div>
+
+<!-- TELA PLANOS -->
+<div id="telaPlanos">
+  <div class="planos-wrap">
+    <div class="final-steps" style="margin-bottom:1.5rem">
+      <div class="final-step"><div class="final-step-dot done"></div><div class="final-step-label done">INÍCIO</div></div>
+      <div class="final-step-line done"></div>
+      <div class="final-step"><div class="final-step-dot active"></div><div class="final-step-label active">ESCOLHER</div></div>
+      <div class="final-step-line"></div>
+      <div class="final-step"><div class="final-step-dot"></div><div class="final-step-label">FINALIZAR</div></div>
+    </div>
+    <div class="plano-frase" id="planoFrase">Mais de 12.450 pessoas já emocionaram alguém com uma Carta do Coração. ❤️</div>
+    <div class="plano-emojis-wrap">
+      <span class="plano-emoji">🎁</span>
+      <span class="plano-emoji">💝</span>
+      <span class="plano-emoji">⭐</span>
+    </div>
+    <h2 class="plano-titulo">Libere sua Carta do Coração ❤️</h2>
+    <p class="plano-sub">Ela já está pronta. Falta apenas liberar sua surpresa.</p>
+    <div class="plano-card">
+      <div class="plano-card-nome">Para Sempre ❤️</div>
+      <div class="plano-preco-old">R$ 67,00</div>
+      <div class="plano-economia">✨ Oferta especial de hoje</div>
+      <div class="plano-preco-hint">Sua primeira Carta do Coração com valor especial. ❤️</div>
+      <p style="font-size:11px;color:var(--muted);text-align:center;margin:0 0 0.5rem;">Menos de R$20 para criar uma surpresa que essa pessoa poderá guardar para sempre.</p>
+      <div class="plano-preco">R$ 19,90</div>
+      <ul class="plano-items">
+        <li>❤️ Uma cartinha criada especialmente por você</li>
+        <li>❤️ Sua mensagem escrita do seu jeito</li>
+        <li>❤️ Fotos que contam a história de vocês</li>
+        <li>❤️ Vídeos para deixar a surpresa ainda mais emocionante</li>
+        <li>❤️ Áudio gravado com a sua própria voz</li>
+        <li>❤️ Personalize cores e animações</li>
+        <li>❤️ Escolha o tema da cartinha</li>
+        <li>❤️ Link exclusivo para compartilhar</li>
+        <li>❤️ QR Code personalizado</li>
+        <li>❤️ Sua cartinha fica disponível para sempre</li>
+      </ul>
+    </div>
+    <button class="btn-pagamento" onclick="abrirPagamento()">
+      Continuar para Pagamento
+      <span>→</span>
+    </button>
+  </div>
+</div>
+
+<!-- TELA PAGAMENTO -->
+<div id="telaPagamento">
+  <div class="pag-wrap">
+
+    <!-- Steps -->
+    <div class="pag-steps">
+      <span class="pag-step active">Início</span>
+      <span class="pag-step-sep">›</span>
+      <span class="pag-step active">Escolher</span>
+      <span class="pag-step-sep">›</span>
+      <span class="pag-step active">Finalizar</span>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--muted);margin-bottom:0.75rem">Etapa 3 de 3 Último passo</p>
+    <div style="text-align:center;margin-bottom:1.25rem">
+      <div id="cronoContainer" style="display:inline-flex;align-items:center;gap:8px;background:var(--pink-100);border:1px solid var(--pink-200);border-radius:30px;padding:7px 16px">
+        <span style="font-size:14px">⏰</span>
+        <span style="font-size:13px;font-weight:700;color:var(--pink-dark)">🎁 Seu preço especial fica reservado por <span id="cronoPag" style="color:var(--pink);font-size:15px;font-weight:900">14:59</span></span>
+      </div>
+    </div>
+
+    <!-- Resumo do plano -->
+    <div class="pag-plano">
+      <div class="pag-plano-nome">Plano: Para Sempre ❤️</div>
+      <div class="pag-plano-preco" id="pagPlanoPreco">R$ 19,90</div>
+    </div>
+
+    <!-- FORMULÁRIO PIX -->
+    <div class="pag-form-pix" id="formPix">
+      <div class="pag-section-title">Libere sua Cartinha</div>
+      <div class="pag-section-sub">Sua cartinha será liberada automaticamente após a confirmação do pagamento.</div>
+
+      <!-- Campos visíveis antes de gerar o PIX -->
+      <div id="pixCampos">
+        <label class="campo-label">Quem está enviando essa surpresa?</label>
+        <div class="campo-wrap">
+          <span class="campo-icon">👤</span>
+          <input class="campo-input" id="pagNome" type="text" placeholder="Seu nome completo" />
+        </div>
+        <!-- ORDER BUMPS -->
+        <div style="margin:16px 0">
+          <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;text-align:center;margin-bottom:10px">🎁 Adicione à sua cartinha</div>
+
+          <!-- Grid: PDF + Pack lado a lado -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+
+            <!-- BUMP PDF -->
+            <div id="bump-pdf" onclick="selecionarBump('pdf')" style="border:2px solid var(--border);border-radius:12px;padding:11px 10px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:18px">📄</span>
+                <div id="bumpCheck-pdf" style="width:18px;height:18px;border-radius:5px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0">
+                  <svg id="bumpCheckIcon-pdf" width="11" height="9" viewBox="0 0 11 9" style="display:none"><polyline points="1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div style="font-size:12px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:2px">PDF da Cartinha</div>
+              <div style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.3">Baixe e imprima</div>
+              <div style="font-size:14px;font-weight:900;color:var(--pink)">+R$ 37</div>
+            </div>
+
+            <!-- BUMP PACK -->
+            <div id="bump-pack" onclick="selecionarBump('pack')" style="border:2px solid var(--border);border-radius:12px;padding:11px 10px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:18px">♾️</span>
+                <div id="bumpCheck-pack" style="width:18px;height:18px;border-radius:5px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0">
+                  <svg id="bumpCheckIcon-pack" width="11" height="9" viewBox="0 0 11 9" style="display:none"><polyline points="1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div style="font-size:12px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:2px">Cartinhas Ilimitadas</div>
+              <div style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.3">Crie quantas quiser</div>
+              <div style="font-size:14px;font-weight:900;color:var(--pink)">+R$ 67</div>
+            </div>
+          </div>
+
+          <!-- BUMP COMBO — destaque -->
+          <div id="bump-combo" onclick="selecionarBump('combo')" style="border:2px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none;position:relative">
+            <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--pink),#ff6bb5);color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em">⭐ MELHOR OFERTA</div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:2px">Leve os 2: PDF + Ilimitadas</div>
+                <div style="font-size:11px;color:var(--muted);margin-bottom:8px">PDF da cartinha + cartinhas ilimitadas</div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:16px;font-weight:900;color:var(--pink)">R$ 87</span>
+                  <span style="font-size:11px;color:var(--muted);text-decoration:line-through">R$ 104</span>
+                  <span style="font-size:10px;font-weight:800;background:#dcfce7;color:#16a34a;padding:2px 7px;border-radius:20px">16% OFF</span>
+                </div>
+              </div>
+              <div id="bumpCheck-combo" style="width:22px;height:22px;min-width:22px;border-radius:6px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-left:12px">
+                <svg id="bumpCheckIcon-combo" width="13" height="11" viewBox="0 0 13 11" style="display:none"><polyline points="1.5 6 5 9.5 11.5 1.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-pagar" id="btnPagarPix" onclick="processarPix()">❤️ Liberar minha Cartinha</button>
+        <p style="text-align:center;font-size:11px;color:var(--muted);margin:0.4rem 0 0;">Pagamento via PIX • Liberação automática</p>
+        <p class="pag-seguro">🔒 Ambiente seguro • Liberação automática após o pagamento</p>
+        <!-- BOTÃO TEMPORÁRIO DE TESTE — REMOVER ANTES DE LANÇAR -->
+        <button onclick="testeSimularPagamento()" style="margin-top:12px;width:100%;padding:12px;border-radius:50px;border:2px dashed #f59e0b;background:#fffbeb;color:#92400e;font-size:13px;font-weight:700;cursor:pointer">
+          🧪 [TESTE] Simular pagamento confirmado
+        </button>
+      </div>
+
+      <!-- QR Code gerado -->
+      <div class="pix-result-box" id="pixResultBox" style="display:none">
+        <div class="pix-status-row" id="pixStatusRow">
+          <span class="pix-status-dot"></span>
+          <span id="pixStatusTxt">Aguardando pagamento…</span>
+        </div>
+        <img id="pixQrCode" src="" alt="QR Code PIX" style="width:200px;height:200px;margin:1rem auto;display:block;border-radius:12px;border:3px solid var(--pink-200)" />
+        <div id="pixCopiaCola" style="display:none"></div>
+        <button class="btn-copiar" id="btnCopiarPix" onclick="copiarPixCodigo()">📋 Copiar código PIX</button>
+        <!-- Confirmado -->
+        <div id="pixConfirmado" style="display:none;text-align:center;padding:1rem 0">
+          <div style="font-size:48px;margin-bottom:0.5rem">🎉</div>
+          <p style="font-size:18px;font-weight:900;color:var(--pink);margin-bottom:0.25rem">Pagamento confirmado!</p>
+          <p style="font-size:13px;color:var(--muted)">Seu acesso será enviado para o e-mail informado.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="pag-seguro">🔒 Ambiente seguro • Liberação automática após o pagamento</p>
+
+    <!-- Urgência com frase variando uma por vez -->
+    <div class="pag-urgencia">
+      <div class="pag-urgencia-title">❤️ Por que vale a pena liberar sua cartinha?</div>
+      <div class="urg-frase-wrap">
+        <p class="urg-frase" id="urgFrase">💖 Imagine a reação quando essa pessoa abrir sua cartinha...<br>Esse momento pode ficar marcado para sempre.</p>
+      </div>
+      <div class="urg-dots" id="urgDots">
+        <span class="urg-dot active"></span>
+        <span class="urg-dot"></span>
+        <span class="urg-dot"></span>
+        <span class="urg-dot"></span>
+      </div>
+    </div>
+
+    <!-- Social proof -->
+    <div class="pag-proof">❤️ Mais de <strong>12.450 Cartas do Coração</strong> já emocionaram alguém especial.</div>
+
+  </div>
+</div>
+
+<!-- TELA FORMULÁRIO PASSO 4 -->
+<div id="telaForm4">
+  <div class="form-wrap">
+
+    <!-- Steps bar -->
+    <div class="steps-bar">
+      <div class="step-ball done">✓</div>
+      <div class="step-line done"></div>
+      <div class="step-ball done">✓</div>
+      <div class="step-line done"></div>
+      <div class="step-ball done">✓</div>
+      <div class="step-line done"></div>
+      <div class="step-ball current">4</div>
+      <div class="step-line"></div>
+      <div class="step-ball todo">5</div>
+    </div>
+
+    <!-- Balão -->
+    <div class="msg-balao">
+      <div class="msg-avatar">🦊</div>
+      <p class="msg-texto">Agora é a hora de transformar essa mensagem em uma lembrança inesquecível. ✨<br><br>Fotos, vídeos e sua voz deixam tudo muito mais especial.</p>
+    </div>
+
+    <!-- Pergunta -->
+    <p class="passo4-title">Quer deixar esse presente ainda mais emocionante?</p>
+    <p class="passo4-sub">As melhores lembranças merecem mais do que apenas palavras.</p>
+
+    <!-- Benefícios -->
+    <div style="display:flex;flex-direction:column;gap:8px;margin:1.25rem 0 1.5rem;background:var(--pink-100);border-radius:14px;padding:1rem 1.25rem;">
+      <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);font-weight:600;">📸 Adicione fotos especiais</div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);font-weight:600;">🎤 Grave uma mensagem com sua voz</div>
+      <div style="display:flex;align-items:center;gap:10px;font-size:13px;color:var(--text);font-weight:600;">🎥 Inclua vídeos inesquecíveis</div>
+    </div>
+
+    <!-- Opções -->
+    <div class="opc-grid">
+      <div class="opc-card" id="opcSim" onclick="selecionarOpc('sim')">
+        <div class="opc-icon-box opc-sim">📷</div>
+        <div class="opc-label">📷 Sim, quero personalizar</div>
+      </div>
+      <div class="opc-card" id="opcNao" onclick="confirmarSemMidia()">
+        <div class="opc-icon-box opc-nao">→</div>
+        <div class="opc-label">➡️ Continuar sem adicionar</div>
+      </div>
+    </div>
+
+    <!-- Só botão Voltar -->
+    <div style="margin-top:2rem;text-align:center">
+      <button class="btn-form-voltar" style="max-width:160px;width:100%;border-radius:50px;padding:13px 24px" onclick="voltarParaForm3do4()">← Voltar</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL CONFIRMAÇÃO SEM MÍDIA -->
+<div id="modalSemMidia" style="display:none;position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,0.55);backdrop-filter:blur(4px);align-items:center;justify-content:center;">
+  <div style="background:var(--card);border-radius:24px;padding:2rem 1.5rem;width:90%;max-width:340px;box-shadow:0 24px 64px rgba(0,0,0,0.25);text-align:center;">
+    <div style="font-size:36px;margin-bottom:0.75rem;">🥺</div>
+    <h3 style="font-size:18px;font-weight:900;color:var(--text);margin-bottom:0.6rem;">Tem certeza?</h3>
+    <p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:1.5rem;">Fotos, vídeos e sua voz deixam a surpresa muito mais emocionante.</p>
+    <button onclick="fecharModalSemMidia()" style="width:100%;padding:14px;border-radius:50px;border:none;background:linear-gradient(135deg,var(--pink),var(--pink-light));color:#fff;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:10px;">Adicionar agora</button>
+    <button onclick="confirmarSkipMidia()" style="width:100%;padding:12px;border-radius:50px;border:1.5px solid var(--pink-200);background:transparent;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;">Continuar assim mesmo</button>
+  </div>
+</div>
+
+<!-- TELA MÍDIA -->
+<div id="telaMidia">
+  <div class="form-wrap">
+    <div class="steps-bar">
+      <div class="step-ball done">✓</div><div class="step-line done"></div>
+      <div class="step-ball done">✓</div><div class="step-line done"></div>
+      <div class="step-ball done">✓</div><div class="step-line done"></div>
+      <div class="step-ball current">4</div><div class="step-line"></div>
+      <div class="step-ball todo">5</div>
+    </div>
+    <div class="msg-balao">
+      <div class="msg-avatar">🦊</div>
+      <p class="msg-texto">Sua surpresa já está quase pronta. ❤️<br><br>Agora adicione as lembranças que vão fazer esse momento ficar inesquecível.</p>
+    </div>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:1.25rem;line-height:1.5;">✨ Tudo é opcional. Mesmo sem fotos ou áudio, sua cartinha continuará linda.</p>
+    <div class="midia-label">📸 Fotos especiais (Opcional)</div>
+    <div class="upload-box" id="boxFotos" onclick="document.getElementById('inputFotos').click()">
+      <span class="upload-icon">📷</span>
+      <p class="upload-text">Clique para escolher suas fotos favoritas</p>
+    </div>
+    <input class="upload-input" id="inputFotos" type="file" accept="image/*" multiple onchange="adicionarFotos(this)"/>
+    <div class="preview-fotos-wrap" id="previewFotos"></div>
+    <p id="fotoContador" style="display:none;font-size:12px;color:var(--pink);font-weight:700;margin-bottom:0.5rem;"></p>
+    <div class="midia-label">🎥 Vídeo especial (Opcional)</div>
+    <div class="upload-box" id="boxVideo" onclick="document.getElementById('inputVideo').click()">
+      <span class="upload-icon">🎬</span>
+      <p class="upload-text">Escolha um vídeo cheio de significado</p>
+    </div>
+    <input class="upload-input" id="inputVideo" type="file" accept="video/*" onchange="adicionarVideo(this)"/>
+    <div class="preview-video-wrap" id="previewVideo" style="display:none">
+      <video id="videoEl" controls></video>
+      <button class="preview-remove" onclick="removerVideo()">✕</button>
+    </div>
+    <div class="midia-label">🎙️ Áudio (Opcional)</div>
+    <button class="audio-btn" id="audioBtn" onclick="toggleGravacao()">
+      <span id="audioBtnIcon">🎙️</span>
+      <span id="audioBtnText">❤️ Gravar mensagem de voz</span>
+    </button>
+    <div class="audio-preview-wrap" id="audioPreview">
+      <audio id="audioEl" controls></audio>
+      <button class="preview-remove" onclick="removerAudio()">✕</button>
+    </div>
+    <p class="audio-hint" id="audioHint">Sua voz pode tornar essa surpresa ainda mais emocionante.</p>
+    <div class="form-btns">
+      <button class="btn-form-voltar" onclick="voltarParaForm4()">← Voltar</button>
+      <button class="btn-form-continuar" onclick="irParaPasso5()">Continuar →</button>
+    </div>
+  </div>
+</div>
+
+<!-- TELA PASSO 5 PERSONALIZAÇÃO -->
+<div id="telaForm5">
+  <div class="form-wrap">
+    <div class="steps-bar">
+      <div class="step-ball done">✓</div><div class="step-line done"></div>
+      <div class="step-ball done">✓</div><div class="step-line done"></div>
+      <div class="step-ball done">✓</div><div class="step-line done"></div>
+      <div class="step-ball done">✓</div><div class="step-line done"></div>
+      <div class="step-ball current">5</div>
+    </div>
+    <div class="msg-balao">
+      <div class="msg-avatar">🦊</div>
+      <p class="msg-texto">Agora ela começa a ganhar vida. ✨<br><br>Escolha o estilo que combina com esse momento especial.</p>
+    </div>
+    <div class="opcoes-section">
+      <div class="opcoes-label">🎨 Qual será a cor dessa lembrança?</div>
+      <p style="font-size:12px;color:var(--muted);margin:-0.5rem 0 0.75rem;">Cada detalhe deixa sua cartinha única.</p>
+      <div class="cores-grid" id="coresGrid">
+        <div class="cor-item" style="background:linear-gradient(135deg,#1a0a2e,#3b0764)" data-c="#1a0a2e" onclick="selecionarCor(this)">✓</div>
+        <div class="cor-item" style="background:linear-gradient(135deg,#831843,#ec4899)" data-c="#be185d" onclick="selecionarCor(this)">✓</div>
+        <div class="cor-item" style="background:linear-gradient(135deg,#0c2340,#1e4d8c)" data-c="#0c2340" onclick="selecionarCor(this)">✓</div>
+        <div class="cor-item" style="background:linear-gradient(135deg,#052e16,#14532d)" data-c="#052e16" onclick="selecionarCor(this)">✓</div>
+        <div class="cor-item sel" style="background:linear-gradient(135deg,#3b0764,#7c3aed)" data-c="#5b21b6" onclick="selecionarCor(this)">✓</div>
+        <div class="cor-item" style="background:linear-gradient(135deg,#450a0a,#991b1b)" data-c="#7f1d1d" onclick="selecionarCor(this)">✓</div>
+        <div class="cor-item" style="background:linear-gradient(135deg,#1e3a8a,#3b82f6)" data-c="#1d4ed8" onclick="selecionarCor(this)">✓</div>
+        <div class="cor-item" style="background:linear-gradient(135deg,#7c2d12,#ea580c)" data-c="#9a3412" onclick="selecionarCor(this)">✓</div>
+        <div class="cor-item" style="background:linear-gradient(135deg,#134e4a,#14b8a6)" data-c="#0d9488" onclick="selecionarCor(this)">✓</div>
+        <div class="cor-item" style="background:linear-gradient(135deg,#881337,#e11d48)" data-c="#9f1239" onclick="selecionarCor(this)">✓</div>
+      <p id="corConfirmacao" style="font-size:12px;color:var(--pink-500);font-weight:600;margin:0.5rem 0 0;min-height:1.4em;"></p>
+      </div>
+    </div>
+    <div class="opcoes-section">
+      <div class="opcoes-label">✨ Escolha a animação</div>
+      <p style="font-size:12px;color:var(--muted);margin:-0.5rem 0 0.75rem;">❤️ Cada detalhe torna sua surpresa ainda mais especial.</p>
+      <div class="anim-grid" id="animGrid">
+        <div class="anim-item" data-a="chuva" onclick="selecionarAnim(this)"><svg width="28" height="28" viewBox="0 0 36 36"><line x1="8" y1="6" x2="4" y2="20" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round"/><line x1="18" y1="2" x2="14" y2="18" stroke="rgba(255,255,255,0.7)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="8" x2="24" y2="24" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round"/></svg><span class="anim-label">Chuva</span></div>
+        <div class="anim-item" data-a="coracoes" onclick="selecionarAnim(this)"><svg width="28" height="28" viewBox="0 0 36 36"><text x="4" y="22" font-size="14">❤️</text><text x="18" y="16" font-size="10">🩷</text><text x="10" y="32" font-size="9">❤️</text></svg><span class="anim-label">Corações</span></div>
+        <div class="anim-item" data-a="estrelas" onclick="selecionarAnim(this)"><svg width="28" height="28" viewBox="0 0 36 36"><circle cx="8" cy="8" r="2.5" fill="white"/><circle cx="28" cy="12" r="1.5" fill="white" opacity=".7"/><circle cx="18" cy="26" r="2" fill="white" opacity=".9"/></svg><span class="anim-label">Estrelas</span></div>
+        <div class="anim-item sel" data-a="nebulosa" onclick="selecionarAnim(this)"><svg width="28" height="28" viewBox="0 0 36 36"><defs><radialGradient id="neb2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#a855f7" stop-opacity="0.8"/><stop offset="100%" stop-color="#1a0a2e" stop-opacity="0"/></radialGradient></defs><circle cx="18" cy="18" r="14" fill="url(#neb2)"/></svg><span class="anim-label">Nebulosa</span></div>
+        <div class="anim-item" data-a="pixels" onclick="selecionarAnim(this)"><svg width="28" height="28" viewBox="0 0 36 36"><rect x="24" y="6" width="4" height="4" fill="#e91e8c" rx="1"/><rect x="8" y="18" width="3" height="3" fill="#60a5fa" rx="1"/><rect x="20" y="24" width="3" height="3" fill="#facc15" rx="1"/></svg><span class="anim-label">Pixels</span></div>
+      </div>
+    </div>
+    <div class="opcoes-section" id="secaoLayout" style="display:none">
+      <div class="opcoes-label">🖼️ Layout das Fotos</div>
+      <div class="layout-grid">
+        <div class="layout-item" id="layFlutuante" onclick="selecionarLayout('flutuante')"><span class="l-icon">✦</span><div class="l-nome">Flutuantes</div></div>
+        <div class="layout-item sel" id="layGrid" onclick="selecionarLayout('grid')"><span class="l-icon">▦</span><div class="l-nome">Grid</div></div>
+      </div>
+    </div>
+    <!-- Botões -->
+    <div class="form-btns form-btns-final">
+      <button class="btn-form-voltar" onclick="voltarDoPasso5()">← Voltar</button>
+      <button class="btn-form-continuar" onclick="abrirFinal()">❤️ Criar minha cartinha</button>
+    </div>
+    <!-- Preview celular final -->
+    <div class="phone-final-wrap">
+      <div class="phone-final" id="phoneFinal">
+        <div class="pf-notch"></div>
+        <div class="pf-status">
+          <span class="pf-time" id="pfTime">18:58</span>
+          <span class="pf-icons">••• ▐</span>
+        </div>
+        <div class="pf-glow" id="pfGlow"></div>
+        <div class="pf-content">
+          <div class="pf-envelope">💌</div>
+          <div class="pf-para">P A R A</div>
+          <div class="pf-nome" id="pfNome">Pessoa Especial</div>
+          <div class="pf-toque">toque para abrir</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- TELA FORMULÁRIO PASSO 3 -->
+<div id="telaForm3">
+  <div class="form-wrap">
+
+    <!-- Steps bar -->
+    <div class="steps-bar">
+      <div class="step-ball done">✓</div>
+      <div class="step-line done"></div>
+      <div class="step-ball done">✓</div>
+      <div class="step-line done"></div>
+      <div class="step-ball current">3</div>
+      <div class="step-line"></div>
+      <div class="step-ball todo">4</div>
+      <div class="step-line"></div>
+      <div class="step-ball todo">5</div>
+    </div>
+
+    <!-- Balão -->
+    <div class="msg-balao">
+      <div class="msg-avatar">🦊</div>
+      <p class="msg-texto">Imagine essa pessoa lendo cada palavra que você escreveu... 💌<br><br>Agora é sua vez de transformar sentimentos em uma lembrança inesquecível.</p>
+    </div>
+
+    <!-- Mensagem -->
+    <div class="msg-header">
+      <label class="msg-label">Sua mensagem</label>
+    </div>
+
+    <!-- Picker de estilo da IA -->
+    <div id="iaEstiloPicker" style="display:none;background:var(--card);border:1.5px solid var(--pink-200);border-radius:16px;padding:1rem 1rem 0.75rem;margin-bottom:1rem;">
+      <p style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:0.75rem;text-align:center;">Como você quer que a mensagem soe?</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:0.25rem;">
+        <button onclick="gerarComEstilo('romantico')"   style="border:1.5px solid var(--pink-200);background:var(--pink-100);color:var(--text);font-size:13px;font-weight:600;padding:8px 12px;border-radius:30px;cursor:pointer;">❤️ Romântico</button>
+        <button onclick="gerarComEstilo('emocionante')" style="border:1.5px solid var(--pink-200);background:var(--pink-100);color:var(--text);font-size:13px;font-weight:600;padding:8px 12px;border-radius:30px;cursor:pointer;">🥹 Emocionante</button>
+        <button onclick="gerarComEstilo('divertido')"   style="border:1.5px solid var(--pink-200);background:var(--pink-100);color:var(--text);font-size:13px;font-weight:600;padding:8px 12px;border-radius:30px;cursor:pointer;">😂 Divertido</button>
+        <button onclick="gerarComEstilo('desculpas')"   style="border:1.5px solid var(--pink-200);background:var(--pink-100);color:var(--text);font-size:13px;font-weight:600;padding:8px 12px;border-radius:30px;cursor:pointer;">🙏 Pedido de desculpas</button>
+        <button onclick="gerarComEstilo('familia')"     style="border:1.5px solid var(--pink-200);background:var(--pink-100);color:var(--text);font-size:13px;font-weight:600;padding:8px 12px;border-radius:30px;cursor:pointer;">👨‍👩‍👧 Família</button>
+        <button onclick="gerarComEstilo('aniversario')" style="border:1.5px solid var(--pink-200);background:var(--pink-100);color:var(--text);font-size:13px;font-weight:600;padding:8px 12px;border-radius:30px;cursor:pointer;">🎂 Aniversário</button>
+        <button onclick="gerarComEstilo('gratidao')"    style="border:1.5px solid var(--pink-200);background:var(--pink-100);color:var(--text);font-size:13px;font-weight:600;padding:8px 12px;border-radius:30px;cursor:pointer;">✨ Gratidão</button>
+      </div>
+    </div>
+
+    <textarea class="msg-textarea" id="mensagemCartinha" placeholder="Comece escrevendo o que seu coração gostaria de dizer..." maxlength="5000" oninput="contarChars(this)"></textarea>
+    <div class="msg-counter" id="msgCounter">❤️ Sua mensagem está ganhando vida...</div>
+    <p style="font-size:12px;color:var(--muted);margin-top:6px;line-height:1.5;">💡 Não precisa escrever muito. Algumas palavras sinceras podem marcar uma vida inteira.</p>
+    <p class="msg-erro" id="erroMensagem" style="display:none;margin-bottom:8px">⚠️ Por favor, escreva uma mensagem antes de continuar.</p>
+    <div class="ia-gerando" id="iaGerando">✨ Gerando mensagem com IA...</div>
+
+    <!-- Botões ACIMA do celular -->
+    <div class="form-btns">
+      <button class="btn-form-voltar" onclick="voltarParaForm2()">← Voltar</button>
+      <button type="button" class="btn-form-continuar" onclick="irDoP3ParaP4()">Continuar →</button>
+    </div>
+
+    <!-- Preview celular -->
+    <div class="phone-preview-wrap">
+      <div class="phone-preview">
+        <div class="pp-notch"></div>
+        <div class="pp-status">
+          <span class="pp-time" id="ppTime3"></span>
+          <span class="pp-icons">••• ▐</span>
+        </div>
+        <div class="pp-glow"></div>
+        <div class="pp-content">
+          <div class="pp-envelope">💌</div>
+          <div class="pp-para">P A R A</div>
+          <div class="pp-nome" id="ppNome3">Pessoa Especial</div>
+          <div class="pp-toque">toque para abrir</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- TELA DE ESCOLHA -->
+<div id="telaEscolha">
+  <div class="escolha-wrap">
+
+    <div class="escolha-top">
+
+      <!-- Badge VIP — visível só no pack mode -->
+      <div id="vipBadge" style="display:none;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--pink),#ff6bb5);color:#fff;font-size:12px;font-weight:800;padding:7px 16px;border-radius:50px;margin-bottom:8px;text-align:center;">
+        ♾️ Área Ilimitada — Crie quantas cartinhas quiser
+      </div>
+
+      <!-- Banner "salve este link" — visível só ao acessar /?criar sem pack -->
+      <div id="criarBanner" style="display:none;align-items:center;justify-content:center;gap:6px;background:var(--pink-100);border:1px solid var(--pink-200);color:var(--pink-dark);font-size:11px;font-weight:700;padding:7px 14px;border-radius:50px;margin-bottom:8px;text-align:center;line-height:1.4;">
+        💡 Salve este link para criar cartinhas mais rápido!
+      </div>
+
+      <div class="steps-bar">
+        <div class="step-ball current">1</div>
+        <div class="step-line"></div>
+        <div class="step-ball todo">2</div>
+        <div class="step-line"></div>
+        <div class="step-ball todo">3</div>
+        <div class="step-line"></div>
+        <div class="step-ball todo">4</div>
+        <div class="step-line"></div>
+        <div class="step-ball todo">5</div>
+      </div>
+      <span class="escolha-tag">✨ Escolha seu presente</span>
+      <h2 class="escolha-title">Como você quer emocionar essa pessoa?</h2>
+      <p class="escolha-sub">Escolha a experiência que melhor representa o que vocês viveram juntos.</p>
+    </div>
+
+    <div class="tipos-stage">
+      <div class="tipos-track" id="tiposTrack">
+        <div class="tipo-wrap" data-t="0">
+          <div class="tipo-card">
+            <div class="tipo-icon-box ti-pink">💌</div>
+            <div class="tipo-label">Cartinha</div>
+            <div class="tipo-nome">Cartinha do Coração</div>
+            <p class="tipo-desc">Uma mensagem personalizada com fotos, música e muito sentimento.</p>
+          </div>
+        </div>
+        <div class="tipo-wrap" data-t="1">
+          <div class="tipo-card">
+            <div class="tipo-icon-box ti-purple">🎬</div>
+            <div class="tipo-label">Retrospectiva</div>
+            <div class="tipo-nome">Retrospectiva de Memórias</div>
+            <p class="tipo-desc">Transforme momentos especiais em um vídeo emocionante.</p>
+          </div>
+        </div>
+        <div class="tipo-wrap" data-t="2">
+          <div class="tipo-card">
+            <div class="tipo-icon-box ti-orange">📍</div>
+            <div class="tipo-label">Mapa</div>
+            <div class="tipo-nome">Nosso Lugar Especial</div>
+            <p class="tipo-desc">Marque o lugar onde tudo começou ou aconteceu algo inesquecível.</p>
+          </div>
+        </div>
+        <div class="tipo-wrap" data-t="3">
+          <div class="tipo-card">
+            <div class="tipo-icon-box ti-teal">⏳</div>
+            <div class="tipo-label">Cronômetro</div>
+            <div class="tipo-nome">Tempo de Nós Dois</div>
+            <p class="tipo-desc">Veja há quanto tempo essa história vem sendo construída.</p>
+          </div>
+        </div>
+      </div>
+      <div class="tipo-arrows">
+        <button class="tipo-arrow" id="tipoL">&#8592;</button>
+        <button class="tipo-arrow" id="tipoR">&#8594;</button>
+      </div>
+      <div class="tipo-dots" id="tipoDots">
+        <div class="tipo-dot on"></div>
+        <div class="tipo-dot"></div>
+        <div class="tipo-dot"></div>
+        <div class="tipo-dot"></div>
+      </div>
+      <p class="escolha-hint">← deslize ou use as setas →</p>
+      <div class="escolha-bottom">
+        <button class="btn-escolha-criar" onclick="abrirForm()">Continuar</button>
+        <button class="btn-voltar" onclick="fecharEscolha()">← Página inicial</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  // Passo 5 personalização
+  var _corEscuraMap = {
+    '#1a0a2e':'#0d0520','#be185d':'#3b0015','#0c2340':'#020c1b',
+    '#052e16':'#011209','#5b21b6':'#1e0a4a','#7f1d1d':'#2d0505',
+    '#1d4ed8':'#0a1a50','#9a3412':'#3a1005','#0d9488':'#012825','#9f1239':'#3d0516',
+  };
+  var _corNomeMap = {
+    '#1a0a2e':'🖤 Roxo Noite selecionado','#be185d':'🩷 Rosa Intenso selecionado',
+    '#0c2340':'💙 Azul Marinho selecionado','#052e16':'💚 Verde Floresta selecionado',
+    '#5b21b6':'💜 Violeta selecionado','#7f1d1d':'❤️ Vermelho selecionado',
+    '#1d4ed8':'💙 Azul Royal selecionado','#9a3412':'🧡 Terracota selecionado',
+    '#0d9488':'💚 Teal selecionado','#9f1239':'❤️ Framboesa selecionado',
+  };
+  function selecionarCor(el) {
+    document.querySelectorAll('.cor-item').forEach(function(i){ i.classList.remove('sel'); });
+    el.classList.add('sel');
+    var cor = el.getAttribute('data-c');
+    var corEscura = _corEscuraMap[cor] || '#0d0520';
+    var glow = document.getElementById('pfGlow');
+    if (glow) glow.style.background = 'radial-gradient(circle, ' + cor + 'cc 0%, transparent 70%)';
+    var phone = document.getElementById('phoneFinal');
+    if (phone) phone.style.background = 'linear-gradient(160deg, ' + cor + ' 0%, ' + corEscura + ' 80%)';
+    var conf = document.getElementById('corConfirmacao');
+    if (conf) conf.textContent = _corNomeMap[cor] || '✓ Cor selecionada';
+  }
+  function selecionarAnim(el) {
+    document.querySelectorAll('.anim-item').forEach(function(i){ i.classList.remove('sel'); });
+    el.classList.add('sel');
+    var tipo = el.getAttribute('data-a');
+    var phone = document.getElementById('phoneFinal');
+    if (!phone) return;
+
+    // Remover canvas anterior
+    var old = phone.querySelector('.pf-anim');
+    if (old) old.remove();
+
+    var canvas = document.createElement('canvas');
+    canvas.className = 'pf-anim';
+    canvas.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:1;border-radius:34px;';
+    canvas.width = 200; canvas.height = 400;
+    phone.insertBefore(canvas, phone.firstChild);
+    var ctx = canvas.getContext('2d');
+    var raf;
+
+    function clearAnim() { if (raf) cancelAnimationFrame(raf); }
+    phone._clearAnim && phone._clearAnim();
+    phone._clearAnim = clearAnim;
+
+    if (tipo === 'chuva') {
+      var drops = Array.from({length:18}, function() {
+        return { x: Math.random()*200, y: Math.random()*400, speed: 1.5+Math.random()*2, len: 8+Math.random()*12, op: 0.3+Math.random()*0.5 };
+      });
+      function drawChuva() {
+        ctx.clearRect(0,0,200,400);
+        drops.forEach(function(d) {
+          ctx.beginPath(); ctx.strokeStyle='rgba(255,255,255,'+d.op+')'; ctx.lineWidth=1.2;
+          ctx.moveTo(d.x, d.y); ctx.lineTo(d.x-4, d.y+d.len); ctx.stroke();
+          d.y += d.speed;
+          if (d.y > 400) { d.y = -20; d.x = Math.random()*200; }
+        });
+        raf = requestAnimationFrame(drawChuva);
+      }
+      drawChuva();
+
+    } else if (tipo === 'coracoes') {
+      var hearts = Array.from({length:10}, function() {
+        return { x:Math.random()*180+10, y:Math.random()*400, speed:0.4+Math.random()*0.6, size:8+Math.random()*14, op:0.4+Math.random()*0.6, emoji:Math.random()>0.5?'❤️':'🩷' };
+      });
+      function drawHearts() {
+        ctx.clearRect(0,0,200,400);
+        hearts.forEach(function(h) {
+          ctx.font = h.size+'px serif'; ctx.globalAlpha = h.op;
+          ctx.fillText(h.emoji, h.x, h.y);
+          h.y -= h.speed;
+          if (h.y < -20) { h.y = 420; h.x = Math.random()*180+10; }
+        });
+        ctx.globalAlpha = 1;
+        raf = requestAnimationFrame(drawHearts);
+      }
+      drawHearts();
+
+    } else if (tipo === 'estrelas') {
+      var stars = Array.from({length:35}, function() {
+        return { x:Math.random()*200, y:Math.random()*400, r:0.5+Math.random()*2, op:Math.random(), dir:Math.random()>0.5?1:-1, spd:0.005+Math.random()*0.015 };
+      });
+      function drawStars() {
+        ctx.clearRect(0,0,200,400);
+        stars.forEach(function(s) {
+          ctx.beginPath(); ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+          ctx.fillStyle='rgba(255,255,255,'+s.op+')'; ctx.fill();
+          s.op += s.dir * s.spd;
+          if (s.op > 1 || s.op < 0.1) s.dir *= -1;
+        });
+        raf = requestAnimationFrame(drawStars);
+      }
+      drawStars();
+
+    } else if (tipo === 'nebulosa') {
+      var angle = 0;
+      function drawNebulosa() {
+        ctx.clearRect(0,0,200,400);
+        var grd = ctx.createRadialGradient(100+Math.sin(angle)*15, 200+Math.cos(angle)*20, 0, 100, 200, 90);
+        grd.addColorStop(0,'rgba(168,85,247,0.35)');
+        grd.addColorStop(0.5,'rgba(233,30,140,0.15)');
+        grd.addColorStop(1,'rgba(0,0,0,0)');
+        ctx.fillStyle = grd; ctx.fillRect(0,0,200,400);
+        angle += 0.01;
+        raf = requestAnimationFrame(drawNebulosa);
+      }
+      drawNebulosa();
+
+    } else if (tipo === 'pixels') {
+      var pixels = Array.from({length:14}, function() {
+        var cols = ['#e91e8c','#60a5fa','#facc15','#ffffff','#a855f7','#34d399'];
+        return { x:Math.random()*190, y:Math.random()*390, size:2+Math.random()*4, col:cols[Math.floor(Math.random()*cols.length)], op:Math.random(), dir:Math.random()>0.5?1:-1, spd:0.008+Math.random()*0.02 };
+      });
+      function drawPixels() {
+        ctx.clearRect(0,0,200,400);
+        pixels.forEach(function(p) {
+          ctx.globalAlpha = p.op;
+          ctx.fillStyle = p.col;
+          ctx.fillRect(p.x, p.y, p.size, p.size);
+          p.op += p.dir * p.spd;
+          if (p.op > 1 || p.op < 0.05) p.dir *= -1;
+        });
+        ctx.globalAlpha = 1;
+        raf = requestAnimationFrame(drawPixels);
+      }
+      drawPixels();
+    } else {
+      ctx.clearRect(0,0,200,400);
+    }
+  }
+  function selecionarLayout(v) {
+    document.getElementById('layFlutuante').classList.toggle('sel', v==='flutuante');
+    document.getElementById('layGrid').classList.toggle('sel', v==='grid');
+  }
+  function abrirPasso5() {
+    // Pegar nome digitado no passo 1
+    var nome = document.getElementById('nomeDestinatario');
+    var pfNome = document.getElementById('pfNome');
+    if (nome && pfNome) pfNome.textContent = nome.value.trim() || 'Pessoa Especial';
+    // Hora atual
+    var pfTime = document.getElementById('pfTime');
+    if (pfTime) { var n=new Date(); pfTime.textContent = n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0'); }
+    var t = document.getElementById('telaForm5');
+    t.style.display = 'block'; t.scrollTop = 0;
+    // Aplicar cor e animação padrão no preview do celular
+    var corDefault = document.querySelector('.cor-item.sel');
+    if (corDefault) selecionarCor(corDefault);
+    var animDefault = document.querySelector('.anim-item.sel');
+    if (animDefault) selecionarAnim(animDefault);
+  }
+  // ── TELA PAGAMENTO ──
+  function abrirPagamento() {
+    atualizarProgresso('telaPagamento');
+    document.getElementById('telaPlanos').style.display = 'none';
+    var t = document.getElementById('telaPagamento');
+    t.style.display = 'block'; t.scrollTop = 0;
+    iniciarCronometro();
+    // Preencher nome com o nome do remetente
+    var nr = document.getElementById('nomeRemetente');
+    var pn = document.getElementById('pagNome');
+    if (nr && pn && nr.value.trim()) pn.value = nr.value.trim();
+  }
+
+  var _pixPollTimer = null;
+  var _cartinhaId   = null;
+  var videoUrl      = null;
+
+  function _coletarDadosCartinha() {
+    var fotos = [];
+    document.querySelectorAll('.preview-foto-item img').forEach(function(img) {
+      if (img.src && img.src.startsWith('data:')) fotos.push(img.src);
+    });
+    var corEl  = document.querySelector('.cor-item.sel');
+    var animEl = document.querySelector('.anim-item.sel');
+    var layGrid = document.getElementById('layGrid');
+    return {
+      nomeDestinatario: (document.getElementById('nomeDestinatario') || {}).value || '',
+      nomeRemetente:    (document.getElementById('nomeRemetente')    || {}).value || '',
+      genero:   generoSel,
+      paraQuem: (document.getElementById('paraQuem') || {}).value || '',
+      ocasiao:  (document.getElementById('ocasiao')  || {}).value || '',
+      mensagem: (document.getElementById('mensagemCartinha') || {}).value || '',
+      cor:      corEl  ? corEl.getAttribute('data-c')  : '#e91e8c',
+      animacao: animEl ? animEl.getAttribute('data-a') : 'coracoes',
+      layout:   (layGrid && layGrid.classList.contains('sel')) ? 'grid' : 'flutuante',
+      fotos:    fotos,
+      audio:    audioBase64,
+      video:    videoUrl,
+    };
+  }
+
+  var _bumps = { pdf: false, pack: false, combo: false };
+  var _bumpTotal = '19.90';
+
+  function selecionarBump(tipo) {
+    // Cada bump é independente — marcar/desmarcar sem regras
+    _bumps[tipo] = !_bumps[tipo];
+
+    // Atualizar visual de cada card
+    ['pdf','pack','combo'].forEach(function(t) {
+      var sel   = _bumps[t];
+      var el    = document.getElementById('bump-' + t);
+      var check = document.getElementById('bumpCheck-' + t);
+      var icon  = document.getElementById('bumpCheckIcon-' + t);
+      el.style.borderColor    = sel ? 'var(--pink)' : 'var(--border)';
+      el.style.background     = sel ? 'var(--pink-100)' : 'var(--card)';
+      check.style.background  = sel ? 'var(--pink)' : '#fff';
+      check.style.borderColor = sel ? 'var(--pink)' : 'var(--border)';
+      icon.style.display      = sel ? 'block' : 'none';
+    });
+
+    // Calcular total somando os marcados
+    var extra = (_bumps.pdf ? 37 : 0) + (_bumps.pack ? 67 : 0) + (_bumps.combo ? 87 : 0);
+    var total = (19.90 + extra).toFixed(2);
+    _bumpTotal = total;
+    var label = total.replace('.', ',');
+    document.getElementById('btnPagarPix').textContent = '◉ Gerar QR Code PIX  R$ ' + label;
+    var preco = document.getElementById('pagPlanoPreco');
+    if (preco) preco.textContent = 'R$ ' + label;
+  }
+
+  async function processarPix() {
+    var nome = (document.getElementById('pagNome').value.trim()) || 'Cliente';
+
+    var btn = document.getElementById('btnPagarPix');
+    btn.disabled = true;
+    btn.textContent = '⏳ Gerando QR Code…';
+
+    try {
+      // Salva dados da cartinha no servidor
+      var dadosCartinha = _coletarDadosCartinha();
+      dadosCartinha.nomeRemetente = dadosCartinha.nomeRemetente || nome;
+      dadosCartinha.pdf  = _bumps.pdf  || _bumps.combo;
+      dadosCartinha.pack = _bumps.pack || _bumps.combo;
+      var salvResp = await fetch('/api/cartinha/salvar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dadosCartinha),
+      });
+      var salvData = await salvResp.json();
+      if (salvData.success) {
+        _cartinhaId = salvData.id;
+        localStorage.setItem('cartinhaId', _cartinhaId);
+      }
+
+      var resp = await fetch('/api/pix', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nome: nome, cartinhaId: _cartinhaId, valor: _bumpTotal }),
+      });
+      var data = await resp.json();
+
+      if (!data.success || !data.qrCodeBase64) {
+        alert('Erro ao gerar PIX: ' + (data.error || 'Tente novamente.'));
+        btn.disabled = false;
+        btn.textContent = '◉ Gerar QR Code PIX  R$ 19,90';
+        return;
+      }
+
+      // Exibir QR Code gerado a partir do link de pagamento
+      document.getElementById('pixQrCode').src = data.qrCodeBase64;
+      document.getElementById('pixCopiaCola').textContent = data.pixCopiaCola;
+      document.getElementById('pixCampos').style.display = 'none';
+      document.getElementById('pixResultBox').style.display = 'block';
+
+      tocarSomSucesso();
+
+      // Iniciar verificação automática de status
+      _iniciarPollingPix(data.id);
+
+    } catch (e) {
+      alert('Erro de conexão. Tente novamente.');
+      btn.disabled = false;
+      btn.textContent = '◉ Gerar QR Code PIX  R$ 19,90';
+    }
+  }
+
+  function _iniciarPollingPix(pixId) {
+    if (_pixPollTimer) clearInterval(_pixPollTimer);
+    _pixPollTimer = setInterval(async function() {
+      try {
+        var r = await fetch('/api/pix/check?id=' + encodeURIComponent(pixId));
+        var d = await r.json();
+        if (d.status === 'CONCLUIDA') {
+          clearInterval(_pixPollTimer);
+          _pixPagoConfirmado();
+        }
+      } catch(e) { /* ignora erros de rede no polling */ }
+    }, 4000);
+  }
+
+  async function testeSimularPagamento() {
+    var dadosCartinha = _coletarDadosCartinha();
+    var nome = (document.getElementById('pagNome') || {}).value || 'Teste';
+    dadosCartinha.nomeRemetente = dadosCartinha.nomeRemetente || nome;
+    dadosCartinha.pdf  = _bumps.pdf  || _bumps.combo;
+    dadosCartinha.pack = _bumps.pack || _bumps.combo;
+    try {
+      var resp = await fetch('/api/cartinha/salvar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dadosCartinha),
+      });
+      var data = await resp.json();
+      if (data.success) {
+        _cartinhaId = data.id;
+        localStorage.setItem('cartinhaId', _cartinhaId);
+      }
+    } catch(e) {}
+    _pixPagoConfirmado();
+  }
+
+  function _pixPagoConfirmado() {
+    tocarSomSucesso();
+    var cid = _cartinhaId || localStorage.getItem('cartinhaId') || '';
+    setTimeout(function() {
+      window.location.href = '/sucesso.html' + (cid ? '?cid=' + cid : '');
+    }, 800);
+  }
+
+  function copiarPixCodigo() {
+    var cod = document.getElementById('pixCopiaCola').textContent;
+    navigator.clipboard.writeText(cod).then(function() {
+      var btn = document.getElementById('btnCopiarPix');
+      if (btn) { btn.textContent = '✅ Copiado!'; setTimeout(function(){ btn.textContent = '📋 Copiar código PIX'; }, 2000); }
+    }).catch(function() {
+      var el = document.getElementById('pixCopiaCola');
+      var range = document.createRange(); range.selectNode(el);
+      window.getSelection().removeAllRanges(); window.getSelection().addRange(range);
+    });
+  }
+
+  // ── URGÊNCIA UMA FRASE POR VEZ ──
+  (function() {
+    var frases = [
+      '💖 Imagine a reação quando essa pessoa abrir sua cartinha...<br>Esse momento pode ficar marcado para sempre.',
+      '🥹 Alguns presentes são esquecidos.<br>Essa lembrança pode ser revivida sempre que ela abrir o link.',
+      '❤️ Você já fez a parte mais difícil: demonstrar o que sente.<br>Agora falta apenas liberar sua cartinha.',
+      '✨ Não deixe esse momento passar.<br>Em poucos segundos sua surpresa estará pronta para ser enviada.',
+    ];
+    var cur = 0;
+    var el = document.getElementById('urgFrase');
+    var dots = document.querySelectorAll('.urg-dot');
+
+    function trocar() {
+      if (!el) return;
+      el.classList.add('fade');
+      setTimeout(function() {
+        cur = (cur + 1) % frases.length;
+        el.innerHTML = frases[cur];
+        el.classList.remove('fade');
+        dots.forEach(function(d, i) { d.classList.toggle('active', i === cur); });
+      }, 500);
+    }
+    setInterval(trocar, 3500);
+  })();
+
+  // ── TELA PLANOS ──
+  function abrirPlanos() {
+    if (window._packMode) { _criarCartinhaPack(); return; }
+    atualizarProgresso('telaPlanos');
+    document.getElementById('telaFinal').style.display = 'none';
+    var t = document.getElementById('telaPlanos');
+    t.style.display = 'block';
+    t.scrollTop = 0;
+    iniciarFrasesPlano();
+  }
+
+  async function _criarCartinhaPack() {
+    var dados = _coletarDadosCartinha();
+    dados.packOrigem = localStorage.getItem('packId') || '';
+    try {
+      var btn = document.querySelector('#telaFinal .btn-comecar');
+      if (btn) { btn.disabled = true; btn.textContent = 'Criando sua cartinha...'; }
+      var r = await fetch('/api/cartinha/salvar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados),
+      });
+      var d = await r.json();
+      if (d.success) {
+        window.location.href = '/sucesso.html?cid=' + d.id;
+      }
+    } catch(e) {
+      alert('Erro ao criar cartinha. Tente novamente.');
+    }
+  }
+
+  function iniciarFrasesPlano() {
+    var frases = [
+      { txt: 'Mais de 12.450 pessoas já emocionaram alguém com uma Carta do Coração. ❤️', emoji: '🎁 💝 ⭐' },
+      { txt: 'Menos de R$20 para criar uma lembrança que pode durar para sempre. ✨', emoji: '🎉 💕 🌟' },
+      { txt: "O plano 'Para Sempre ❤️' é o favorito de quem quer criar uma surpresa inesquecível. ⭐", emoji: '🎁 💝 ⭐' },
+    ];
+    var el = document.getElementById('planoFrase');
+    if (!el) return;
+    var idx = 0;
+    el.textContent = frases[0].txt;
+
+    function proxFrase() {
+      if (idx >= frases.length - 1) return;
+      el.classList.add('fade');
+      setTimeout(function() {
+        idx++;
+        el.textContent = frases[idx].txt;
+        el.classList.remove('fade');
+        setTimeout(proxFrase, 3000);
+      }, 500);
+    }
+    setTimeout(proxFrase, 3000);
+  }
+
+  // ── TELA FINAL ──
+  function abrirFinal() {
+    atualizarProgresso('telaFinal');
+    document.getElementById('telaForm5').style.display = 'none';
+    var t = document.getElementById('telaFinal');
+    t.style.display = 'block';
+    t.scrollTop = 0;
+    iniciarFrasesFinal();
+  }
+
+  function iniciarFrasesFinal() {
+    var frases = [
+      'Sua cartinha já está criada. ✨<br>Falta só o último passo.',
+      'Imagine a reação quando essa pessoa abrir sua cartinha... ❤️<br>Esse momento pode ficar na memória para sempre.',
+      'Falta só um passo para transformar tudo isso em uma lembrança inesquecível. ✨'
+    ];
+    var el = document.getElementById('finalMsg');
+    if (!el) return;
+    var idx = 0;
+    el.innerHTML = frases[0];
+
+    function proxFrase() {
+      if (idx >= frases.length - 1) return; // Para na última
+      el.classList.add('fade');
+      setTimeout(function() {
+        idx++;
+        el.innerHTML = frases[idx];
+        el.classList.remove('fade');
+        setTimeout(proxFrase, 2800);
+      }, 500);
+    }
+    setTimeout(proxFrase, 2800);
+  }
+
+  function irParaPasso5() {
+    atualizarProgresso('telaForm4');
+    document.getElementById('telaForm4').style.display = 'none';
+    document.getElementById('telaMidia').style.display = 'none';
+    abrirPasso5();
+  }
+  function voltarDoPasso5() {
+    document.getElementById('telaForm5').style.display = 'none';
+    // Volta para mídia ou form4 dependendo do caminho
+    if (document.getElementById('telaMidia').style.display !== 'none' || opcMidiaSel === 'sim') {
+      document.getElementById('telaMidia').style.display = 'block';
+    } else {
+      document.getElementById('telaForm4').style.display = 'block';
+    }
+  }
+
+  // Tela mídia Fotos
+  function removerFotoItem(btn) {
+    btn.parentNode.remove();
+    var wrap = document.getElementById('previewFotos');
+    if (!wrap.querySelector('.preview-foto-item')) {
+      document.getElementById('secaoLayout').style.display = 'none';
+    }
+    _atualizarContadorFotos();
+  }
+
+  function _atualizarContadorFotos() {
+    var wrap = document.getElementById('previewFotos');
+    var contador = document.getElementById('fotoContador');
+    if (!wrap || !contador) return;
+    var n = wrap.querySelectorAll('.preview-foto-item').length;
+    if (n > 0) {
+      contador.textContent = '❤️ ' + n + ' lembrança' + (n > 1 ? 's' : '') + ' adicionada' + (n > 1 ? 's' : '') + '!';
+      contador.style.display = 'block';
+    } else {
+      contador.style.display = 'none';
+    }
+  }
+
+  function adicionarFotos(input) {
+    if (!input.files.length) return;
+    var wrap = document.getElementById('previewFotos');
+    Array.from(input.files).forEach(function(file) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        var item = document.createElement('div');
+        item.className = 'preview-foto-item';
+        item.innerHTML = '<img src="' + e.target.result + '"/><button class="preview-remove" onclick="removerFotoItem(this)">✕</button>';
+        wrap.appendChild(item);
+        document.getElementById('secaoLayout').style.display = 'block';
+        _atualizarContadorFotos();
+      };
+      reader.readAsDataURL(file);
+    });
+    document.getElementById('boxFotos').classList.add('has-file');
+    input.value = '';
+  }
+
+  // Vídeo
+  function adicionarVideo(input) {
+    if (!input.files.length) return;
+    var file = input.files[0];
+    document.getElementById('videoEl').src = URL.createObjectURL(file);
+    document.getElementById('previewVideo').style.display = 'block';
+    document.getElementById('boxVideo').classList.add('has-file');
+    videoUrl = null;
+    var fd = new FormData();
+    fd.append('file', file);
+    fetch('/api/upload', { method: 'POST', body: fd })
+      .then(function(r) { return r.json(); })
+      .then(function(d) { if (d.success) videoUrl = d.url; })
+      .catch(function() {});
+  }
+  function removerVideo() {
+    document.getElementById('videoEl').src = '';
+    document.getElementById('previewVideo').style.display = 'none';
+    document.getElementById('boxVideo').classList.remove('has-file');
+    document.getElementById('inputVideo').value = '';
+    videoUrl = null;
+  }
+
+  // Áudio
+  var gravando = false; var mediaRec = null; var audioChunks = []; var audioBase64 = null;
+  function toggleGravacao() {
+    var btn  = document.getElementById('audioBtn');
+    var icon = document.getElementById('audioBtnIcon');
+    var txt  = document.getElementById('audioBtnText');
+    var hint = document.getElementById('audioHint');
+    if (!gravando) {
+      navigator.mediaDevices.getUserMedia({audio:true}).then(function(stream) {
+        gravando = true; audioChunks = [];
+        btn.classList.add('gravando');
+        icon.textContent = '⏹️'; txt.textContent = 'Parar gravação';
+        hint.textContent = '🔴 Gravando...';
+        mediaRec = new MediaRecorder(stream);
+        mediaRec.ondataavailable = function(e) { audioChunks.push(e.data); };
+        mediaRec.onstop = function() {
+          var blob = new Blob(audioChunks, {type:'audio/webm'});
+          var url  = URL.createObjectURL(blob);
+          var el   = document.getElementById('audioEl');
+          el.src   = url;
+          var wrap = document.getElementById('audioPreview');
+          wrap.style.display = 'flex';
+          hint.textContent = '🎙 Sua voz fará parte dessa lembrança.';
+          stream.getTracks().forEach(function(t){t.stop();});
+          // Converte para base64 para salvar na cartinha
+          var reader = new FileReader();
+          reader.onload = function(e) { audioBase64 = e.target.result; };
+          reader.readAsDataURL(blob);
+        };
+        mediaRec.start();
+      }).catch(function() { hint.textContent = 'Permissão de microfone negada.'; });
+    } else {
+      gravando = false;
+      if (mediaRec && mediaRec.state !== 'inactive') mediaRec.stop();
+      btn.classList.remove('gravando');
+      icon.textContent = '✅'; txt.textContent = 'Áudio gravado!';
+    }
+  }
+  function removerAudio() {
+    document.getElementById('audioEl').src = '';
+    document.getElementById('audioPreview').style.display = 'none';
+    document.getElementById('audioBtnIcon').textContent = '🎙️';
+    document.getElementById('audioBtnText').textContent = '❤️ Gravar mensagem de voz';
+    document.getElementById('audioHint').textContent = 'Sua voz pode tornar essa surpresa ainda mais emocionante.';
+    gravando = false; audioChunks = []; audioBase64 = null;
+  }
+
+  function voltarParaForm4() {
+    document.getElementById('telaMidia').style.display = 'none';
+    document.getElementById('telaForm4').style.display = 'block';
+  }
+  function abrirMidia() {
+    atualizarProgresso('telaMidia');
+    document.getElementById('telaForm4').style.display = 'none';
+    var t = document.getElementById('telaMidia');
+    t.style.display = 'block';
+    t.scrollTop = 0;
+  }
+
+  // Passo 4 fotos e áudio
+  var opcMidiaSel = '';
+  function selecionarOpc(v) {
+    opcMidiaSel = v;
+    document.getElementById('opcSim').classList.toggle('selected', v==='sim');
+    document.getElementById('opcNao').classList.toggle('selected', v==='nao');
+    if (v === 'nao') {
+      setTimeout(function() { irParaPasso5(); }, 300);
+    } else {
+      setTimeout(function() { abrirMidia(); }, 300);
+    }
+  }
+
+  function confirmarSemMidia() {
+    var modal = document.getElementById('modalSemMidia');
+    if (modal) { modal.style.display = 'flex'; }
+  }
+  function fecharModalSemMidia() {
+    var modal = document.getElementById('modalSemMidia');
+    if (modal) modal.style.display = 'none';
+  }
+  function confirmarSkipMidia() {
+    fecharModalSemMidia();
+    selecionarOpc('nao');
+  }
+  function voltarParaForm3() {
+    document.getElementById('telaForm4').style.display = 'none';
+    // Por enquanto volta para form2 (passo 3 ainda não existe)
+    document.getElementById('telaForm2').style.display = 'block';
+  }
+  // ── PASSO 3 FUNÇÃO DIRETA ──
+  function voltarParaForm3do4() {
+    document.getElementById('telaForm4').style.display = 'none';
+    document.getElementById('telaForm3').style.display = 'block';
+  }
+
+  function irDoP3ParaP4() {
+    atualizarProgresso('telaForm3');
+    var msg    = document.getElementById('mensagemCartinha');
+    var erroMsg = document.getElementById('erroMensagem');
+    var ok = true;
+
+    // Validar mensagem — mínimo 10 caracteres
+    if (!msg || msg.value.trim().length < 10) {
+      if (msg) { msg.style.borderColor = '#ef4444'; msg.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.15)'; }
+      if (erroMsg) { erroMsg.textContent = '⚠️ Escreva pelo menos 10 caracteres na mensagem.'; erroMsg.style.display = 'block'; }
+      ok = false;
+    } else {
+      if (msg) { msg.style.borderColor = ''; msg.style.boxShadow = ''; }
+      if (erroMsg) erroMsg.style.display = 'none';
+    }
+
+    if (!ok) return false;
+
+    // Navegar para passo 4
+    var f3 = document.getElementById('telaForm3');
+    var f4 = document.getElementById('telaForm4');
+    if (f3) f3.style.cssText += ';display:none!important';
+    if (f4) { f4.style.cssText += ';display:block!important'; f4.scrollTop = 0; }
+    return false;
+  }
+
+  // ── PASSO 3 ──
+  function contarChars(el) {
+    var counter = document.getElementById('msgCounter');
+    if (!counter) return;
+    if (el.value.length === 0) {
+      counter.innerHTML = '❤️ Sua mensagem está ganhando vida...';
+    } else {
+      counter.innerHTML = '<span id="charCount">' + el.value.length + '</span>/5000';
+    }
+  }
+
+  function abrirPasso3() {
+    // Atualizar nome no preview
+    var nd = document.getElementById('nomeDestinatario');
+    var pp = document.getElementById('ppNome3');
+    if (nd && pp) pp.textContent = nd.value.trim() || 'Pessoa Especial';
+    // Hora
+    var pt = document.getElementById('ppTime3');
+    if (pt) { var n=new Date(); pt.textContent = n.getHours().toString().padStart(2,'0')+':'+n.getMinutes().toString().padStart(2,'0'); }
+    document.getElementById('telaForm2').style.display = 'none';
+    var t = document.getElementById('telaForm3');
+    t.style.display = 'block'; t.scrollTop = 0;
+  }
+
+  function voltarParaForm2() {
+    document.getElementById('telaForm3').style.display = 'none';
+    document.getElementById('telaForm2').style.display = 'block';
+  }
+
+  function irParaForm4From3() {
+    var msg = document.getElementById('mensagemCartinha');
+    // Validar mensagem
+    if (!msg || !msg.value.trim()) {
+      msg.style.borderColor = '#ef4444';
+      msg.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.15)';
+      msg.focus();
+      setTimeout(function(){ 
+        msg.style.borderColor = '';
+        msg.style.boxShadow = '';
+      }, 2000);
+      return;
+    }
+    // Ir para passo 4
+    var f3 = document.getElementById('telaForm3');
+    var f4 = document.getElementById('telaForm4');
+    if (f3) f3.style.display = 'none';
+    if (f4) { f4.style.display = 'block'; f4.scrollTop = 0; }
+  }
+
+  function abrirPickerEstilo() {
+    var picker = document.getElementById('iaEstiloPicker');
+    if (!picker) return;
+    picker.style.display = picker.style.display === 'none' ? 'block' : 'none';
+  }
+
+  async function gerarComEstilo(estilo) {
+    var picker = document.getElementById('iaEstiloPicker');
+    if (picker) picker.style.display = 'none';
+
+    var nr = document.getElementById('nomeRemetente');
+    var nd = document.getElementById('nomeDestinatario');
+    var pq = document.getElementById('paraQuem');
+    var oc = document.getElementById('ocasiao');
+    var btn = document.getElementById('btnIA');
+    var gerando = document.getElementById('iaGerando');
+
+    btn.disabled = true;
+    btn.textContent = '⏳ Gerando...';
+    gerando.style.display = 'block';
+
+    var estiloTexto = {
+      'romantico':   'romântica e apaixonada',
+      'emocionante': 'emocionante e que provoque lágrimas',
+      'divertido':   'divertida e descontraída',
+      'desculpas':   'sincera e de pedido de desculpas',
+      'familia':     'carinhosa e voltada para laços familiares',
+      'aniversario': 'festiva e de parabéns',
+      'gratidao':    'cheia de gratidão e reconhecimento'
+    }[estilo] || 'emotiva e personalizada';
+
+    var prompt = 'Escreva uma mensagem ' + estiloTexto + ' de cartinha digital. De: ' +
+      (nr ? nr.value : 'alguém especial') + '. Para: ' +
+      (nd ? nd.value : 'pessoa amada') + '. Relação: ' +
+      (pq ? pq.options[pq.selectedIndex]?.text : '') + '. Ocasião: ' +
+      (oc ? oc.options[oc.selectedIndex]?.text : '') +
+      '. Escreva em português, com carinho, emoção e personalidade. Máximo 300 palavras. Retorne apenas a mensagem, sem título.';
+
+    try {
+      var resp = await fetch('/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: prompt })
+      });
+      var data = await resp.json();
+      var texto = data.text;
+      if (texto) {
+        document.getElementById('mensagemCartinha').value = texto;
+        contarChars(document.getElementById('mensagemCartinha'));
+      } else if (data.error) {
+        alert(data.error);
+      }
+    } catch(e) {
+      alert('Erro ao gerar mensagem. Tente escrever manualmente!');
+    }
+
+    btn.disabled = false;
+    btn.textContent = '✨ Me ajude a escrever';
+    gerando.style.display = 'none';
+  }
+
+  function gerarMensagemIA() { abrirPickerEstilo(); }
+
+  // ── CONTROLE DE GÊNERO ──
+  var generoSel = '';
+
+  var _opcoesF = [
+    ['namorada','Namorada'],['noiva','Noiva'],['esposa','Esposa'],['mae','Mãe'],['tia','Tia'],
+    ['avo','Avó'],['bisavo','Bisavó'],['irma','Irmã'],['prima','Prima'],
+    ['madrinha','Madrinha'],['madrasta','Madrasta'],['amiga','Amiga'],
+    ['filha','Filha'],['neta','Neta'],['sobrinha','Sobrinha'],
+    ['cunhada','Cunhada'],['sogra','Sogra'],['professora','Professora'],
+    ['chefe','Chefe'],['colega','Colega'],['outra','Outra pessoa']
+  ];
+  var _opcoesM = [
+    ['namorado','Namorado'],['noivo','Noivo'],['marido','Marido'],['esposo','Esposo'],
+    ['pai','Pai'],['tio','Tio'],['avo','Avô'],['bisavo','Bisavô'],
+    ['irmao','Irmão'],['primo','Primo'],['padrinho','Padrinho'],['amigo','Amigo'],
+    ['filho','Filho'],['neto','Neto'],['sobrinho','Sobrinho'],
+    ['cunhado','Cunhado'],['sogro','Sogro'],['professor','Professor'],
+    ['chefe','Chefe'],['colega','Colega'],['outro','Outra pessoa']
+  ];
+
+  var _todasOcasioes = [
+    ['cartinha','Cartinha Especial'],
+    ['porque-te-amo','Porque eu te amo'],
+    ['surpresa-romantica','Surpresa romântica'],
+    ['aniversario','Aniversário'],
+    ['maes','Dia das Mães'],
+    ['pais','Dia dos Pais'],
+    ['mulheres','Dia da Mulher'],
+    ['namorados','Dia dos Namorados'],
+    ['aniv-namoro','Aniversário de Namoro'],
+    ['pedido-namoro','Pedido de Namoro'],
+    ['pedido-casamento','Pedido de Casamento'],
+    ['casamento','Casamento'],
+    ['lua-de-mel','Lua de Mel'],
+    ['aniv-casamento','Aniversário de Casamento'],
+    ['reconciliacao','Reconciliação'],
+    ['saudade','Saudade'],
+    ['primeiro-encontro','Primeiro encontro'],
+    ['primeiro-beijo','Primeiro beijo'],
+    ['aniv-amigo','Aniversário de Amigo(a)'],
+    ['agradecimento-amigo','Agradecimento a Amigo(a)'],
+    ['amizade','Dia da Amizade'],
+    ['formatura','Formatura'],
+    ['criancas','Dia das Crianças'],
+    ['nascimento','Nascimento'],
+    ['cha-bebe','Chá de bebê'],
+    ['agradecimento','Agradecimento'],
+    ['boa-sorte','Boa sorte'],
+    ['novo-emprego','Novo emprego'],
+    ['promocao','Promoção'],
+    ['conquista','Conquista especial'],
+    ['lembranca','Lembrança Especial'],
+    ['gratidao','Gratidão'],
+    ['natal','Natal'],
+    ['ano-novo','Ano Novo'],
+    ['pascoa','Páscoa'],
+    ['so-porque-sim','Só porque sim ❤️'],
+    ['outro','Outro']
+  ];
+
+  var _ocasiaoMap = {
+    // ── Feminino ──
+    'namorada':   ['porque-te-amo','surpresa-romantica','namorados','aniv-namoro','pedido-namoro','pedido-casamento','reconciliacao','saudade','primeiro-encontro','primeiro-beijo','cartinha','aniversario','formatura','agradecimento','boa-sorte','lembranca','natal','ano-novo','so-porque-sim','outro'],
+    'noiva':      ['pedido-casamento','casamento','lua-de-mel','porque-te-amo','surpresa-romantica','namorados','aniv-namoro','aniv-casamento','reconciliacao','cartinha','aniversario','agradecimento','lembranca','natal','ano-novo','so-porque-sim','outro'],
+    'esposa':     ['aniv-casamento','namorados','porque-te-amo','surpresa-romantica','reconciliacao','maes','cartinha','aniversario','gratidao','agradecimento','boa-sorte','lembranca','natal','ano-novo','pascoa','so-porque-sim','outro'],
+    'mae':        ['maes','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','mulheres','cha-bebe','nascimento','conquista','cartinha','so-porque-sim','outro'],
+    'tia':        ['maes','mulheres','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','formatura','conquista','so-porque-sim','outro'],
+    'avo-F':      ['maes','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','mulheres','so-porque-sim','outro'],
+    'bisavo':     ['maes','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','mulheres','so-porque-sim','outro'],
+    'irma':       ['maes','mulheres','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','formatura','amizade','reconciliacao','conquista','cha-bebe','nascimento','so-porque-sim','outro'],
+    'prima':      ['mulheres','aniversario','gratidao','agradecimento','natal','lembranca','ano-novo','formatura','amizade','conquista','so-porque-sim','outro'],
+    'madrinha':   ['maes','mulheres','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','so-porque-sim','outro'],
+    'madrasta':   ['maes','mulheres','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','so-porque-sim','outro'],
+    'amiga':      ['aniv-amigo','agradecimento-amigo','agradecimento','amizade','mulheres','maes','aniversario','formatura','reconciliacao','conquista','boa-sorte','novo-emprego','promocao','lembranca','natal','ano-novo','so-porque-sim','outro'],
+    'filha':      ['aniversario','criancas','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','formatura','mulheres','conquista','so-porque-sim','outro'],
+    'neta':       ['aniversario','criancas','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','mulheres','conquista','so-porque-sim','outro'],
+    'sobrinha':   ['aniversario','criancas','mulheres','gratidao','agradecimento','natal','lembranca','ano-novo','formatura','conquista','so-porque-sim','outro'],
+    'cunhada':    ['maes','mulheres','aniversario','gratidao','agradecimento','natal','lembranca','ano-novo','formatura','amizade','conquista','cha-bebe','nascimento','so-porque-sim','outro'],
+    'sogra':      ['maes','mulheres','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','so-porque-sim','outro'],
+    'professora': ['agradecimento','agradecimento-amigo','formatura','aniversario','boa-sorte','conquista','lembranca','natal','so-porque-sim','outro'],
+    'chefe':      ['agradecimento','boa-sorte','novo-emprego','promocao','conquista','aniversario','natal','so-porque-sim','outro'],
+    'colega':     ['mulheres','aniversario','agradecimento-amigo','agradecimento','amizade','formatura','boa-sorte','novo-emprego','promocao','conquista','lembranca','natal','ano-novo','so-porque-sim','outro'],
+    'outra':      ['cartinha','porque-te-amo','surpresa-romantica','maes','mulheres','aniv-namoro','namorados','pedido-namoro','pedido-casamento','casamento','lua-de-mel','aniv-casamento','reconciliacao','saudade','primeiro-encontro','primeiro-beijo','aniv-amigo','agradecimento-amigo','agradecimento','amizade','formatura','lembranca','pais','aniversario','criancas','gratidao','boa-sorte','novo-emprego','promocao','conquista','nascimento','cha-bebe','natal','ano-novo','pascoa','so-porque-sim','outro'],
+    // ── Masculino ──
+    'namorado':   ['porque-te-amo','surpresa-romantica','namorados','aniv-namoro','pedido-namoro','pedido-casamento','reconciliacao','saudade','primeiro-encontro','primeiro-beijo','cartinha','aniversario','formatura','agradecimento','boa-sorte','lembranca','natal','ano-novo','so-porque-sim','outro'],
+    'noivo':      ['pedido-casamento','casamento','lua-de-mel','porque-te-amo','surpresa-romantica','namorados','aniv-namoro','aniv-casamento','reconciliacao','cartinha','aniversario','agradecimento','lembranca','natal','ano-novo','so-porque-sim','outro'],
+    'marido':     ['aniv-casamento','namorados','porque-te-amo','surpresa-romantica','reconciliacao','pais','cartinha','aniversario','gratidao','agradecimento','boa-sorte','lembranca','natal','ano-novo','pascoa','so-porque-sim','outro'],
+    'esposo':     ['aniv-casamento','namorados','porque-te-amo','surpresa-romantica','reconciliacao','pais','cartinha','aniversario','gratidao','agradecimento','lembranca','natal','ano-novo','pascoa','so-porque-sim','outro'],
+    'pai':        ['pais','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','cartinha','conquista','so-porque-sim','outro'],
+    'tio':        ['pais','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','formatura','conquista','so-porque-sim','outro'],
+    'avo-M':      ['pais','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','so-porque-sim','outro'],
+    'irmao':      ['pais','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','formatura','amizade','reconciliacao','conquista','cha-bebe','nascimento','so-porque-sim','outro'],
+    'primo':      ['aniversario','gratidao','agradecimento','natal','lembranca','ano-novo','formatura','amizade','conquista','so-porque-sim','outro'],
+    'padrinho':   ['pais','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','so-porque-sim','outro'],
+    'amigo':      ['aniv-amigo','agradecimento-amigo','agradecimento','amizade','aniversario','formatura','reconciliacao','conquista','boa-sorte','novo-emprego','promocao','lembranca','natal','ano-novo','so-porque-sim','outro'],
+    'filho':      ['aniversario','criancas','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','formatura','conquista','so-porque-sim','outro'],
+    'neto':       ['aniversario','criancas','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','conquista','so-porque-sim','outro'],
+    'sobrinho':   ['aniversario','criancas','gratidao','agradecimento','natal','lembranca','ano-novo','formatura','conquista','so-porque-sim','outro'],
+    'cunhado':    ['pais','aniversario','gratidao','agradecimento','natal','lembranca','ano-novo','formatura','amizade','conquista','cha-bebe','nascimento','so-porque-sim','outro'],
+    'sogro':      ['pais','aniversario','gratidao','agradecimento','natal','lembranca','pascoa','ano-novo','so-porque-sim','outro'],
+    'professor':  ['agradecimento','agradecimento-amigo','formatura','aniversario','boa-sorte','conquista','lembranca','natal','so-porque-sim','outro'],
+    'colega':     ['aniversario','agradecimento-amigo','agradecimento','amizade','formatura','boa-sorte','novo-emprego','promocao','conquista','lembranca','natal','ano-novo','so-porque-sim','outro'],
+    'outro':      ['cartinha','porque-te-amo','surpresa-romantica','maes','mulheres','aniv-namoro','namorados','pedido-namoro','pedido-casamento','casamento','lua-de-mel','aniv-casamento','reconciliacao','saudade','primeiro-encontro','primeiro-beijo','aniv-amigo','agradecimento-amigo','agradecimento','amizade','formatura','lembranca','pais','aniversario','criancas','gratidao','boa-sorte','novo-emprego','promocao','conquista','nascimento','cha-bebe','natal','ano-novo','pascoa','so-porque-sim','outro']
+  };
+
+  function atualizarOcasioes(val) {
+    var oc = document.getElementById('ocasiao');
+    if (!oc) return;
+    if (!val) {
+      oc.innerHTML = '<option value="">Escolha uma ocasião...</option>';
+      atualizarBalaoEtapa2();
+      return;
+    }
+    var key = (val === 'avo') ? ('avo-' + (generoSel || 'F')) : val;
+    var permitidas = _ocasiaoMap[key] || _todasOcasioes.map(function(o){ return o[0]; });
+    var html = '<option value="">Escolha uma ocasião...</option>';
+    _todasOcasioes.forEach(function(o) {
+      if (permitidas.indexOf(o[0]) !== -1) {
+        html += '<option value="' + o[0] + '">' + o[1] + '</option>';
+      }
+    });
+    oc.innerHTML = html;
+    oc.value = '';
+    atualizarBalaoEtapa2();
+  }
+
+  function atualizarBalaoEtapa2() {
+    var el = document.getElementById('msgBalao2');
+    if (!el) return;
+    var pq = (document.getElementById('paraQuem') || {}).value || '';
+    var oc = (document.getElementById('ocasiao') || {}).value || '';
+    var msg = '';
+    if (oc === 'pedido-casamento' || oc === 'casamento') {
+      msg = '💍 Esse é um daqueles momentos que mudam uma vida.';
+    } else if (oc === 'reconciliacao') {
+      msg = '🤍 Algumas palavras sinceras têm o poder de aproximar corações.';
+    } else if (oc === 'lua-de-mel') {
+      msg = '💍 Que esse momento especial seja o começo de uma vida linda juntos.';
+    } else if (oc === 'nascimento' || oc === 'cha-bebe') {
+      msg = '👶 Uma nova vida merece ser celebrada com muito amor.';
+    } else if (oc === 'formatura') {
+      msg = '🎓 Uma conquista que merece ser celebrada com muito carinho.';
+    } else if (oc === 'novo-emprego' || oc === 'promocao' || oc === 'conquista') {
+      msg = '🌟 Celebrar quem você ama nas conquistas é um presente lindo.';
+    } else if (oc === 'porque-te-amo' || oc === 'surpresa-romantica') {
+      msg = '💕 Às vezes o melhor presente é simplesmente mostrar o quanto você importa.';
+    } else if (oc === 'saudade') {
+      msg = '🥺 A saudade mostra que temos algo precioso.';
+    } else if (oc === 'primeiro-encontro' || oc === 'primeiro-beijo') {
+      msg = '💞 Alguns momentos ficam gravados no coração para sempre.';
+    } else if (oc === 'so-porque-sim') {
+      msg = '😊 Os melhores presentes são os que chegam sem motivo algum.';
+    } else if (pq === 'namorada' || pq === 'namorado' || pq === 'noiva' || pq === 'noivo') {
+      msg = '❤️ Essa surpresa tem tudo para arrancar um sorriso enorme.';
+    } else if (pq === 'esposa' || pq === 'esposo' || pq === 'marido') {
+      msg = '❤️ Ela vai guardar esse momento para sempre.';
+    } else if (pq === 'mae') {
+      msg = '💝 Ela vai guardar esse momento para sempre.';
+    } else if (pq === 'pai') {
+      msg = '💙 Ele vai guardar esse momento para sempre.';
+    } else if (pq === 'avo' || pq === 'bisavo') {
+      msg = '💛 Uma surpresa que vai tocar o coração de um jeito especial.';
+    } else if (pq === 'amiga' || pq === 'amigo') {
+      msg = '😊 Os melhores presentes vêm de quem realmente conhece a gente.';
+    } else if (pq) {
+      msg = '❤️ Uma lembrança que vai ficar entre vocês para sempre.';
+    }
+    if (msg) {
+      el.textContent = msg;
+    } else {
+      el.innerHTML = 'Agora vamos dar um significado para essa surpresa. ❤️<br><br>Para quem ela é e qual é a ocasião?';
+    }
+  }
+
+  function selecionarGenero(g) {
+    generoSel = g;
+    document.getElementById('genF').className = 'genero-card' + (g === 'F' ? ' selected' : '');
+    document.getElementById('genM').className = 'genero-card' + (g === 'M' ? ' selected' : '');
+
+    // Atualiza dropdown "Para quem"
+    var sel = document.getElementById('paraQuem');
+    var opcoes = g === 'F' ? _opcoesF : _opcoesM;
+    sel.innerHTML = '<option value="">Escolha uma opção...</option>' +
+      opcoes.map(function(o){ return '<option value="' + o[0] + '">' + o[1] + '</option>'; }).join('');
+
+    // Reseta ocasião ao trocar gênero
+    atualizarOcasioes('');
+
+    // Aplica tema de cor
+    document.body.setAttribute('data-genero', g);
+  }
+
+  function irParaForm4() {
+    atualizarProgresso('telaForm2'); abrirPasso3(); }
+  function _irParaForm4Real_unused() {
+    var ok = true;
+
+    // Validar gênero
+    var gf = document.getElementById('genF');
+    var gm = document.getElementById('genM');
+    if (!generoSel) {
+      if (gf) { gf.style.border = '2px solid #ef4444'; setTimeout(function(){ gf.style.border=''; }, 1500); }
+      if (gm) { gm.style.border = '2px solid #ef4444'; setTimeout(function(){ gm.style.border=''; }, 1500); }
+      ok = false;
+    } else {
+      if (gf) gf.style.border = '';
+      if (gm) gm.style.border = '';
+    }
+
+    // Validar para quem
+    var pq = document.getElementById('paraQuem');
+    var ePQ = document.getElementById('erroPQ');
+    if (pq && !pq.value) {
+      pq.classList.add('campo-erro', 'shake');
+      setTimeout(function() { pq.classList.remove('shake'); }, 400);
+      if (ePQ) ePQ.style.display = 'block';
+      ok = false;
+    } else {
+      pq && pq.classList.remove('campo-erro');
+      if (ePQ) ePQ.style.display = 'none';
+    }
+
+    // Validar ocasião
+    var oc = document.getElementById('ocasiao');
+    var eOc = document.getElementById('erroOcasiao');
+    if (oc && !oc.value) {
+      oc.classList.add('campo-erro', 'shake');
+      setTimeout(function() { oc.classList.remove('shake'); }, 400);
+      if (eOc) eOc.style.display = 'block';
+      ok = false;
+    } else {
+      oc && oc.classList.remove('campo-erro');
+      if (eOc) eOc.style.display = 'none';
+    }
+
+    if (!ok) return;
+
+    document.getElementById('telaForm2').style.display = 'none';
+    var t = document.getElementById('telaForm4');
+    t.style.display = 'block';
+    t.scrollTop = 0;
+  }
+
+
+
+  function voltarParaForm1() {
+    document.getElementById('telaForm2').style.display = 'none';
+    document.getElementById('telaForm').style.display = 'block';
+  }
+
+  // Atualizar preview do celular (etapa 1: mostra remetente + destinatário)
+  function atualizarPreviewCompleto() {
+    var rem  = (document.getElementById('nomeRemetente')  || {}).value || '';
+    var dest = (document.getElementById('nomeDestinatario') || {}).value || '';
+    var ppPara = document.getElementById('ppPara');
+    var ppNome = document.getElementById('ppNome');
+    if (ppPara) ppPara.textContent = rem.trim() ? 'De ' + rem.trim() : 'P A R A';
+    if (ppNome) {
+      if (dest.trim()) {
+        ppNome.textContent = 'Para ' + dest.trim() + ' ❤️';
+        ppNome.classList.remove('vazio');
+      } else {
+        ppNome.textContent = 'Pessoa Especial';
+        ppNome.classList.add('vazio');
+      }
+    }
+    ['ppNome2', 'ppNome3'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (dest.trim()) { el.textContent = dest.trim(); el.classList.remove('vazio'); }
+      else { el.textContent = 'Pessoa Especial'; el.classList.add('vazio'); }
+    });
+  }
+
+  // Atualizar preview do celular (chamada direta pelo nome do destinatário em outros passos)
+  function atualizarPreview(val) {
+    ['ppNome', 'ppNome2', 'ppNome3'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (val.trim() === '') {
+        el.textContent = 'Pessoa Especial';
+        el.classList.add('vazio');
+      } else {
+        el.textContent = val;
+        el.classList.remove('vazio');
+      }
+    });
+  }
+
+  // Relógio do celular
+  function tickRelogio() {
+    var now = new Date();
+    var h = now.getHours().toString().padStart(2,'0');
+    var m = now.getMinutes().toString().padStart(2,'0');
+    var t = h + ':' + m;
+    ['ppTime','ppTime2','ppTime3'].forEach(function(id){
+      var el = document.getElementById(id);
+      if (el) el.textContent = t;
+    });
+  }
+  tickRelogio();
+  setInterval(tickRelogio, 30000);
+
+  function abrirForm() {
+    document.getElementById('telaEscolha').style.display = 'none';
+    var t = document.getElementById('telaForm');
+    t.style.display = 'block';
+    t.scrollTop = 0;
+  }
+
+
+  function irParaForm2() {
+    atualizarProgresso('telaForm');
+    var nr = document.getElementById('nomeRemetente');
+    var nd = document.getElementById('nomeDestinatario');
+    var ok = true;
+    // Validar nome remetente
+    if (!nr.value.trim()) {
+      nr.classList.add('campo-erro','shake');
+      document.getElementById('erroNomeR').style.display = 'block';
+      setTimeout(function(){ nr.classList.remove('shake'); }, 400);
+      ok = false;
+    } else {
+      nr.classList.remove('campo-erro');
+      document.getElementById('erroNomeR').style.display = 'none';
+    }
+    // Validar nome destinatário
+    if (!nd.value.trim()) {
+      nd.classList.add('campo-erro','shake');
+      document.getElementById('erroNomeD').style.display = 'block';
+      setTimeout(function(){ nd.classList.remove('shake'); }, 400);
+      ok = false;
+    } else {
+      nd.classList.remove('campo-erro');
+      document.getElementById('erroNomeD').style.display = 'none';
+    }
+    if (!ok) return;
+    document.getElementById('telaForm').style.display = 'none';
+    var t = document.getElementById('telaForm2');
+    t.style.display = 'block';
+    t.scrollTop = 0;
+  }
+
+  function voltarParaEscolha() {
+    document.getElementById('telaForm').style.display = 'none';
+    document.getElementById('telaEscolha').style.display = 'block';
+  }
+
+  function abrirEscolha() {
+    atualizarProgresso('telaEscolha');
+    var t = document.getElementById('telaEscolha');
+    t.style.display = 'block';
+    t.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+    renderTipos();
+  }
+  function fecharEscolha() {
+    document.getElementById('telaEscolha').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  // Carrossel de tipos
+  (function() {
+    var total = 4; var cur = 0;
+    var wraps = null; var dots = null; var counter = null;
+
+    function mod(n) { return ((n % total) + total) % total; }
+
+    window.renderTipos = function() {
+      wraps = document.querySelectorAll('.tipo-wrap');
+      dots  = document.querySelectorAll('.tipo-dot');
+      counter = document.getElementById('escolhaCounter');
+      wraps.forEach(function(w) {
+        var i = parseInt(w.getAttribute('data-t'));
+        var diff = mod(i - cur);
+        w.className = 'tipo-wrap';
+        if (diff === 0)            w.classList.add('tc');
+        else if (diff === 1)       w.classList.add('tr');
+        else if (diff === total-1) w.classList.add('tl');
+        else                       w.classList.add('th');
+      });
+      dots.forEach(function(d,i){ d.classList.toggle('on', i===cur); });
+      if (counter) counter.textContent = (cur+1) + ' de ' + total;
+    };
+
+    document.addEventListener('click', function(e) {
+      if (e.target.id === 'tipoL') { cur = mod(cur-1); renderTipos(); }
+      if (e.target.id === 'tipoR') { cur = mod(cur+1); renderTipos(); }
+    });
+
+    // Swipe touch
+    var sx = 0;
+    document.addEventListener('touchstart', function(e) { sx = e.touches[0].clientX; }, {passive:true});
+    document.addEventListener('touchend', function(e) {
+      if (document.getElementById('telaEscolha').style.display !== 'block') return;
+      var dx = e.changedTouches[0].clientX - sx;
+      if (Math.abs(dx) > 50) { cur = mod(cur + (dx < 0 ? 1 : -1)); renderTipos(); }
+    });
+  })();
+</script>
+
+<!-- ── NOTIFICAÇÃO SOCIAL PROOF ── -->
+<style>
+@keyframes pulseDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.75)}}
+@keyframes notifIn{from{transform:translateX(110%);opacity:0}to{transform:translateX(0);opacity:1}}
+@keyframes notifOut{from{transform:translateX(0);opacity:1}to{transform:translateX(110%);opacity:0}}
+#notifProof{
+  position:fixed;top:1rem;right:.75rem;z-index:9999;
+  max-width:270px;width:calc(100vw - 1.5rem);
+  background:rgba(255,255,255,0.97);
+  border:1px solid rgba(233,30,140,.22);
+  border-radius:18px;
+  padding:13px 14px 13px 13px;
+  box-shadow:0 8px 32px rgba(233,30,140,.15),0 2px 12px rgba(0,0,0,.08);
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  display:none;align-items:center;gap:11px;
+  transform:translateX(110%);
+}
+#notifProof.entrando{display:flex;animation:notifIn .5s cubic-bezier(.34,1.56,.64,1) forwards}
+#notifProof.saindo  {display:flex;animation:notifOut .4s ease forwards}
+</style>
+
+<div id="notifProof" role="status" aria-live="polite">
+  <div style="font-size:30px;line-height:1;flex-shrink:0">💌</div>
+  <div style="flex:1;min-width:0">
+    <div id="notifNome" style="font-size:13px;font-weight:700;color:#1a0010;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div>
+    <div id="notifAcao" style="font-size:12px;color:rgba(26,0,16,.58);line-height:1.4;margin-top:2px"></div>
+    <div style="font-size:10px;color:#e91e8c;margin-top:5px;display:flex;align-items:center;gap:5px">
+      <span style="width:6px;height:6px;background:#e91e8c;border-radius:50%;display:inline-block;animation:pulseDot 1.4s ease-in-out infinite;flex-shrink:0"></span>
+      Agora há pouco
+    </div>
+  </div>
+  <button onclick="fecharNotif()" aria-label="Fechar" style="background:none;border:none;color:rgba(255,255,255,.3);cursor:pointer;font-size:18px;padding:0 2px;line-height:1;flex-shrink:0;align-self:flex-start;margin-top:-1px">×</button>
+</div>
+
+<script>
+(function(){
+  var dados = [
+    {nome:'Ana L.',    cidade:'São Paulo – SP',    acao:'acabou de criar uma cartinha de amor 💖'},
+    {nome:'Pedro M.',  cidade:'Rio de Janeiro – RJ',acao:'criou uma cartinha para a namorada 💌'},
+    {nome:'Juliana F.',cidade:'Belo Horizonte – MG',acao:'criou uma cartinha de aniversário 🎂'},
+    {nome:'Carlos R.', cidade:'Curitiba – PR',      acao:'criou uma cartinha para a esposa 💍'},
+    {nome:'Beatriz C.',cidade:'Salvador – BA',      acao:'criou uma cartinha especial para alguém 💕'},
+    {nome:'Rafael O.', cidade:'Fortaleza – CE',     acao:'criou uma cartinha romântica 🌹'},
+    {nome:'Camila S.', cidade:'Porto Alegre – RS',  acao:'criou uma cartinha surpresa 💕'},
+    {nome:'Thiago N.', cidade:'Brasília – DF',      acao:'criou uma cartinha para a namorada 😍'},
+    {nome:'Fernanda K.',cidade:'Recife – PE',       acao:'criou uma cartinha de pedido de casamento 💍'},
+    {nome:'Lucas A.',  cidade:'Goiânia – GO',       acao:'criou uma cartinha surpresa 🎉'},
+    {nome:'Mariana B.',cidade:'Campinas – SP',      acao:'criou uma cartinha para o namorado 💑'},
+    {nome:'Diego T.',  cidade:'Florianópolis – SC', acao:'criou uma cartinha para alguém especial 🙏'},
+  ];
+
+  // embaralha
+  dados.sort(function(){ return Math.random()-.5; });
+  var idx = 0;
+  var autoClose = null;
+
+  function mostrar() {
+    var el   = document.getElementById('notifProof');
+    var d    = dados[idx % dados.length]; idx++;
+    document.getElementById('notifNome').textContent = d.nome + ' · ' + d.cidade;
+    document.getElementById('notifAcao').textContent = d.acao;
+    el.className = '';
+    void el.offsetWidth;
+    el.className = 'entrando';
+    if (autoClose) clearTimeout(autoClose);
+    autoClose = setTimeout(fecharNotif, 5000);
+  }
+
+  window.fecharNotif = function() {
+    var el = document.getElementById('notifProof');
+    if (autoClose) clearTimeout(autoClose);
+    el.className = 'saindo';
+    setTimeout(function(){ el.className = ''; el.style.display = 'none'; el.style.display = ''; }, 400);
+  };
+
+  setTimeout(function(){
+    mostrar();
+    setInterval(function(){
+      mostrar();
+    }, 14000 + Math.floor(Math.random()*6000));
+  }, 5000);
+})();
+</script>
+
+<script>
+  // ── PACK MODE (cartinhas ilimitadas) ──
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var packParam = params.get('pack');
+    if (packParam) {
+      localStorage.setItem('packId', packParam);
+      window.history.replaceState({}, '', '/');
+    }
+    var packId = localStorage.getItem('packId');
+    if (packId) {
+      window._packMode = true;
+      // Badge VIP ao abrir o funil
+      var origEscolha = window.abrirEscolha;
+      window.abrirEscolha = function() {
+        origEscolha();
+        var badge = document.getElementById('vipBadge');
+        if (badge) badge.style.display = 'flex';
+      };
+      // Mudar botão da tela final para não dizer "plano"
+      var origFinal = window.abrirFinal;
+      window.abrirFinal = function() {
+        origFinal();
+        var btn = document.querySelector('#telaFinal .btn-comecar');
+        if (btn) btn.textContent = '❤️ Criar minha cartinha';
+        var sub = document.querySelector('#telaFinal .final-sub');
+        if (sub) sub.textContent = 'Sua cartinha está pronta. Clique para gerar o link e enviar!';
+      };
+    }
+    // Abrir funil direto se vier de ?criar
+    if (params.get('criar') !== null) {
+      // Manter a URL /?criar para a pessoa poder favoritar
+      setTimeout(function() {
+        abrirEscolha();
+        // Mostrar banner "salve este link" apenas para não-assinantes
+        if (!window._packMode) {
+          var banner = document.getElementById('criarBanner');
+          if (banner) banner.style.display = 'flex';
+        }
+      }, 100);
+    }
+  })();
+</script>
+</body>
+</html>

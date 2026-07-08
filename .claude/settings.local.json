@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(Get-ChildItem -Path \"c:\\\\Users\\\\Usuario\\\\Downloads\\\\cartadocoracao-vscode\" | Where-Object { -not $_.PSIsContainer } | Select-Object Name)"
+    ]
+  }
+}

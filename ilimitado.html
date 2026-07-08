@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Área Ilimitada — Carta do Coração</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #fdf0f6 0%, #fce4ec 100%);
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 2.5rem 1.75rem;
+      width: 100%; max-width: 360px;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(233,30,140,0.12);
+      animation: fadeUp 0.5s ease;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: linear-gradient(135deg, #e91e8c, #ff6bb5);
+      color: #fff; font-size: 12px; font-weight: 800;
+      padding: 6px 16px; border-radius: 50px;
+      margin-bottom: 1.5rem; letter-spacing: 0.05em;
+    }
+    .icon { font-size: 52px; margin-bottom: 1rem; }
+    h1 { font-size: 22px; font-weight: 900; color: #1a0a2e; margin-bottom: 0.5rem; }
+    p  { font-size: 14px; color: #71717a; line-height: 1.6; margin-bottom: 2rem; }
+    .btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 15px;
+      border-radius: 50px; border: none;
+      background: linear-gradient(135deg, #e91e8c, #ff6bb5);
+      color: #fff; font-size: 15px; font-weight: 800;
+      cursor: pointer; text-decoration: none;
+      margin-bottom: 12px;
+    }
+    .btn-sec {
+      display: block; font-size: 13px; color: #a1a1aa; text-align: center;
+      cursor: pointer; background: none; border: none; width: 100%; padding: 8px;
+    }
+    .erro {
+      display: none; background: #fef2f2; border: 1px solid #fecaca;
+      border-radius: 12px; padding: 1rem; margin-bottom: 1rem;
+      font-size: 13px; color: #dc2626; line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="badge">♾️ ÁREA ILIMITADA</div>
+    <div class="icon">💌</div>
+    <h1>Suas cartinhas ilimitadas</h1>
+    <p>Aqui você pode criar quantas cartinhas quiser, sem pagar nada a mais. Cada uma pode ser personalizada do zero.</p>
+    <div class="erro" id="erro">
+      Acesso não encontrado. Verifique se você está usando o link correto do seu e-mail de confirmação.
+    </div>
+    <button class="btn" id="btnCriar" onclick="entrar()">❤️ Criar nova cartinha</button>
+    <button class="btn-sec" onclick="limpar()">Não sou eu — usar outro acesso</button>
+  </div>
+
+  <script>
+    function entrar() {
+      var packId = new URLSearchParams(location.search).get('pack') || localStorage.getItem('packId');
+      if (!packId) {
+        document.getElementById('erro').style.display = 'block';
+        return;
+      }
+      localStorage.setItem('packId', packId);
+      window.location.href = '/?pack=' + encodeURIComponent(packId);
+    }
+
+    function limpar() {
+      localStorage.removeItem('packId');
+      document.getElementById('erro').style.display = 'none';
+      window.location.href = '/ilimitado.html';
+    }
+
+    // Se já tiver packId salvo, mostrar mensagem de boas-vindas
+    (function() {
+      var packId = new URLSearchParams(location.search).get('pack') || localStorage.getItem('packId');
+      if (!packId) {
+        document.getElementById('erro').style.display = 'block';
+        document.getElementById('btnCriar').disabled = true;
+        document.getElementById('btnCriar').style.opacity = '0.5';
+      }
+    })();
+  </script>
+</body>
+</html>
