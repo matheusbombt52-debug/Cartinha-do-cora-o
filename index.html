@@ -3234,11 +3234,7 @@
     var erroMsg = document.getElementById('erroMensagem');
     var ok = true;
 
-    // Validar mensagem — mínimo 10 caracteres
-    if (!msg || msg.value.trim().length < 10) {
-      if (msg) { msg.style.borderColor = '#ef4444'; msg.style.boxShadow = '0 0 0 3px rgba(239,68,68,0.15)'; }
-      if (erroMsg) { erroMsg.textContent = '⚠️ Escreva pelo menos 10 caracteres na mensagem.'; erroMsg.style.display = 'block'; }
-      ok = false;
+    if (false) {
     } else {
       if (msg) { msg.style.borderColor = ''; msg.style.boxShadow = ''; }
       if (erroMsg) erroMsg.style.display = 'none';
