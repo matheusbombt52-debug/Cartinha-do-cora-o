@@ -111,8 +111,6 @@
 
     <div class="section-label">❤️ Seu link exclusivo</div>
 
-    <div id="linkBox" style="background:#27272a;border:1px solid #3f3f46;border-radius:12px;padding:12px 14px;margin-bottom:12px;word-break:break-all;font-size:12px;color:#a1a1aa;font-family:monospace;line-height:1.5"></div>
-
     <a id="btnVerCartinha" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:14px;border-radius:12px;background:#18181b;border:1.5px solid #e91e8c;color:#e91e8c;font-size:14px;font-weight:700;text-decoration:none;margin-bottom:16px">
       👀 Ver como ficou
     </a>
@@ -302,7 +300,7 @@
     var cid = params.get('cid') || localStorage.getItem('cartinhaId') || '';
     var cartinhaUrl = window.location.origin + '/cartinha.html' + (cid ? '?cid=' + cid : '');
 
-    document.getElementById('linkBox').textContent = cartinhaUrl;
+
     document.getElementById('btnVerCartinha').href = cartinhaUrl;
     document.getElementById('btnAbrirPDF').href = cartinhaUrl;
 
@@ -374,6 +372,13 @@
             card.style.webkitBackdropFilter = 'blur(20px)';
             card.style.border = '1px solid rgba(255,255,255,0.1)';
             card.style.boxShadow = '0 8px 40px rgba(0,0,0,0.5)';
+            // Corrigir contraste de texto no tema escuro
+            card.querySelectorAll('.section-label').forEach(function(el) { el.style.color = 'rgba(255,255,255,0.5)'; });
+            card.querySelectorAll('.divider span').forEach(function(el) { el.style.color = 'rgba(255,255,255,0.45)'; });
+            card.querySelectorAll('.divider::before, .divider::after').forEach(function(el) { el.style.background = 'rgba(255,255,255,0.12)'; });
+            card.querySelectorAll('.subtitle').forEach(function(el) { el.style.color = 'rgba(255,255,255,0.7)'; });
+            card.querySelectorAll('.nova-sub').forEach(function(el) { el.style.color = 'rgba(255,255,255,0.5)'; });
+            card.querySelectorAll('p[style*="color:#71717a"], p[style*="color: #71717a"]').forEach(function(el) { el.style.color = 'rgba(255,255,255,0.5)'; });
             // Mostrar PDF só se comprou
             if (json.data.pdf) {
               document.getElementById('secaoPDF').style.display = 'block';
