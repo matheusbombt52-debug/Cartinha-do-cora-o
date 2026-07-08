@@ -416,7 +416,7 @@
       </div>
       <div id="pdfPixArea">
         <button id="btnGerarPixPDF" onclick="gerarPixPDF()" style="width:100%;padding:14px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:15px;font-weight:800;cursor:pointer;margin-bottom:10px">
-          ◉ Gerar PIX R$ 9,90
+          ◉ Gerar PIX R$ 27,00
         </button>
       </div>
       <button onclick="fecharModalPDF()" style="width:100%;padding:11px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.45);font-size:13px;font-weight:600;cursor:pointer">
@@ -772,7 +772,7 @@
         var resp = await fetch('/api/pix', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nome: 'Cliente', cartinhaId: (cartaData && cartaData.id) || '', valor: '17.00' }),
+          body: JSON.stringify({ nome: 'Cliente', cartinhaId: (cartaData && cartaData.id) || '', valor: '27.00' }),
         });
         var data = await resp.json();
         if (data.success) {
@@ -786,11 +786,11 @@
           _iniciarPollingPixPDF(data.id);
         } else {
           btn.disabled = false;
-          btn.textContent = '◉ Gerar PIX R$ 9,90';
+          btn.textContent = '◉ Gerar PIX R$ 27,00';
         }
       } catch(e) {
         btn.disabled = false;
-        btn.textContent = '◉ Gerar PIX R$ 9,90';
+        btn.textContent = '◉ Gerar PIX R$ 27,00';
       }
     }
 
@@ -850,7 +850,7 @@
       // PDF bloqueado — mostra cadeado se não comprou
       if (!d.pdf) {
         var btnPrint = document.getElementById('btnPrint');
-        if (btnPrint) btnPrint.innerHTML = '🔒 Baixar PDF &mdash; R$&nbsp;9,90';
+        if (btnPrint) btnPrint.innerHTML = '🔒 Baixar PDF por R$&nbsp;27,00';
       }
 
       // Partículas brancas para ficarem visíveis no fundo colorido
