@@ -2325,11 +2325,16 @@
       <span id="audioBtnIcon">🎙️</span>
       <span id="audioBtnText">❤️ Gravar mensagem de voz</span>
     </button>
+    <button class="audio-btn" onclick="document.getElementById('inputAudio').click()" style="margin-top:8px">
+      <span>🎵</span>
+      <span>Ou enviar uma música</span>
+    </button>
+    <input type="file" id="inputAudio" accept="audio/*" style="display:none" onchange="uploadAudio(this)" />
     <div class="audio-preview-wrap" id="audioPreview">
       <audio id="audioEl" controls></audio>
       <button class="preview-remove" onclick="removerAudio()">✕</button>
     </div>
-    <p class="audio-hint" id="audioHint">Sua voz pode tornar essa surpresa ainda mais emocionante.</p>
+    <p class="audio-hint" id="audioHint">Sua voz ou uma música especial tornam essa surpresa ainda mais emocionante.</p>
     <div class="form-btns">
       <button class="btn-form-voltar" onclick="voltarParaForm4()">← Voltar</button>
       <button class="btn-form-continuar" onclick="irParaPasso5()">Continuar →</button>
@@ -3150,6 +3155,28 @@
     document.getElementById('audioBtnText').textContent = '❤️ Gravar mensagem de voz';
     document.getElementById('audioHint').textContent = 'Sua voz pode tornar essa surpresa ainda mais emocionante.';
     gravando = false; audioChunks = []; audioBase64 = null;
+    document.getElementById('inputAudio').value = '';
+  }
+
+  function uploadAudio(input) {
+    var file = input.files && input.files[0];
+    if (!file) return;
+    if (file.size > 20 * 1024 * 1024) {
+      alert('Arquivo muito grande. Use um áudio de até 20 MB.');
+      input.value = '';
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      audioBase64 = e.target.result;
+      var el = document.getElementById('audioEl');
+      el.src = audioBase64;
+      document.getElementById('audioPreview').style.display = 'flex';
+      document.getElementById('audioBtnIcon').textContent = '🎵';
+      document.getElementById('audioBtnText').textContent = file.name.length > 30 ? file.name.substring(0,28)+'…' : file.name;
+      document.getElementById('audioHint').textContent = 'Música adicionada! ❤️';
+    };
+    reader.readAsDataURL(file);
   }
 
   function voltarParaForm4() {
