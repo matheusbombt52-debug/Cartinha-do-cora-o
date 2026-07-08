@@ -175,15 +175,15 @@
       </div>
     </div>
 
-    <!-- Seção link ilimitado — visível só para quem comprou o pack -->
+    <!-- Seção VIP — visível só para quem comprou o pack -->
     <div id="secaoPackLink" style="display:none;margin-bottom:1.5rem">
       <div class="divider"><span>♾️ SEU ACESSO ILIMITADO</span></div>
       <div style="background:#27272a;border:1px solid #3f3f46;border-radius:16px;padding:1.25rem;text-align:center">
         <div style="font-size:22px;margin-bottom:0.5rem">♾️</div>
-        <div style="font-size:14px;font-weight:800;color:#e4e4e7;margin-bottom:0.4rem">Seu link de criação ilimitada</div>
-        <div style="font-size:11px;color:#71717a;margin-bottom:0.75rem;line-height:1.5">Salve este link. Ele abre o funil direto para você criar cartinhas sem pagar nada a mais — em qualquer celular.</div>
-        <div id="packLinkBox" style="background:#18181b;border:1px solid #3f3f46;border-radius:10px;padding:10px 12px;font-size:11px;color:#a1a1aa;font-family:monospace;word-break:break-all;margin-bottom:10px;line-height:1.5;text-align:left"></div>
-        <button onclick="copiarPackLink()" style="width:100%;padding:12px;border-radius:50px;border:1.5px solid #e91e8c;background:transparent;color:#e91e8c;font-size:13px;font-weight:700;cursor:pointer">📋 Copiar meu link ilimitado</button>
+        <div style="font-size:14px;font-weight:800;color:#e4e4e7;margin-bottom:0.5rem">Sua área de criação ilimitada</div>
+        <div style="font-size:11px;color:#71717a;margin-bottom:1rem;line-height:1.5">Crie quantas cartinhas quiser, sem pagar nada a mais. Salve o link para acessar de qualquer celular.</div>
+        <button onclick="abrirVIP()" style="width:100%;padding:13px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:800;cursor:pointer;margin-bottom:10px">✨ Abrir minha área VIP</button>
+        <button onclick="copiarPackLink()" style="width:100%;padding:12px;border-radius:50px;border:1.5px solid #e91e8c;background:transparent;color:#e91e8c;font-size:13px;font-weight:700;cursor:pointer">📋 Copiar meu link</button>
       </div>
     </div>
 
@@ -334,6 +334,10 @@
       mostrarToast('Link copiado! Cole nos Stories do Instagram 📸');
     }
 
+    function abrirVIP() {
+      if (window._packUrl) window.open(window._packUrl, '_blank');
+    }
+
     function copiarPackLink() {
       var url = window._packUrl || '';
       if (!url) return;
@@ -394,10 +398,8 @@
               // Seção link ilimitado (funciona em qualquer dispositivo)
               var secao = document.getElementById('secaoPackLink');
               if (secao) secao.style.display = 'block';
-              var packUrl = window.location.origin + '/?pack=' + packId;
+              var packUrl = window.location.origin + '/ilimitado.html?pack=' + packId;
               window._packUrl = packUrl;
-              var boxEl = document.getElementById('packLinkBox');
-              if (boxEl) boxEl.textContent = packUrl;
             }
           }
         })
