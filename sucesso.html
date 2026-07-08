@@ -168,14 +168,17 @@
     <!-- Seção VIP — visível só para quem comprou o pack -->
     <div id="secaoPackLink" style="display:none;margin-bottom:1.5rem">
       <div class="divider"><span>♾️ SEU ACESSO ILIMITADO</span></div>
-      <button class="btn-nova" id="btnNova" onclick="window.open('/?criar', '_blank')" style="margin-bottom:10px">
-        <span style="font-size:20px" id="btnNovaIcon">♾️</span>
-        <div>
-          <div id="btnNovaTitle">Criar mais uma cartinha</div>
-          <div class="nova-sub" id="btnNovaSub">Você tem cartinhas ilimitadas. Crie quantas quiser, sem pagar nada a mais.</div>
-        </div>
-      </button>
-      <button onclick="copiarPackLink()" style="width:100%;padding:12px;border-radius:50px;border:1.5px solid #e91e8c;background:transparent;color:#e91e8c;font-size:13px;font-weight:700;cursor:pointer">📋 Copiar meu link</button>
+      <div style="background:#27272a;border:1px solid #3f3f46;border-radius:16px;padding:1.25rem;text-align:center">
+        <button class="btn-nova" id="btnNova" onclick="abrirVIP()" style="margin-bottom:12px;width:100%">
+          <span style="font-size:20px" id="btnNovaIcon">♾️</span>
+          <div>
+            <div id="btnNovaTitle">Criar mais uma cartinha</div>
+            <div class="nova-sub" id="btnNovaSub">Você tem cartinhas ilimitadas. Crie quantas quiser, sem pagar nada a mais.</div>
+          </div>
+        </button>
+        <p style="font-size:11px;color:#71717a;margin-bottom:10px;line-height:1.5">Salve o link abaixo para acessar sua área VIP de qualquer celular, a qualquer hora.</p>
+        <button onclick="copiarPackLink()" style="width:100%;padding:12px;border-radius:50px;border:1.5px solid #e91e8c;background:transparent;color:#e91e8c;font-size:13px;font-weight:700;cursor:pointer">📋 Copiar meu link</button>
+      </div>
     </div>
 
   </div>
