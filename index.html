@@ -2991,6 +2991,7 @@
 
   // ── TELA FINAL ──
   function abrirFinal() {
+    if (window._packMode) { _criarCartinhaPack(); return; }
     atualizarProgresso('telaFinal');
     document.getElementById('telaForm5').style.display = 'none';
     var t = document.getElementById('telaFinal');
