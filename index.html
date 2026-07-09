@@ -2745,6 +2745,21 @@
     var nr = document.getElementById('nomeRemetente');
     var pn = document.getElementById('pagNome');
     if (nr && pn && nr.value.trim()) pn.value = nr.value.trim();
+    // Esconder bumps já adquiridos
+    var temPack = !!localStorage.getItem('packId');
+    var temPDF  = !!localStorage.getItem('pdfComprado');
+    if (temPack) {
+      var bPack  = document.getElementById('bump-pack');
+      var bCombo = document.getElementById('bump-combo');
+      if (bPack)  bPack.style.display  = 'none';
+      if (bCombo) bCombo.style.display = 'none';
+    }
+    if (temPDF) {
+      var bPdf   = document.getElementById('bump-pdf');
+      var bCombo2 = document.getElementById('bump-combo');
+      if (bPdf)   bPdf.style.display   = 'none';
+      if (bCombo2) bCombo2.style.display = 'none';
+    }
   }
 
   var _pixPollTimer = null;

@@ -381,6 +381,7 @@
             card.querySelectorAll('p[style*="color:#71717a"], p[style*="color: #71717a"]').forEach(function(el) { el.style.color = 'rgba(255,255,255,0.5)'; });
             // Mostrar PDF só se comprou
             if (json.data.pdf) {
+              localStorage.setItem('pdfComprado', '1');
               document.getElementById('secaoPDF').style.display = 'block';
               document.getElementById('secaoPDFLock').style.display = 'none';
             }
@@ -460,6 +461,7 @@
               if (s.status === 'CONCLUIDA') {
                 clearInterval(_pdfSucessoTimer);
                 if (cid) await fetch('/api/cartinha/' + cid + '/pdf', { method: 'POST' });
+                localStorage.setItem('pdfComprado', '1');
                 document.getElementById('secaoPDFLock').style.display = 'none';
                 document.getElementById('secaoPDF').style.display = 'block';
                 mostrarToast('✓ PDF desbloqueado!');
