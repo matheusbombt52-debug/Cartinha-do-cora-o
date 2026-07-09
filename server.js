@@ -208,6 +208,15 @@ app.post('/api/cartinha/:id/pdf', (req, res) => {
   res.json({ success: true });
 });
 
+// ── DESBLOQUEAR PACK APÓS COMPRA AVULSA ──
+app.post('/api/cartinha/:id/pack', (req, res) => {
+  const todas = lerCartinhas();
+  if (!todas[req.params.id]) return res.status(404).json({ error: 'Não encontrada' });
+  todas[req.params.id].pack = true;
+  gravarCartinhas(todas);
+  res.json({ success: true });
+});
+
 // ── QR CODE DA CARTINHA ──
 app.get('/api/qrcode', async (req, res) => {
   const { cid } = req.query;

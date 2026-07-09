@@ -528,7 +528,7 @@
               var s = await r.json();
               if (s.status === 'CONCLUIDA') {
                 clearInterval(timer);
-                if (cid) await fetch('/api/cartinha/' + cid + '/pdf', { method: 'POST' });
+                if (cid) await fetch('/api/cartinha/' + cid + '/pack', { method: 'POST' });
                 localStorage.setItem('packId', cid);
                 document.getElementById('secaoUpsellPack').style.display = 'none';
                 document.getElementById('secaoPackLink').style.display = 'block';
