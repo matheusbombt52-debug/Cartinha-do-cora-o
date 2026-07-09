@@ -165,6 +165,26 @@
       </div>
     </div>
 
+    <!-- Upsell pack — visível só para quem tem PDF mas não tem pack -->
+    <div id="secaoUpsellPack" style="display:none;margin-bottom:1.5rem">
+      <div class="divider"><span>♾️ OFERTA EXCLUSIVA</span></div>
+      <div style="background:#27272a;border:1px solid #3f3f46;border-radius:16px;padding:1.25rem;text-align:center">
+        <div style="font-size:26px;margin-bottom:0.5rem">♾️</div>
+        <div style="font-size:14px;font-weight:800;color:#e4e4e7;margin-bottom:0.4rem">Cartinhas Ilimitadas</div>
+        <div style="font-size:12px;color:#a1a1aa;margin-bottom:0.75rem;line-height:1.5">Crie quantas cartinhas quiser, sem pagar nada a mais. Por tempo limitado, preço exclusivo para você que já tem o PDF.</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1rem">
+          <span style="font-size:13px;color:#71717a;text-decoration:line-through">R$ 67,00</span>
+          <span style="font-size:22px;font-weight:900;color:#e91e8c">R$ 47,00</span>
+          <span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px">30% OFF</span>
+        </div>
+        <div id="upsellPackPixArea">
+          <button onclick="comprarPackSucesso()" style="width:100%;padding:13px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:800;cursor:pointer">
+            ♾️ Quero Cartinhas Ilimitadas por R$ 47,00
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Seção VIP — visível só para quem comprou o pack -->
     <div id="secaoPackLink" style="display:none;margin-bottom:1.5rem">
       <div class="divider"><span>♾️ SEU ACESSO ILIMITADO</span></div>
@@ -389,8 +409,13 @@
             if (json.data.pack) {
               localStorage.setItem('packId', cid);
             }
-            // Mostrar botão e seção de acesso ilimitado se tiver pack
+            // Upsell pack para quem tem PDF mas não tem pack
             var packId = json.data.pack ? cid : localStorage.getItem('packId');
+            if (json.data.pdf && !packId) {
+              var upsell = document.getElementById('secaoUpsellPack');
+              if (upsell) upsell.style.display = 'block';
+            }
+            // Mostrar botão e seção de acesso ilimitado se tiver pack
             if (packId) {
               var semPack = document.getElementById('secaoSemPack');
               if (semPack) semPack.style.display = 'none';
@@ -474,6 +499,48 @@
         }
       } catch(e) {
         area.innerHTML = '<p style="color:#f87171;font-size:13px;text-align:center">Erro de conexão. Tente novamente.</p><button onclick="comprarPDFSucesso()" style="margin-top:8px;width:100%;padding:12px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Tentar novamente</button>';
+      }
+    }
+
+    async function comprarPackSucesso() {
+      var area = document.getElementById('upsellPackPixArea');
+      area.innerHTML = '<p style="font-size:13px;color:#a1a1aa;text-align:center">⏳ Gerando PIX…</p>';
+      try {
+        var resp = await fetch('/api/pix', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome: 'Cliente', cartinhaId: cid, valor: '47.00' }),
+        });
+        var data = await resp.json();
+        if (data.success) {
+          var codigo = data.pixCopiaCola || '';
+          area.innerHTML =
+            '<img src="' + (data.qrCodeBase64 || '') + '" style="width:160px;height:160px;margin:0 auto 1rem;display:block;border-radius:10px;border:2px solid #3f3f46" />' +
+            '<button onclick="navigator.clipboard.writeText(\'' + codigo.replace(/'/g,"\\'") + '\').catch(function(){})" style="width:100%;padding:11px;border-radius:50px;border:1.5px solid #e91e8c;background:transparent;color:#e91e8c;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:6px">📋 Copiar código PIX</button>' +
+            '<p style="font-size:10px;color:#52525b;text-align:center">Acesso liberado automaticamente após o pagamento</p>';
+          var timer = setInterval(async function() {
+            try {
+              var r = await fetch('/api/pix/check?id=' + encodeURIComponent(data.id));
+              var s = await r.json();
+              if (s.status === 'CONCLUIDA') {
+                clearInterval(timer);
+                if (cid) await fetch('/api/cartinha/' + cid + '/pdf', { method: 'POST' });
+                localStorage.setItem('packId', cid);
+                document.getElementById('secaoUpsellPack').style.display = 'none';
+                document.getElementById('secaoPackLink').style.display = 'block';
+                window._packUrl = window.location.origin + '/ilimitado.html?pack=' + cid;
+                var boxEl = document.getElementById('packLinkBox');
+                if (boxEl) boxEl.textContent = window._packUrl;
+                mostrarToast('✓ Cartinhas Ilimitadas ativadas!');
+              }
+            } catch(e) {}
+          }, 4000);
+        } else {
+          var errMsg = data.error || 'Erro ao gerar PIX.';
+          area.innerHTML = '<p style="color:#f87171;font-size:13px;text-align:center">' + errMsg + '</p><button onclick="comprarPackSucesso()" style="margin-top:8px;width:100%;padding:12px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Tentar novamente</button>';
+        }
+      } catch(e) {
+        area.innerHTML = '<p style="color:#f87171;font-size:13px;text-align:center">Erro de conexão.</p><button onclick="comprarPackSucesso()" style="margin-top:8px;width:100%;padding:12px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Tentar novamente</button>';
       }
     }
 
