@@ -44,14 +44,20 @@ app.post('/api/upload', upload.single('file'), (req, res) => {
 // ── CERTIFICADO EFÍ BANK (mTLS) ──
 let efiAgent = null;
 const certPath = path.join(__dirname, 'certificado.p12');
+let certBuffer = null;
 if (fs.existsSync(certPath)) {
+  certBuffer = fs.readFileSync(certPath);
+} else if (process.env.EFI_CERT_BASE64) {
+  certBuffer = Buffer.from(process.env.EFI_CERT_BASE64, 'base64');
+}
+if (certBuffer) {
   efiAgent = new https.Agent({
-    pfx: fs.readFileSync(certPath),
+    pfx: certBuffer,
     passphrase: process.env.EFI_CERT_PASSPHRASE || '',
   });
   console.log('✅ Certificado Efí Bank carregado');
 } else {
-  console.warn('⚠️  certificado.p12 não encontrado — coloque na pasta do projeto');
+  console.warn('⚠️  Certificado não encontrado — defina EFI_CERT_BASE64 no Railway');
 }
 
 console.log('🔎 EFI_CLIENT_ID definido:', !!process.env.EFI_CLIENT_ID);
