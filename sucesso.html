@@ -469,7 +469,8 @@
             } catch(e) {}
           }, 4000);
         } else {
-          area.innerHTML = '<p style="color:#f87171;font-size:13px;text-align:center">Erro ao gerar PIX. Tente novamente.</p><button onclick="comprarPDFSucesso()" style="margin-top:8px;width:100%;padding:12px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Tentar novamente</button>';
+          var errMsg = data.error || 'Erro ao gerar PIX.';
+          area.innerHTML = '<p style="color:#f87171;font-size:13px;text-align:center">' + errMsg + '</p><button onclick="comprarPDFSucesso()" style="margin-top:8px;width:100%;padding:12px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Tentar novamente</button>';
         }
       } catch(e) {
         area.innerHTML = '<p style="color:#f87171;font-size:13px;text-align:center">Erro de conexão. Tente novamente.</p><button onclick="comprarPDFSucesso()" style="margin-top:8px;width:100%;padding:12px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Tentar novamente</button>';
