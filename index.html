@@ -2759,6 +2759,12 @@
       var bCombo2 = document.getElementById('bump-combo');
       if (bPdf)   bPdf.style.display   = 'none';
       if (bCombo2) bCombo2.style.display = 'none';
+      // Desconto exclusivo no pack para quem já tem PDF
+      window._packDesconto = true;
+      var packPreco = document.querySelector('#bump-pack [style*="font-weight:900"]');
+      if (packPreco) packPreco.innerHTML = '<span style="text-decoration:line-through;font-size:11px;color:var(--muted);font-weight:600">R$ 67</span> <span style="color:var(--pink)">+R$ 47</span>';
+      var packSub = document.querySelector('#bump-pack [style*="margin-bottom:6px"]');
+      if (packSub) packSub.innerHTML = 'Crie quantas quiser &nbsp;<span style="background:#dcfce7;color:#16a34a;font-size:9px;font-weight:800;padding:2px 6px;border-radius:20px">DESCONTO EXCLUSIVO</span>';
     }
   }
 
@@ -2811,7 +2817,8 @@
     });
 
     // Calcular total somando os marcados
-    var extra = (_bumps.pdf ? 37 : 0) + (_bumps.pack ? 67 : 0) + (_bumps.combo ? 87 : 0);
+    var precopack = window._packDesconto ? 47 : 67;
+    var extra = (_bumps.pdf ? 37 : 0) + (_bumps.pack ? precopack : 0) + (_bumps.combo ? 87 : 0);
     var total = (19.90 + extra).toFixed(2);
     _bumpTotal = total;
     var label = total.replace('.', ',');
