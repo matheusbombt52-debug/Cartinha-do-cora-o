@@ -2176,10 +2176,6 @@
         <button class="btn-pagar" id="btnPagarPix" onclick="processarPix()">❤️ Liberar minha Cartinha</button>
         <p style="text-align:center;font-size:11px;color:var(--muted);margin:0.4rem 0 0;">Pagamento via PIX • Liberação automática</p>
         <p class="pag-seguro">🔒 Ambiente seguro • Liberação automática após o pagamento</p>
-        <!-- BOTÃO TEMPORÁRIO DE TESTE — REMOVER ANTES DE LANÇAR -->
-        <button onclick="testeSimularPagamento()" style="margin-top:12px;width:100%;padding:12px;border-radius:50px;border:2px dashed #f59e0b;background:#fffbeb;color:#92400e;font-size:13px;font-weight:700;cursor:pointer">
-          🧪 [TESTE] Simular pagamento confirmado
-        </button>
       </div>
 
       <!-- QR Code gerado -->
@@ -2897,26 +2893,6 @@
     }, 4000);
   }
 
-  async function testeSimularPagamento() {
-    var dadosCartinha = _coletarDadosCartinha();
-    var nome = (document.getElementById('pagNome') || {}).value || 'Teste';
-    dadosCartinha.nomeRemetente = dadosCartinha.nomeRemetente || nome;
-    dadosCartinha.pdf  = _bumps.pdf  || _bumps.combo;
-    dadosCartinha.pack = _bumps.pack || _bumps.combo;
-    try {
-      var resp = await fetch('/api/cartinha/salvar', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dadosCartinha),
-      });
-      var data = await resp.json();
-      if (data.success) {
-        _cartinhaId = data.id;
-        localStorage.setItem('cartinhaId', _cartinhaId);
-      }
-    } catch(e) {}
-    _pixPagoConfirmado();
-  }
 
   function _pixPagoConfirmado() {
     tocarSomSucesso();
