@@ -236,26 +236,29 @@ app.post('/api/cartinha/:id/pack', (req, res) => {
 // ── WEBHOOK EFÍ BANK (PIX pago) ──
 app.post('/webhook/efi', async (req, res) => {
   res.sendStatus(200); // EFI Bank exige 200 imediato
+  console.log('🔔 Webhook EFI recebido:', JSON.stringify(req.body));
 
   try {
     const pixList = req.body?.pix;
-    if (!Array.isArray(pixList)) return;
+    if (!Array.isArray(pixList)) {
+      console.log('⚠️  Webhook sem array pix:', JSON.stringify(req.body));
+      return;
+    }
 
     const todas = lerCartinhas();
 
     for (const pix of pixList) {
       const txid = pix.txid;
+      console.log('🔍 Processando txid:', txid);
       if (!txid) continue;
 
-      // Buscar cartinha com esse txid
       const cartinha = Object.values(todas).find(c => c.pixTxid === txid);
-      if (!cartinha || cartinha.webhookEnviado) continue;
+      if (!cartinha) { console.log('⚠️  Cartinha não encontrada para txid:', txid); continue; }
+      if (cartinha.webhookEnviado) { console.log('ℹ️  Postback já enviado para txid:', txid); continue; }
 
-      // Marcar para não enviar duas vezes
       cartinha.webhookEnviado = true;
       gravarCartinhas(todas);
 
-      // Enviar postback para UTMify
       await enviarPostbackUtmify(cartinha, pix);
     }
   } catch (e) {
