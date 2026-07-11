@@ -337,6 +337,26 @@ app.get('/api/pix/check', async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`✅ Servidor rodando na porta ${PORT}`);
+  await registrarWebhookEfi();
 });
+
+async function registrarWebhookEfi() {
+  if (!efiAgent || !process.env.EFI_CLIENT_ID || !process.env.EFI_PIX_KEY) return;
+  const webhookUrl = process.env.WEBHOOK_URL || 'https://cartinha-do-coracao.up.railway.app/webhook/efi';
+  try {
+    const token = await getEfiToken();
+    await axios.put(
+      `${EFI_BASE}/v2/webhook/${encodeURIComponent(process.env.EFI_PIX_KEY)}`,
+      { webhookUrl },
+      {
+        httpsAgent: efiAgent,
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      }
+    );
+    console.log('✅ Webhook EFI Bank registrado:', webhookUrl);
+  } catch (e) {
+    console.warn('⚠️  Webhook EFI Bank não registrado:', e.response?.data || e.message);
+  }
+}
