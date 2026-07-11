@@ -2778,6 +2778,8 @@
       var packSub = document.querySelector('#bump-pack [style*="margin-bottom:6px"]');
       if (packSub) packSub.innerHTML = 'Crie quantas quiser &nbsp;<span style="background:#dcfce7;color:#16a34a;font-size:9px;font-weight:800;padding:2px 6px;border-radius:20px">DESCONTO EXCLUSIVO</span>';
     }
+    // Pré-aquecer token EFI em background para reduzir tempo de geração do PIX
+    fetch('/api/pix/warm').catch(function(){});
   }
 
   var _pixPollTimer = null;
@@ -2845,6 +2847,12 @@
     var btn = document.getElementById('btnPagarPix');
     btn.disabled = true;
     btn.textContent = '⏳ Gerando QR Code…';
+    var _loadingMsgs = ['⏳ Conectando ao banco…','⏳ Criando cobrança…','⏳ Gerando QR Code…'];
+    var _loadingIdx = 0;
+    var _loadingTimer = setInterval(function(){
+      _loadingIdx = (_loadingIdx + 1) % _loadingMsgs.length;
+      if (btn.disabled) btn.textContent = _loadingMsgs[_loadingIdx];
+    }, 1200);
 
     try {
       // Salva dados da cartinha no servidor
@@ -2883,6 +2891,7 @@
         return;
       }
 
+      clearInterval(_loadingTimer);
       // Exibir QR Code gerado a partir do link de pagamento
       document.getElementById('pixQrCode').src = data.qrCodeBase64;
       document.getElementById('pixCopiaCola').textContent = data.pixCopiaCola;

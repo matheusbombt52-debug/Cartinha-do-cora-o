@@ -144,6 +144,12 @@ app.post('/api/generate', async (req, res) => {
   }
 });
 
+// ── PRÉ-AQUECIMENTO DO TOKEN EFI ──
+app.get('/api/pix/warm', async (req, res) => {
+  try { if (efiAgent) await getEfiToken(); } catch(e) {}
+  res.sendStatus(200);
+});
+
 // ── PIX VIA EFÍ BANK (QR code EMV nativo) ──
 app.post('/api/pix', async (req, res) => {
   const { nome, cartinhaId } = req.body;
