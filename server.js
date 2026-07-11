@@ -186,6 +186,16 @@ app.post('/api/pix', async (req, res) => {
 
     const { qrcode, imagemQrcode } = qrResp.data;
 
+    // Salvar txid e valor na cartinha para o webhook usar
+    if (cartinhaId) {
+      const todas = lerCartinhas();
+      if (todas[cartinhaId]) {
+        todas[cartinhaId].pixTxid  = txid;
+        todas[cartinhaId].pixValor = req.body.valor || '19.90';
+        gravarCartinhas(todas);
+      }
+    }
+
     res.json({
       success: true,
       id: txid,
@@ -216,6 +226,80 @@ app.post('/api/cartinha/:id/pack', (req, res) => {
   gravarCartinhas(todas);
   res.json({ success: true });
 });
+
+// ── WEBHOOK EFÍ BANK (PIX pago) ──
+app.post('/webhook/efi', async (req, res) => {
+  res.sendStatus(200); // EFI Bank exige 200 imediato
+
+  try {
+    const pixList = req.body?.pix;
+    if (!Array.isArray(pixList)) return;
+
+    const todas = lerCartinhas();
+
+    for (const pix of pixList) {
+      const txid = pix.txid;
+      if (!txid) continue;
+
+      // Buscar cartinha com esse txid
+      const cartinha = Object.values(todas).find(c => c.pixTxid === txid);
+      if (!cartinha || cartinha.webhookEnviado) continue;
+
+      // Marcar para não enviar duas vezes
+      cartinha.webhookEnviado = true;
+      gravarCartinhas(todas);
+
+      // Enviar postback para UTMify
+      await enviarPostbackUtmify(cartinha, pix);
+    }
+  } catch (e) {
+    console.error('Webhook EFI erro:', e.message);
+  }
+});
+
+async function enviarPostbackUtmify(cartinha, pix) {
+  const token = process.env.UTMIFY_API_TOKEN;
+  if (!token) return;
+
+  try {
+    await axios.post('https://api.utmify.com.br/api-credentials/orders', {
+      order_id:      cartinha.pixTxid,
+      platform:      'custom',
+      payment_method:'pix',
+      status:        'paid',
+      created_at:    new Date().toISOString().replace('T',' ').split('.')[0],
+      approved_date: new Date().toISOString().replace('T',' ').split('.')[0],
+      customer: {
+        name:     cartinha.nomeRemetente || 'Cliente',
+        email:    '',
+        phone:    '',
+        document: pix.pagador?.cpf || '',
+      },
+      products: [{
+        id:        'carta-do-coracao',
+        name:      'Carta do Coração',
+        plan_id:   'carta-do-coracao',
+        plan_name: 'Carta do Coração',
+        quantity:  1,
+        price:     parseFloat(cartinha.pixValor || '19.90'),
+      }],
+      trackings: {
+        utm_source:   cartinha.utm_source   || null,
+        utm_medium:   cartinha.utm_medium   || null,
+        utm_campaign: cartinha.utm_campaign || null,
+        utm_content:  cartinha.utm_content  || null,
+        utm_term:     cartinha.utm_term     || null,
+        src:          cartinha.src          || null,
+        sck:          cartinha.sck          || null,
+      },
+    }, {
+      headers: { 'x-api-token': token, 'Content-Type': 'application/json' },
+    });
+    console.log('✅ UTMify postback enviado para txid:', cartinha.pixTxid);
+  } catch (e) {
+    console.error('UTMify postback erro:', e.response?.data || e.message);
+  }
+}
 
 // ── QR CODE DA CARTINHA ──
 app.get('/api/qrcode', async (req, res) => {

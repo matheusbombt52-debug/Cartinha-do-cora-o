@@ -1121,6 +1121,16 @@
   </style>
 </head>
 <body>
+  <script>
+    // Captura UTMs da URL e salva no localStorage para o webhook usar
+    (function(){
+      var p = new URLSearchParams(location.search);
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','src','sck'].forEach(function(k){
+        var v = p.get(k);
+        if (v) localStorage.setItem('utmify_'+k, v);
+      });
+    })();
+  </script>
 
   <!-- TOP BAR -->
   <div class="topbar">❤️ Transforme uma simples mensagem em uma lembrança eterna</div>
@@ -2840,6 +2850,12 @@
       dadosCartinha.nomeRemetente = dadosCartinha.nomeRemetente || nome;
       dadosCartinha.pdf  = _bumps.pdf  || _bumps.combo;
       dadosCartinha.pack = _bumps.pack || _bumps.combo;
+      // UTMs para rastreamento server-side (webhook EFI → UTMify)
+      var _up = new URLSearchParams(location.search);
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','src','sck'].forEach(function(k){
+        var v = _up.get(k) || localStorage.getItem('utmify_'+k);
+        if (v) dadosCartinha[k] = v;
+      });
       var salvResp = await fetch('/api/cartinha/salvar', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
