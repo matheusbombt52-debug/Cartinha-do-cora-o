@@ -2887,6 +2887,9 @@
       document.getElementById('pixCampos').style.display = 'none';
       document.getElementById('pixResultBox').style.display = 'block';
 
+      // Disparar InitiateCheckout somente quando o QR Code é gerado
+      try { fbq('track', 'InitiateCheckout', { value: parseFloat(_bumpTotal), currency: 'BRL' }); } catch(e) {}
+
       tocarSomSucesso();
 
       // Iniciar verificação automática de status
