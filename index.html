@@ -3149,22 +3149,29 @@
       }
 
       // Tokenizar cartão via EFI Pay SDK
+      var brand = detectarBandeiraLocal(numero);
+      if (!brand) {
+        mostrarErroCartao('Bandeira do cartão não reconhecida. Use Visa, Mastercard, Elo, Amex ou Hipercard.');
+        btn.disabled = false; btn.textContent = origText; return;
+      }
+
+      if (typeof EfiPay === 'undefined') {
+        mostrarErroCartao('SDK de pagamento não carregou. Recarregue a página e tente novamente.');
+        btn.disabled = false; btn.textContent = origText; return;
+      }
+
       var tokenData = await new Promise(function(resolve, reject) {
-        var brand = detectarBandeiraLocal(numero);
-        if (!brand) return mostrarErroCartao('Bandeira do cartão não reconhecida. Use Visa, Mastercard, Elo, Amex ou Hipercard.');
-        var paymentData = {
-          brand: brand,
-          number: numero,
-          cvv: cvv,
-          expirationMonth: mes,
-          expirationYear: ano,
-        };
+        var timer = setTimeout(function() { reject(new Error('Tempo esgotado ao tokenizar cartão. Tente novamente.')); }, 15000);
         EfiPay.CreditCard
           .setAccount('c86eca1384292a603843b08402f984ac')
           .setEnvironment('production')
-          .setCreditCardData(paymentData)
+          .setCreditCardData({ brand: brand, number: numero, cvv: cvv, expirationMonth: mes, expirationYear: ano })
           .getPaymentToken(function(err, token) {
-            if (err) return reject(new Error(err.error_description || 'Erro ao tokenizar cartão.'));
+            clearTimeout(timer);
+            if (err) {
+              console.error('EFI token erro:', JSON.stringify(err));
+              return reject(new Error(err.error_description || err.error || JSON.stringify(err)));
+            }
             resolve(token);
           });
       });
@@ -3194,7 +3201,8 @@
           window.location.href = '/sucesso.html' + (cid ? '?cid=' + cid : '');
         }, 600);
       } else {
-        mostrarErroCartao(data.message || 'Pagamento recusado. Verifique os dados e tente novamente.');
+        var errMsg = data.message || data.error || (data.detail ? JSON.stringify(data.detail) : '') || 'Pagamento recusado. Verifique os dados e tente novamente.';
+        mostrarErroCartao(errMsg);
         btn.disabled = false;
         btn.textContent = origText;
       }
