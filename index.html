@@ -10,6 +10,7 @@
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1722559029166712&ev=PageView&noscript=1"/></noscript>
   <script>window.pixelId="6a4f5cb54af0d825670ebba7";var a=document.createElement("script");a.setAttribute("async","");a.setAttribute("defer","");a.setAttribute("src","https://cdn.utmify.com.br/scripts/pixel/pixel.js");document.head.appendChild(a);</script>
   <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+  <script src="https://cdn.jsdelivr.net/gh/efipay/js-payment-token-efi/dist/payment-token-efi-umd.min.js" async></script>
   <script>if(new URLSearchParams(location.search).get('criar')!==null){document.documentElement.style.opacity='0';}</script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
@@ -2123,77 +2124,85 @@
       <div class="pag-plano-preco" id="pagPlanoPreco">R$ 19,90</div>
     </div>
 
+    <!-- SEÇÃO COMPARTILHADA: Nome + Bumps + Método -->
+    <div id="payShared">
+      <label class="campo-label">Quem está enviando essa surpresa?</label>
+      <div class="campo-wrap">
+        <span class="campo-icon">👤</span>
+        <input class="campo-input" id="pagNome" type="text" placeholder="Seu nome completo" />
+      </div>
+      <!-- ORDER BUMPS -->
+      <div style="margin:16px 0">
+        <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;text-align:center;margin-bottom:10px">🎁 Adicione à sua cartinha</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+          <!-- BUMP PDF -->
+          <div id="bump-pdf" onclick="selecionarBump('pdf')" style="border:2px solid var(--border);border-radius:12px;padding:11px 10px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <span style="font-size:18px">📄</span>
+              <div id="bumpCheck-pdf" style="width:18px;height:18px;border-radius:5px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0">
+                <svg id="bumpCheckIcon-pdf" width="11" height="9" viewBox="0 0 11 9" style="display:none"><polyline points="1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <div style="font-size:12px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:2px">PDF da Cartinha</div>
+            <div style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.3">Baixe e imprima</div>
+            <div style="font-size:14px;font-weight:900;color:var(--pink)">+R$ 37</div>
+          </div>
+          <!-- BUMP PACK -->
+          <div id="bump-pack" onclick="selecionarBump('pack')" style="border:2px solid var(--border);border-radius:12px;padding:11px 10px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+              <span style="font-size:18px">♾️</span>
+              <div id="bumpCheck-pack" style="width:18px;height:18px;border-radius:5px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0">
+                <svg id="bumpCheckIcon-pack" width="11" height="9" viewBox="0 0 11 9" style="display:none"><polyline points="1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <div style="font-size:12px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:2px">Cartinhas Ilimitadas</div>
+            <div style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.3">Crie quantas quiser</div>
+            <div style="font-size:14px;font-weight:900;color:var(--pink)">+R$ 67</div>
+          </div>
+        </div>
+        <!-- BUMP COMBO -->
+        <div id="bump-combo" onclick="selecionarBump('combo')" style="border:2px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none;position:relative">
+          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--pink),#ff6bb5);color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em">⭐ MELHOR OFERTA</div>
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <div style="flex:1">
+              <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:2px">Leve os 2: PDF + Ilimitadas</div>
+              <div style="font-size:11px;color:var(--muted);margin-bottom:8px">PDF da cartinha + cartinhas ilimitadas</div>
+              <div style="display:flex;align-items:center;gap:8px">
+                <span style="font-size:16px;font-weight:900;color:var(--pink)">R$ 87</span>
+                <span style="font-size:11px;color:var(--muted);text-decoration:line-through">R$ 104</span>
+                <span style="font-size:10px;font-weight:800;background:#dcfce7;color:#16a34a;padding:2px 7px;border-radius:20px">16% OFF</span>
+              </div>
+            </div>
+            <div id="bumpCheck-combo" style="width:22px;height:22px;min-width:22px;border-radius:6px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-left:12px">
+              <svg id="bumpCheckIcon-combo" width="13" height="11" viewBox="0 0 13 11" style="display:none"><polyline points="1.5 6 5 9.5 11.5 1.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- SELETOR DE MÉTODO -->
+      <p class="pag-metodo-label">Forma de pagamento</p>
+      <div class="pag-metodos">
+        <button class="pag-metodo-btn active" id="tabPix" onclick="selecionarMetodo('pix')">
+          <div class="radio"></div>
+          <span>◉ PIX</span>
+        </button>
+        <button class="pag-metodo-btn" id="tabCartao" onclick="selecionarMetodo('cartao')">
+          <div class="radio"></div>
+          <span>💳 Cartão</span>
+        </button>
+      </div>
+    </div>
+
     <!-- FORMULÁRIO PIX -->
-    <div class="pag-form-pix" id="formPix">
-      <div class="pag-section-title">Libere sua Cartinha</div>
-      <div class="pag-section-sub">Sua cartinha será liberada automaticamente após a confirmação do pagamento.</div>
-
-      <!-- Campos visíveis antes de gerar o PIX -->
+    <div id="formPix">
+      <div class="pag-section-title">Pague com PIX</div>
+      <div class="pag-section-sub">Pagamento instantâneo. QR Code gerado na hora.</div>
       <div id="pixCampos">
-        <label class="campo-label">Quem está enviando essa surpresa?</label>
-        <div class="campo-wrap">
-          <span class="campo-icon">👤</span>
-          <input class="campo-input" id="pagNome" type="text" placeholder="Seu nome completo" />
-        </div>
-        <!-- ORDER BUMPS -->
-        <div style="margin:16px 0">
-          <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;text-align:center;margin-bottom:10px">🎁 Adicione à sua cartinha</div>
-
-          <!-- Grid: PDF + Pack lado a lado -->
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
-
-            <!-- BUMP PDF -->
-            <div id="bump-pdf" onclick="selecionarBump('pdf')" style="border:2px solid var(--border);border-radius:12px;padding:11px 10px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none">
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-                <span style="font-size:18px">📄</span>
-                <div id="bumpCheck-pdf" style="width:18px;height:18px;border-radius:5px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0">
-                  <svg id="bumpCheckIcon-pdf" width="11" height="9" viewBox="0 0 11 9" style="display:none"><polyline points="1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-              </div>
-              <div style="font-size:12px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:2px">PDF da Cartinha</div>
-              <div style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.3">Baixe e imprima</div>
-              <div style="font-size:14px;font-weight:900;color:var(--pink)">+R$ 37</div>
-            </div>
-
-            <!-- BUMP PACK -->
-            <div id="bump-pack" onclick="selecionarBump('pack')" style="border:2px solid var(--border);border-radius:12px;padding:11px 10px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none">
-              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-                <span style="font-size:18px">♾️</span>
-                <div id="bumpCheck-pack" style="width:18px;height:18px;border-radius:5px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0">
-                  <svg id="bumpCheckIcon-pack" width="11" height="9" viewBox="0 0 11 9" style="display:none"><polyline points="1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-              </div>
-              <div style="font-size:12px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:2px">Cartinhas Ilimitadas</div>
-              <div style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.3">Crie quantas quiser</div>
-              <div style="font-size:14px;font-weight:900;color:var(--pink)">+R$ 67</div>
-            </div>
-          </div>
-
-          <!-- BUMP COMBO — destaque -->
-          <div id="bump-combo" onclick="selecionarBump('combo')" style="border:2px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none;position:relative">
-            <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--pink),#ff6bb5);color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em">⭐ MELHOR OFERTA</div>
-            <div style="display:flex;align-items:center;justify-content:space-between">
-              <div style="flex:1">
-                <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:2px">Leve os 2: PDF + Ilimitadas</div>
-                <div style="font-size:11px;color:var(--muted);margin-bottom:8px">PDF da cartinha + cartinhas ilimitadas</div>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <span style="font-size:16px;font-weight:900;color:var(--pink)">R$ 87</span>
-                  <span style="font-size:11px;color:var(--muted);text-decoration:line-through">R$ 104</span>
-                  <span style="font-size:10px;font-weight:800;background:#dcfce7;color:#16a34a;padding:2px 7px;border-radius:20px">16% OFF</span>
-                </div>
-              </div>
-              <div id="bumpCheck-combo" style="width:22px;height:22px;min-width:22px;border-radius:6px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-left:12px">
-                <svg id="bumpCheckIcon-combo" width="13" height="11" viewBox="0 0 13 11" style="display:none"><polyline points="1.5 6 5 9.5 11.5 1.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <button class="btn-pagar" id="btnPagarPix" onclick="processarPix()">❤️ Liberar minha Cartinha</button>
+        <button class="btn-pagar" id="btnPagarPix" onclick="processarPix()">◉ Gerar QR Code PIX  R$ 19,90</button>
         <p style="text-align:center;font-size:11px;color:var(--muted);margin:0.4rem 0 0;">Pagamento via PIX • Liberação automática</p>
         <p class="pag-seguro">🔒 Ambiente seguro • Liberação automática após o pagamento</p>
       </div>
-
       <!-- QR Code gerado -->
       <div class="pix-result-box" id="pixResultBox" style="display:none">
         <div class="pix-status-row" id="pixStatusRow">
@@ -2203,13 +2212,67 @@
         <img id="pixQrCode" src="" alt="QR Code PIX" style="width:200px;height:200px;margin:1rem auto;display:block;border-radius:12px;border:3px solid var(--pink-200)" />
         <div id="pixCopiaCola" style="display:none"></div>
         <button class="btn-copiar" id="btnCopiarPix" onclick="copiarPixCodigo()">📋 Copiar código PIX</button>
-        <!-- Confirmado -->
         <div id="pixConfirmado" style="display:none;text-align:center;padding:1rem 0">
           <div style="font-size:48px;margin-bottom:0.5rem">🎉</div>
           <p style="font-size:18px;font-weight:900;color:var(--pink);margin-bottom:0.25rem">Pagamento confirmado!</p>
-          <p style="font-size:13px;color:var(--muted)">Seu acesso será enviado para o e-mail informado.</p>
+          <p style="font-size:13px;color:var(--muted)">Redirecionando para sua cartinha…</p>
         </div>
       </div>
+    </div>
+
+    <!-- FORMULÁRIO CARTÃO -->
+    <div id="formCartao" style="display:none">
+      <div class="pag-section-title">💳 Dados do Cartão</div>
+      <div class="pag-section-sub">Dados criptografados. Não armazenamos seu cartão.</div>
+
+      <label class="campo-label">Número do cartão</label>
+      <div class="campo-wrap" style="position:relative">
+        <span class="campo-icon">💳</span>
+        <input class="campo-input" id="cardNumero" type="tel" inputmode="numeric" placeholder="0000 0000 0000 0000" maxlength="19" oninput="onCardNumeroInput(this)" />
+        <span id="cardBandeiraIcon" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:800;color:var(--pink);pointer-events:none"></span>
+      </div>
+
+      <label class="campo-label">Nome impresso no cartão</label>
+      <div class="campo-wrap">
+        <span class="campo-icon">👤</span>
+        <input class="campo-input" id="cardNome" type="text" placeholder="NOME COMO NO CARTÃO" oninput="this.value=this.value.toUpperCase()" />
+      </div>
+
+      <label class="campo-label">CPF do titular</label>
+      <div class="campo-wrap">
+        <span class="campo-icon">📋</span>
+        <input class="campo-input" id="cardCPF" type="tel" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" oninput="onCpfInput(this)" />
+      </div>
+
+      <div class="card-row">
+        <div>
+          <label class="campo-label">Validade</label>
+          <div class="campo-wrap">
+            <span class="campo-icon">📅</span>
+            <input class="campo-input" id="cardValidade" type="tel" inputmode="numeric" placeholder="MM/AAAA" maxlength="7" oninput="onValidadeInput(this)" />
+          </div>
+        </div>
+        <div>
+          <label class="campo-label">CVV</label>
+          <div class="campo-wrap">
+            <span class="campo-icon">🔒</span>
+            <input class="campo-input" id="cardCVV" type="tel" inputmode="numeric" placeholder="123" maxlength="4" />
+          </div>
+        </div>
+      </div>
+
+      <label class="campo-label">Parcelas</label>
+      <div class="campo-wrap">
+        <span class="campo-icon">💰</span>
+        <select class="campo-input" id="cardParcelas" style="padding-left:42px">
+          <option value="1">1x de R$ 19,90 sem juros</option>
+        </select>
+      </div>
+
+      <div id="cardErro" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:1rem;margin-bottom:1rem;font-size:13px;color:#dc2626;line-height:1.5"></div>
+
+      <button class="btn-pagar" id="btnPagarCartao" onclick="processarCartao()">💳 Pagar com Cartão  R$ 19,90</button>
+      <p class="pag-seguro">🔒 Dados criptografados • Ambiente seguro • Efí Bank</p>
     </div>
 
     <p class="pag-seguro">🔒 Ambiente seguro • Liberação automática após o pagamento</p>
@@ -2778,6 +2841,9 @@
       var packSub = document.querySelector('#bump-pack [style*="margin-bottom:6px"]');
       if (packSub) packSub.innerHTML = 'Crie quantas quiser &nbsp;<span style="background:#dcfce7;color:#16a34a;font-size:9px;font-weight:800;padding:2px 6px;border-radius:20px">DESCONTO EXCLUSIVO</span>';
     }
+    // Garantir que começa em PIX e botões corretos
+    selecionarMetodo('pix');
+    _atualizarParcelasCartao(19.90);
     // Pré-aquecer token EFI em background para reduzir tempo de geração do PIX
     fetch('/api/pix/warm').catch(function(){});
   }
@@ -2837,6 +2903,9 @@
     _bumpTotal = total;
     var label = total.replace('.', ',');
     document.getElementById('btnPagarPix').textContent = '◉ Gerar QR Code PIX  R$ ' + label;
+    var btnCartao = document.getElementById('btnPagarCartao');
+    if (btnCartao) btnCartao.textContent = '💳 Pagar com Cartão  R$ ' + label;
+    _atualizarParcelasCartao(parseFloat(total));
     var preco = document.getElementById('pagPlanoPreco');
     if (preco) preco.textContent = 'R$ ' + label;
   }
@@ -2896,6 +2965,8 @@
       document.getElementById('pixQrCode').src = data.qrCodeBase64;
       document.getElementById('pixCopiaCola').textContent = data.pixCopiaCola;
       document.getElementById('pixCampos').style.display = 'none';
+      var shared = document.getElementById('payShared');
+      if (shared) shared.style.display = 'none';
       document.getElementById('pixResultBox').style.display = 'block';
 
       // Disparar InitiateCheckout somente quando o QR Code é gerado
@@ -2946,6 +3017,180 @@
       var range = document.createRange(); range.selectNode(el);
       window.getSelection().removeAllRanges(); window.getSelection().addRange(range);
     });
+  }
+
+  // ── SELETOR DE MÉTODO ──
+  function selecionarMetodo(m) {
+    var isPix = (m === 'pix');
+    document.getElementById('formPix').style.display    = isPix  ? 'block' : 'none';
+    document.getElementById('formCartao').style.display = !isPix ? 'block' : 'none';
+    document.getElementById('tabPix').classList.toggle('active', isPix);
+    document.getElementById('tabCartao').classList.toggle('active', !isPix);
+    // Resetar campos de resultado PIX se trocar de método
+    if (!isPix) {
+      document.getElementById('pixCampos').style.display    = 'block';
+      document.getElementById('pixResultBox').style.display = 'none';
+      var shared = document.getElementById('payShared');
+      if (shared) shared.style.display = 'block';
+    }
+  }
+
+  // ── PARCELAS DO CARTÃO ──
+  function _atualizarParcelasCartao(total) {
+    var sel = document.getElementById('cardParcelas');
+    if (!sel) return;
+    sel.innerHTML = '';
+    var maxParc = total >= 100 ? 12 : total >= 50 ? 6 : 3;
+    for (var i = 1; i <= maxParc; i++) {
+      var parcVal = (total / i).toFixed(2).replace('.', ',');
+      var label = i + 'x de R$ ' + parcVal + (i === 1 ? ' sem juros' : '');
+      var opt = document.createElement('option');
+      opt.value = i;
+      opt.textContent = label;
+      sel.appendChild(opt);
+    }
+  }
+
+  // ── HELPERS DE INPUT CARTÃO ──
+  function onCardNumeroInput(el) {
+    var v = el.value.replace(/\D/g, '').slice(0, 16);
+    el.value = v.replace(/(.{4})/g, '$1 ').trim();
+    var bandeira = detectarBandeiraLocal(v);
+    var icon = document.getElementById('cardBandeiraIcon');
+    if (icon) icon.textContent = bandeira;
+  }
+
+  function detectarBandeiraLocal(num) {
+    if (/^4/.test(num)) return 'VISA';
+    if (/^5[1-5]/.test(num)) return 'MC';
+    if (/^3[47]/.test(num)) return 'AMEX';
+    if (/^(636368|438935|504175|451416|636297|506699|5067|4576|4011)/.test(num)) return 'ELO';
+    return '';
+  }
+
+  function onCpfInput(el) {
+    var v = el.value.replace(/\D/g, '').slice(0, 11);
+    if (v.length > 9) v = v.replace(/^(\d{3})(\d{3})(\d{3})(\d{1,2})$/, '$1.$2.$3-$4');
+    else if (v.length > 6) v = v.replace(/^(\d{3})(\d{3})(\d{1,3})$/, '$1.$2.$3');
+    else if (v.length > 3) v = v.replace(/^(\d{3})(\d{1,3})$/, '$1.$2');
+    el.value = v;
+  }
+
+  function onValidadeInput(el) {
+    var v = el.value.replace(/\D/g, '').slice(0, 6);
+    if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2);
+    el.value = v;
+  }
+
+  function mostrarErroCartao(msg) {
+    var el = document.getElementById('cardErro');
+    if (!el) return;
+    el.textContent = msg;
+    el.style.display = msg ? 'block' : 'none';
+  }
+
+  // ── PROCESSAR CARTÃO ──
+  async function processarCartao() {
+    mostrarErroCartao('');
+    var numero   = (document.getElementById('cardNumero').value   || '').replace(/\s/g, '');
+    var nome     = (document.getElementById('cardNome').value     || '').trim();
+    var cpf      = (document.getElementById('cardCPF').value      || '').replace(/\D/g, '');
+    var validade = (document.getElementById('cardValidade').value || '').replace(/\D/g, '');
+    var cvv      = (document.getElementById('cardCVV').value      || '').replace(/\D/g, '');
+    var parcelas = parseInt(document.getElementById('cardParcelas').value) || 1;
+    var nomePag  = (document.getElementById('pagNome').value || '').trim() || nome;
+
+    if (numero.length < 13) return mostrarErroCartao('Número do cartão inválido.');
+    if (!nome)              return mostrarErroCartao('Informe o nome impresso no cartão.');
+    if (cpf.length !== 11)  return mostrarErroCartao('CPF inválido.');
+    if (validade.length < 6) return mostrarErroCartao('Validade inválida (MM/AAAA).');
+    if (cvv.length < 3)     return mostrarErroCartao('CVV inválido.');
+
+    var mes = validade.slice(0, 2);
+    var ano = validade.slice(2, 6);
+
+    var btn = document.getElementById('btnPagarCartao');
+    btn.disabled = true;
+    var origText = btn.textContent;
+    btn.textContent = '⏳ Processando…';
+
+    try {
+      // Salvar cartinha antes de cobrar
+      if (!_cartinhaId) {
+        var dadosCartinha = _coletarDadosCartinha();
+        dadosCartinha.nomeRemetente = dadosCartinha.nomeRemetente || nomePag;
+        dadosCartinha.pdf  = _bumps.pdf  || _bumps.combo;
+        dadosCartinha.pack = _bumps.pack || _bumps.combo;
+        var _up = new URLSearchParams(location.search);
+        ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','src','sck'].forEach(function(k){
+          var v = _up.get(k) || localStorage.getItem('utmify_'+k);
+          if (v) dadosCartinha[k] = v;
+        });
+        var salvResp = await fetch('/api/cartinha/salvar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dadosCartinha),
+        });
+        var salvData = await salvResp.json();
+        if (salvData.success) {
+          _cartinhaId = salvData.id;
+          localStorage.setItem('cartinhaId', _cartinhaId);
+        }
+      }
+
+      // Tokenizar cartão via EFI Pay SDK
+      var tokenData = await new Promise(function(resolve, reject) {
+        var paymentData = {
+          brand: detectarBandeiraLocal(numero).toLowerCase() || 'visa',
+          number: numero,
+          cvv: cvv,
+          expiration_month: mes,
+          expiration_year: ano,
+        };
+        EfiPay.CreditCard
+          .setAccount('c86eca1384292a603843b08402f984ac')
+          .setEnvironment('production')
+          .setCreditCardData(paymentData)
+          .getPaymentToken(function(err, token) {
+            if (err) return reject(new Error(err.error_description || 'Erro ao tokenizar cartão.'));
+            resolve(token);
+          });
+      });
+
+      var payment_token = tokenData.payment_token;
+
+      var resp = await fetch('/api/cartao', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          payment_token,
+          holder_name: nome,
+          cpf,
+          phone: '',
+          installments: parcelas,
+          cartinhaId: _cartinhaId,
+          valor: _bumpTotal,
+        }),
+      });
+      var data = await resp.json();
+
+      if (data.success) {
+        try { fbq('track', 'Purchase', { value: parseFloat(_bumpTotal), currency: 'BRL' }); } catch(e) {}
+        tocarSomSucesso();
+        var cid = _cartinhaId || '';
+        setTimeout(function() {
+          window.location.href = '/sucesso.html' + (cid ? '?cid=' + cid : '');
+        }, 600);
+      } else {
+        mostrarErroCartao(data.message || 'Pagamento recusado. Verifique os dados e tente novamente.');
+        btn.disabled = false;
+        btn.textContent = origText;
+      }
+    } catch(e) {
+      mostrarErroCartao('Erro de conexão. Tente novamente.');
+      btn.disabled = false;
+      btn.textContent = origText;
+    }
   }
 
   // ── URGÊNCIA UMA FRASE POR VEZ ──

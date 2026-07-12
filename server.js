@@ -87,6 +87,29 @@ async function getEfiToken() {
   return _efiToken;
 }
 
+// ── COBRANÇAS API (CARTÃO DE CRÉDITO) ──
+const EFI_COB_BASE = 'https://cobrancas.api.efipay.com.br';
+let _cobToken = null;
+let _cobTokenExpiry = 0;
+
+async function getCobToken() {
+  if (_cobToken && Date.now() < _cobTokenExpiry) return _cobToken;
+  const resp = await axios.post(
+    `${EFI_COB_BASE}/v1/authorize`,
+    { grant_type: 'client_credentials' },
+    {
+      auth: {
+        username: process.env.EFI_COBRANCAS_CLIENT_ID,
+        password: process.env.EFI_COBRANCAS_CLIENT_SECRET,
+      },
+      headers: { 'Content-Type': 'application/json' },
+    }
+  );
+  _cobToken = resp.data.access_token;
+  _cobTokenExpiry = Date.now() + ((resp.data.expires_in || 3600) - 60) * 1000;
+  return _cobToken;
+}
+
 // ── ARMAZENAMENTO DAS CARTINHAS (arquivo JSON no disco) ──
 const DATA_FILE = path.join(__dirname, 'data', 'cartinhas.json');
 
@@ -212,6 +235,71 @@ app.post('/api/pix', async (req, res) => {
     const detail = err.response?.data || err.message;
     console.error('Erro Efí PIX:', JSON.stringify(detail));
     res.status(500).json({ error: 'Erro ao gerar PIX', detail });
+  }
+});
+
+// ── PAGAMENTO VIA CARTÃO (COBRANÇAS EFI) ──
+app.post('/api/cartao', async (req, res) => {
+  const { payment_token, holder_name, cpf, phone, installments, cartinhaId, valor } = req.body;
+
+  if (!process.env.EFI_COBRANCAS_CLIENT_ID || !process.env.EFI_COBRANCAS_CLIENT_SECRET) {
+    return res.status(500).json({ error: 'Credenciais Cobranças não configuradas' });
+  }
+  if (!payment_token) {
+    return res.status(400).json({ error: 'payment_token obrigatório' });
+  }
+
+  try {
+    const token = await getCobToken();
+    const valorTotal = parseFloat(valor || '19.90');
+    const valorCentavos = Math.round(valorTotal * 100);
+
+    const cobResp = await axios.post(
+      `${EFI_COB_BASE}/v1/charge/one-step`,
+      {
+        items: [{ name: 'Carta do Coração', value: valorCentavos, amount: 1 }],
+        payment: {
+          credit_card: {
+            customer: {
+              name:         holder_name || 'Cliente',
+              cpf:          (cpf || '').replace(/\D/g, ''),
+              email:        '',
+              phone_number: (phone || '').replace(/\D/g, '') || '11999999999',
+            },
+            installments: parseInt(installments) || 1,
+            payment_token,
+          },
+        },
+      },
+      { headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' } }
+    );
+
+    const d      = cobResp.data.data || cobResp.data;
+    const chargeId = d.charge_id;
+    const status   = d.status;
+
+    console.log('💳 Cartão processado — charge_id:', chargeId, 'status:', status);
+
+    if (status === 'approved') {
+      if (cartinhaId) {
+        const todas = lerCartinhas();
+        if (todas[cartinhaId]) {
+          todas[cartinhaId].pixTxid       = `card_${chargeId}`;
+          todas[cartinhaId].pixValor      = String(valorTotal);
+          todas[cartinhaId].webhookEnviado = true;
+          gravarCartinhas(todas);
+          await enviarPostbackUtmify({ ...todas[cartinhaId] }, {});
+        }
+      }
+      return res.json({ success: true, status });
+    }
+
+    res.json({ success: false, status, message: 'Pagamento recusado. Verifique os dados do cartão e tente novamente.' });
+
+  } catch (err) {
+    const detail = err.response?.data || err.message;
+    console.error('Erro cartão:', JSON.stringify(detail));
+    res.status(500).json({ error: 'Erro ao processar cartão', detail });
   }
 });
 
