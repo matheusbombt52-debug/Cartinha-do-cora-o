@@ -3153,8 +3153,8 @@
           brand: detectarBandeiraLocal(numero).toLowerCase() || 'visa',
           number: numero,
           cvv: cvv,
-          expiration_month: mes,
-          expiration_year: ano,
+          expirationMonth: mes,
+          expirationYear: ano,
         };
         EfiPay.CreditCard
           .setAccount('c86eca1384292a603843b08402f984ac')
