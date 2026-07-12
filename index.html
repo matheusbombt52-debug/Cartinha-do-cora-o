@@ -3065,14 +3065,15 @@
     el.value = v.replace(/(.{4})/g, '$1 ').trim();
     var bandeira = detectarBandeiraLocal(v);
     var icon = document.getElementById('cardBandeiraIcon');
-    if (icon) icon.textContent = bandeira;
+    if (icon) icon.textContent = bandeira ? bandeira.toUpperCase() : '';
   }
 
   function detectarBandeiraLocal(num) {
-    if (/^4/.test(num)) return 'VISA';
-    if (/^5[1-5]/.test(num)) return 'MC';
-    if (/^3[47]/.test(num)) return 'AMEX';
-    if (/^(636368|438935|504175|451416|636297|506699|5067|4576|4011)/.test(num)) return 'ELO';
+    if (/^(636368|438935|504175|451416|636297|506699|5067|4576|4011)/.test(num)) return 'elo';
+    if (/^(606282|3841)/.test(num)) return 'hipercard';
+    if (/^3[47]/.test(num)) return 'amex';
+    if (/^5[1-5]/.test(num)) return 'mastercard';
+    if (/^4/.test(num)) return 'visa';
     return '';
   }
 
@@ -3149,8 +3150,10 @@
 
       // Tokenizar cartão via EFI Pay SDK
       var tokenData = await new Promise(function(resolve, reject) {
+        var brand = detectarBandeiraLocal(numero);
+        if (!brand) return mostrarErroCartao('Bandeira do cartão não reconhecida. Use Visa, Mastercard, Elo, Amex ou Hipercard.');
         var paymentData = {
-          brand: detectarBandeiraLocal(numero).toLowerCase() || 'visa',
+          brand: brand,
           number: numero,
           cvv: cvv,
           expirationMonth: mes,
