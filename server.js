@@ -338,7 +338,20 @@ app.get('/api/pix/check', async (req, res) => {
         headers: { Authorization: `Bearer ${token}` },
       }
     );
-    res.json({ status: r.data.status });
+
+    const status = r.data.status;
+    res.json({ status });
+
+    if (status === 'CONCLUIDA') {
+      const todas = lerCartinhas();
+      const cartinha = Object.values(todas).find(c => c.pixTxid === id);
+      if (cartinha && !cartinha.webhookEnviado) {
+        cartinha.webhookEnviado = true;
+        gravarCartinhas(todas);
+        console.log('💳 PIX CONCLUIDA detectado via polling, enviando postback UTMify para txid:', id);
+        await enviarPostbackUtmify(cartinha, {});
+      }
+    }
   } catch (err) {
     const detail = err.response?.data || err.message;
     res.status(500).json({ error: err.message, detail });
