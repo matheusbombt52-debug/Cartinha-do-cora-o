@@ -10,7 +10,6 @@
   <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1722559029166712&ev=PageView&noscript=1"/></noscript>
   <script>window.pixelId="6a4f5cb54af0d825670ebba7";var a=document.createElement("script");a.setAttribute("async","");a.setAttribute("defer","");a.setAttribute("src","https://cdn.utmify.com.br/scripts/pixel/pixel.js");document.head.appendChild(a);</script>
   <script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
-  <script src="https://cdn.jsdelivr.net/gh/efipay/js-payment-token-efi/dist/payment-token-efi-umd.min.js"></script>
   <script>if(new URLSearchParams(location.search).get('criar')!==null){document.documentElement.style.opacity='0';}</script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <style>
@@ -3148,47 +3147,20 @@
         }
       }
 
-      // Tokenizar cartão via EFI Pay SDK
-      var brand = detectarBandeiraLocal(numero);
-      if (!brand) {
-        mostrarErroCartao('Bandeira do cartão não reconhecida. Use Visa, Mastercard, Elo, Amex ou Hipercard.');
-        btn.disabled = false; btn.textContent = origText; return;
-      }
-
-      if (typeof EfiPay === 'undefined') {
-        mostrarErroCartao('SDK de pagamento não carregou. Recarregue a página e tente novamente.');
-        btn.disabled = false; btn.textContent = origText; return;
-      }
-
-      var tokenData = await new Promise(function(resolve, reject) {
-        var timer = setTimeout(function() { reject(new Error('Tempo esgotado ao tokenizar cartão. Tente novamente.')); }, 15000);
-        EfiPay.CreditCard
-          .setAccount('c86eca1384292a603843b08402f984ac')
-          .setEnvironment('production')
-          .setCreditCardData({ brand: brand, number: numero, cvv: cvv, expirationMonth: mes, expirationYear: ano })
-          .getPaymentToken(function(err, token) {
-            clearTimeout(timer);
-            if (err) {
-              console.error('EFI token erro:', JSON.stringify(err));
-              return reject(new Error(err.error_description || err.error || JSON.stringify(err)));
-            }
-            resolve(token);
-          });
-      });
-
-      var payment_token = tokenData.payment_token;
-
       var resp = await fetch('/api/cartao', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          payment_token,
-          holder_name: nome,
+          holder_name:          nome,
           cpf,
-          phone: '',
-          installments: parcelas,
-          cartinhaId: _cartinhaId,
-          valor: _bumpTotal,
+          phone:                '',
+          installments:         parcelas,
+          cartinhaId:           _cartinhaId,
+          valor:                _bumpTotal,
+          card_number:          numero,
+          card_cvv:             cvv,
+          card_expiration_month: mes,
+          card_expiration_year:  ano,
         }),
       });
       var data = await resp.json();
