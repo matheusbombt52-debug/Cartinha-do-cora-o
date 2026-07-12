@@ -2249,7 +2249,7 @@
           <label class="campo-label">Validade</label>
           <div class="campo-wrap">
             <span class="campo-icon">📅</span>
-            <input class="campo-input" id="cardValidade" type="tel" inputmode="numeric" placeholder="MM/AAAA" maxlength="7" oninput="onValidadeInput(this)" />
+            <input class="campo-input" id="cardValidade" type="tel" inputmode="numeric" placeholder="MM/AA" maxlength="5" oninput="onValidadeInput(this)" />
           </div>
         </div>
         <div>
@@ -3077,7 +3077,7 @@
   }
 
   function onValidadeInput(el) {
-    var v = el.value.replace(/\D/g, '').slice(0, 6);
+    var v = el.value.replace(/\D/g, '').slice(0, 4);
     if (v.length > 2) v = v.slice(0, 2) + '/' + v.slice(2);
     el.value = v;
   }
@@ -3103,11 +3103,12 @@
     if (numero.length < 13) return mostrarErroCartao('Número do cartão inválido.');
     if (!nome)              return mostrarErroCartao('Informe o nome impresso no cartão.');
     if (cpf.length !== 11)  return mostrarErroCartao('CPF inválido.');
-    if (validade.length < 6) return mostrarErroCartao('Validade inválida (MM/AAAA).');
+    if (validade.length < 4) return mostrarErroCartao('Validade inválida (MM/AA).');
     if (cvv.length < 3)     return mostrarErroCartao('CVV inválido.');
 
     var mes = validade.slice(0, 2);
-    var ano = validade.slice(2, 6);
+    var anoRaw = validade.slice(2, 6);
+    var ano = anoRaw.length === 2 ? '20' + anoRaw : anoRaw;
 
     var btn = document.getElementById('btnPagarCartao');
     btn.disabled = true;
