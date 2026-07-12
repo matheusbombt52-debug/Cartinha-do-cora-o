@@ -3173,7 +3173,7 @@
           window.location.href = '/sucesso.html' + (cid ? '?cid=' + cid : '');
         }, 600);
       } else {
-        var errMsg = data.message || data.error || (data.detail ? JSON.stringify(data.detail) : '') || 'Pagamento recusado. Verifique os dados e tente novamente.';
+        var errMsg = data.message || (data.detail ? JSON.stringify(data.detail) : '') || data.error || 'Pagamento recusado. Verifique os dados e tente novamente.';
         mostrarErroCartao(errMsg);
         btn.disabled = false;
         btn.textContent = origText;
