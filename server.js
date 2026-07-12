@@ -240,14 +240,13 @@ app.post('/api/pix', async (req, res) => {
 
 // ── PAGAMENTO VIA CARTÃO (COBRANÇAS EFI) ──
 app.post('/api/cartao', async (req, res) => {
-  const { holder_name, cpf, phone, installments, cartinhaId, valor,
-          card_number, card_cvv, card_expiration_month, card_expiration_year } = req.body;
+  const { payment_token, holder_name, cpf, phone, installments, cartinhaId, valor } = req.body;
 
   if (!process.env.EFI_COBRANCAS_CLIENT_ID || !process.env.EFI_COBRANCAS_CLIENT_SECRET) {
     return res.status(500).json({ error: 'Credenciais Cobranças não configuradas' });
   }
-  if (!card_number || !card_cvv || !card_expiration_month || !card_expiration_year) {
-    return res.status(400).json({ error: 'Dados do cartão incompletos' });
+  if (!payment_token) {
+    return res.status(400).json({ error: 'payment_token obrigatório' });
   }
 
   try {
@@ -268,13 +267,7 @@ app.post('/api/cartao', async (req, res) => {
               phone_number: (phone || '').replace(/\D/g, '') || '11999999999',
             },
             installments: parseInt(installments) || 1,
-            credit_card: {
-              holder:           holder_name || 'Cliente',
-              number:           (card_number || '').replace(/\D/g, ''),
-              cvv:              card_cvv,
-              expiration_month: card_expiration_month,
-              expiration_year:  card_expiration_year,
-            },
+            payment_token,
           },
         },
       },
