@@ -2955,6 +2955,9 @@
       dadosCartinha.nomeRemetente = dadosCartinha.nomeRemetente || nome;
       dadosCartinha.pdf  = _bumps.pdf  || _bumps.combo;
       dadosCartinha.pack = _bumps.pack || _bumps.combo;
+      // Salva cor no localStorage para sucesso.html aplicar imediatamente sem piscar
+      if (dadosCartinha.cor) localStorage.setItem('cartinhaCor', dadosCartinha.cor);
+      if (dadosCartinha.genero) localStorage.setItem('cartinhaGenero', dadosCartinha.genero);
       // UTMs para rastreamento server-side (webhook EFI → UTMify)
       var _up = new URLSearchParams(location.search);
       ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','src','sck'].forEach(function(k){
@@ -3157,6 +3160,8 @@
         dadosCartinha.nomeRemetente = dadosCartinha.nomeRemetente || nomePag;
         dadosCartinha.pdf  = _bumps.pdf  || _bumps.combo;
         dadosCartinha.pack = _bumps.pack || _bumps.combo;
+        if (dadosCartinha.cor) localStorage.setItem('cartinhaCor', dadosCartinha.cor);
+        if (dadosCartinha.genero) localStorage.setItem('cartinhaGenero', dadosCartinha.genero);
         var _up = new URLSearchParams(location.search);
         ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','src','sck'].forEach(function(k){
           var v = _up.get(k) || localStorage.getItem('utmify_'+k);

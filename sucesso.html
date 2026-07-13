@@ -107,6 +107,23 @@
   </style>
 </head>
 <body>
+<script>
+  (function(){
+    var cor = localStorage.getItem('cartinhaCor');
+    var gen = localStorage.getItem('cartinhaGenero');
+    var _corEscura = {
+      '#1a0a2e':'#0d0520','#be185d':'#3b0015','#0c2340':'#020c1b',
+      '#052e16':'#011209','#5b21b6':'#1e0a4a','#7f1d1d':'#2d0505',
+      '#1d4ed8':'#0a1a50','#9a3412':'#3a1005','#0d9488':'#012825','#9f1239':'#3d0516'
+    };
+    if (cor) {
+      var dark = _corEscura[cor] || '#0d0520';
+      document.body.style.background = 'linear-gradient(135deg,'+cor+' 0%,'+dark+' 100%)';
+    } else if (gen === 'M') {
+      document.body.style.background = 'linear-gradient(135deg,#1565c0 0%,#0a1535 100%)';
+    }
+  })();
+</script>
   <div class="card">
     <div class="success-icon-wrap">
       <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
