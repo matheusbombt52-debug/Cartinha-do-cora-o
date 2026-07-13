@@ -2840,12 +2840,32 @@
       var bCombo2 = document.getElementById('bump-combo');
       if (bPdf)   bPdf.style.display   = 'none';
       if (bCombo2) bCombo2.style.display = 'none';
-      // Desconto exclusivo no pack para quem já tem PDF
+      // Desconto exclusivo no pack para quem já tem PDF — redesign completo do card
       window._packDesconto = true;
-      var packPreco = document.querySelector('#bump-pack [style*="font-weight:900"]');
-      if (packPreco) packPreco.innerHTML = '<span style="text-decoration:line-through;font-size:11px;color:var(--muted);font-weight:600">R$ 47</span> <span style="color:var(--pink)">+R$ 37,90</span>';
-      var packSub = document.querySelector('#bump-pack [style*="margin-bottom:6px"]');
-      if (packSub) packSub.innerHTML = 'Crie quantas quiser &nbsp;<span style="background:#dcfce7;color:#16a34a;font-size:9px;font-weight:800;padding:2px 6px;border-radius:20px">DESCONTO EXCLUSIVO</span>';
+      var bumpPackEl = document.getElementById('bump-pack');
+      if (bumpPackEl) {
+        bumpPackEl.style.border = '2px solid #e91e8c';
+        bumpPackEl.style.background = '#fff0f6';
+        bumpPackEl.style.position = 'relative';
+        bumpPackEl.style.paddingTop = '20px';
+        bumpPackEl.innerHTML =
+          '<div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:9px;font-weight:800;padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em">🏷️ DESCONTO EXCLUSIVO</div>' +
+          '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">' +
+            '<div style="flex:1">' +
+              '<div style="font-size:18px;margin-bottom:4px">♾️</div>' +
+              '<div style="font-size:12px;font-weight:800;color:var(--text);margin-bottom:2px">Cartinhas Ilimitadas</div>' +
+              '<div style="font-size:11px;color:var(--muted);margin-bottom:8px">Crie quantas cartinhas quiser</div>' +
+              '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">' +
+                '<span style="font-size:11px;color:var(--muted);text-decoration:line-through;font-weight:600">R$ 47</span>' +
+                '<span style="font-size:16px;font-weight:900;color:#e91e8c">+R$ 37,90</span>' +
+              '</div>' +
+            '</div>' +
+            '<div id="bumpCheck-pack" style="width:20px;height:20px;min-width:20px;border-radius:6px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s">' +
+              '<svg id="bumpCheckIcon-pack" width="12" height="10" viewBox="0 0 11 9" style="display:none"><polyline points="1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+            '</div>' +
+          '</div>'
+        ;
+      }
     }
     // Garantir que começa em PIX e botões corretos
     selecionarMetodo('pix');
