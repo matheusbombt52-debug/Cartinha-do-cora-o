@@ -157,15 +157,40 @@
       </a>
     </div>
 
-    <!-- PDF não comprado → upsell -->
-    <div id="secaoPDFLock" style="margin-bottom:1.5rem">
+    <!-- Sem bump → upsell COMBO (PDF + Ilimitadas) -->
+    <div id="secaoComboUpsell" style="margin-bottom:1.5rem;display:none">
+      <div style="background:#27272a;border:1px solid #e91e8c;border-radius:16px;padding:1.25rem;text-align:center;position:relative">
+        <div style="position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:10px;font-weight:800;padding:3px 14px;border-radius:20px;white-space:nowrap">⭐ OFERTA ESPECIAL</div>
+        <div style="font-size:26px;margin-bottom:.5rem">🎁</div>
+        <div style="font-size:14px;font-weight:800;color:#e4e4e7;margin-bottom:.3rem">Leve o Combo Completo</div>
+        <div style="font-size:12px;color:#a1a1aa;margin-bottom:.75rem;line-height:1.5">PDF da cartinha + Cartinhas Ilimitadas. Tudo que você precisa para surpreender sempre.</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1rem">
+          <span style="font-size:13px;color:#71717a;text-decoration:line-through">R$ 74,00</span>
+          <span style="font-size:22px;font-weight:900;color:#e91e8c">R$ 47,00</span>
+          <span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px">R$ 27 OFF</span>
+        </div>
+        <div id="comboUpsellPixArea">
+          <button onclick="comprarComboSucesso()" style="width:100%;padding:13px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:800;cursor:pointer">
+            🎁 Quero o Combo por R$ 47,00
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Só tem Pack → upsell PDF -->
+    <div id="secaoPDFParaPack" style="margin-bottom:1.5rem;display:none">
       <div style="background:#27272a;border:1px solid #3f3f46;border-radius:16px;padding:1.25rem;text-align:center">
-        <div style="font-size:30px;margin-bottom:.5rem">🔒</div>
-        <div style="font-size:14px;font-weight:700;color:#e4e4e7;margin-bottom:.3rem">📄 Transforme sua cartinha em um presente físico</div>
-        <div style="font-size:12px;color:#71717a;margin-bottom:1rem;line-height:1.5">Imprima sua cartinha, coloque em uma moldura ou entregue junto com flores e presentes.</div>
-        <div id="pdfLockPixArea">
-          <button onclick="comprarPDFSucesso()" style="width:100%;padding:13px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:800;cursor:pointer">
-            ❤️ Quero adicionar o PDF por R$ 27,00
+        <div style="font-size:30px;margin-bottom:.5rem">📄</div>
+        <div style="font-size:14px;font-weight:700;color:#e4e4e7;margin-bottom:.3rem">Transforme sua cartinha em presente físico</div>
+        <div style="font-size:12px;color:#71717a;margin-bottom:.75rem;line-height:1.5">Imprima e entregue junto com flores. Preço exclusivo para você que já tem ilimitadas.</div>
+        <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1rem">
+          <span style="font-size:13px;color:#71717a;text-decoration:line-through">R$ 27,00</span>
+          <span style="font-size:22px;font-weight:900;color:#e91e8c">R$ 19,90</span>
+          <span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px">26% OFF</span>
+        </div>
+        <div id="pdfParaPackPixArea">
+          <button onclick="comprarPDFParaPack()" style="width:100%;padding:13px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:800;cursor:pointer">
+            📄 Quero o PDF por R$ 19,90
           </button>
         </div>
       </div>
@@ -179,13 +204,13 @@
         <div style="font-size:14px;font-weight:800;color:#e4e4e7;margin-bottom:0.4rem">Cartinhas Ilimitadas</div>
         <div style="font-size:12px;color:#a1a1aa;margin-bottom:0.75rem;line-height:1.5">Crie quantas cartinhas quiser, sem pagar nada a mais. Por tempo limitado, preço exclusivo para você que já tem o PDF.</div>
         <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1rem">
-          <span style="font-size:13px;color:#71717a;text-decoration:line-through">R$ 67,00</span>
-          <span style="font-size:22px;font-weight:900;color:#e91e8c">R$ 47,00</span>
-          <span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px">30% OFF</span>
+          <span style="font-size:13px;color:#71717a;text-decoration:line-through">R$ 47,00</span>
+          <span style="font-size:22px;font-weight:900;color:#e91e8c">R$ 37,90</span>
+          <span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px">19% OFF</span>
         </div>
         <div id="upsellPackPixArea">
           <button onclick="comprarPackSucesso()" style="width:100%;padding:13px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:800;cursor:pointer">
-            ♾️ Quero Cartinhas Ilimitadas por R$ 47,00
+            ♾️ Quero Cartinhas Ilimitadas por R$ 37,90
           </button>
         </div>
       </div>
@@ -409,18 +434,30 @@
             if (json.data.pdf) {
               localStorage.setItem('pdfComprado', '1');
               document.getElementById('secaoPDF').style.display = 'block';
-              document.getElementById('secaoPDFLock').style.display = 'none';
             }
             // Cartinhas ilimitadas — salvar pack no localStorage e mostrar link
             if (json.data.pack) {
               localStorage.setItem('packId', cid);
             }
-            // Upsell pack para quem tem PDF mas não tem pack
             var packId = json.data.pack ? cid : localStorage.getItem('packId');
-            if (json.data.pdf && !packId) {
+            var temPdf  = !!json.data.pdf;
+            var temPack = !!packId;
+
+            // Mostrar upsell correto por combinação
+            if (!temPdf && !temPack) {
+              // Não comprou nada → oferecer Combo
+              var sc = document.getElementById('secaoComboUpsell');
+              if (sc) sc.style.display = 'block';
+            } else if (temPdf && !temPack) {
+              // Só PDF → oferecer Pack com desconto
               var upsell = document.getElementById('secaoUpsellPack');
               if (upsell) upsell.style.display = 'block';
+            } else if (!temPdf && temPack) {
+              // Só Pack → oferecer PDF com desconto
+              var sp = document.getElementById('secaoPDFParaPack');
+              if (sp) sp.style.display = 'block';
             }
+            // temPdf && temPack → não mostra nenhum upsell
             // Mostrar botão e seção de acesso ilimitado se tiver pack
             if (packId) {
               var semPack = document.getElementById('secaoSemPack');
@@ -515,7 +552,7 @@
         var resp = await fetch('/api/pix', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nome: 'Cliente', cartinhaId: cid, valor: '47.00' }),
+          body: JSON.stringify({ nome: 'Cliente', cartinhaId: cid, valor: '37.90' }),
         });
         var data = await resp.json();
         if (data.success) {
@@ -547,6 +584,68 @@
         }
       } catch(e) {
         area.innerHTML = '<p style="color:#f87171;font-size:13px;text-align:center">Erro de conexão.</p><button onclick="comprarPackSucesso()" style="margin-top:8px;width:100%;padding:12px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Tentar novamente</button>';
+      }
+    }
+
+    async function comprarComboSucesso() {
+      var area = document.getElementById('comboUpsellPixArea');
+      area.innerHTML = '<p style="font-size:13px;color:#a1a1aa;text-align:center">⏳ Gerando PIX…</p>';
+      try {
+        var resp = await fetch('/api/pix', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome: 'Cliente', cartinhaId: cid, valor: '47.00' }),
+        });
+        var data = await resp.json();
+        if (data.success) {
+          var codigo = data.pixCopiaCola || '';
+          area.innerHTML = '<p style="font-size:13px;color:#a1a1aa;text-align:center;margin-bottom:8px">Copie o código e pague no seu banco:</p><div style="background:#18181b;border:1px solid #3f3f46;border-radius:10px;padding:10px;font-size:11px;color:#e4e4e7;word-break:break-all;margin-bottom:10px">' + codigo + '</div><button onclick="navigator.clipboard.writeText(\'' + codigo.replace(/'/g,"\\'")+'\').then(function(){this.textContent=\'✅ Copiado!\';}.bind(this))" style="width:100%;padding:11px;border-radius:50px;border:1.5px solid #e91e8c;background:transparent;color:#e91e8c;font-size:13px;font-weight:700;cursor:pointer">📋 Copiar código PIX</button>';
+          var timer = setInterval(async function() {
+            try {
+              var r = await fetch('/api/pix/check?id=' + encodeURIComponent(data.id));
+              var d = await r.json();
+              if (d.status === 'CONCLUIDA') {
+                clearInterval(timer);
+                area.innerHTML = '<p style="color:#22c55e;font-size:14px;font-weight:700;text-align:center">✅ Combo ativado! Recarregue a página.</p>';
+              }
+            } catch(e) {}
+          }, 4000);
+        } else {
+          area.innerHTML = '<p style="color:#f87171;font-size:13px;text-align:center">' + (data.error||'Erro ao gerar PIX.') + '</p><button onclick="comprarComboSucesso()" style="margin-top:8px;width:100%;padding:12px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Tentar novamente</button>';
+        }
+      } catch(e) {
+        area.innerHTML = '<p style="color:#f87171;font-size:13px;text-align:center">Erro de conexão.</p><button onclick="comprarComboSucesso()" style="margin-top:8px;width:100%;padding:12px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Tentar novamente</button>';
+      }
+    }
+
+    async function comprarPDFParaPack() {
+      var area = document.getElementById('pdfParaPackPixArea');
+      area.innerHTML = '<p style="font-size:13px;color:#a1a1aa;text-align:center">⏳ Gerando PIX…</p>';
+      try {
+        var resp = await fetch('/api/pix', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ nome: 'Cliente', cartinhaId: cid, valor: '19.90' }),
+        });
+        var data = await resp.json();
+        if (data.success) {
+          var codigo = data.pixCopiaCola || '';
+          area.innerHTML = '<p style="font-size:13px;color:#a1a1aa;text-align:center;margin-bottom:8px">Copie o código e pague no seu banco:</p><div style="background:#18181b;border:1px solid #3f3f46;border-radius:10px;padding:10px;font-size:11px;color:#e4e4e7;word-break:break-all;margin-bottom:10px">' + codigo + '</div><button onclick="navigator.clipboard.writeText(\'' + codigo.replace(/'/g,"\\'")+'\').then(function(){this.textContent=\'✅ Copiado!\';}.bind(this))" style="width:100%;padding:11px;border-radius:50px;border:1.5px solid #e91e8c;background:transparent;color:#e91e8c;font-size:13px;font-weight:700;cursor:pointer">📋 Copiar código PIX</button>';
+          var timer = setInterval(async function() {
+            try {
+              var r = await fetch('/api/pix/check?id=' + encodeURIComponent(data.id));
+              var d = await r.json();
+              if (d.status === 'CONCLUIDA') {
+                clearInterval(timer);
+                area.innerHTML = '<p style="color:#22c55e;font-size:14px;font-weight:700;text-align:center">✅ PDF ativado! Recarregue a página.</p>';
+              }
+            } catch(e) {}
+          }, 4000);
+        } else {
+          area.innerHTML = '<p style="color:#f87171;font-size:13px;text-align:center">' + (data.error||'Erro ao gerar PIX.') + '</p><button onclick="comprarPDFParaPack()" style="margin-top:8px;width:100%;padding:12px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Tentar novamente</button>';
+        }
+      } catch(e) {
+        area.innerHTML = '<p style="color:#f87171;font-size:13px;text-align:center">Erro de conexão.</p><button onclick="comprarPDFParaPack()" style="margin-top:8px;width:100%;padding:12px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:700;cursor:pointer">Tentar novamente</button>';
       }
     }
 
