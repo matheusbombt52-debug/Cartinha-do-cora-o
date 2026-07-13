@@ -2214,6 +2214,10 @@
         <img id="pixQrCode" src="" alt="QR Code PIX" style="width:200px;height:200px;margin:1rem auto;display:block;border-radius:12px;border:3px solid var(--pink-200)" />
         <div id="pixCopiaCola" style="display:none"></div>
         <button class="btn-copiar" id="btnCopiarPix" onclick="copiarPixCodigo()">📋 Copiar código PIX</button>
+        <!-- Botão de teste — só aparece com ?cartao=sim -->
+        <div id="btnTesteConfirmar" style="display:none;margin-top:12px">
+          <button onclick="_pixPagoConfirmado()" style="width:100%;padding:10px;border-radius:50px;border:2px dashed #f59e0b;background:transparent;color:#f59e0b;font-size:12px;font-weight:700;cursor:pointer">🧪 [TESTE] Simular pagamento confirmado</button>
+        </div>
         <div id="pixConfirmado" style="display:none;text-align:center;padding:1rem 0">
           <div style="font-size:48px;margin-bottom:0.5rem">🎉</div>
           <p style="font-size:18px;font-weight:900;color:var(--pink);margin-bottom:0.25rem">Pagamento confirmado!</p>
@@ -3021,10 +3025,12 @@
     });
   }
 
-  // Revelar aba de cartão só com ?cartao=sim
+  // Revelar aba de cartão e botão de teste só com ?cartao=sim
   if (new URLSearchParams(location.search).get('cartao') === 'sim') {
     var bm = document.getElementById('blocoMetodos');
     if (bm) bm.style.display = 'block';
+    var bt = document.getElementById('btnTesteConfirmar');
+    if (bt) bt.style.display = 'block';
   }
 
   // ── SELETOR DE MÉTODO ──
