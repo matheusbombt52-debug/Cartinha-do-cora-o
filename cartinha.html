@@ -763,7 +763,7 @@
       }
     }
 
-    function abrirJanelaPDF() {
+    function abrirJanelaPDF(inline) {
       var d = cartaData || {};
       var cor = d.cor || '#e91e8c';
       var nomeD = (d.nomeDestinatario || 'Você').replace(/</g,'&lt;').replace(/>/g,'&gt;');
@@ -880,11 +880,17 @@
         '<div class="rodape"><p>Carta do Coração · cartinha-do-coracao.up.railway.app</p></div>' +
         '</body></html>';
 
-      var win = window.open('', '_blank');
-      if (!win) { alert('Permita popups neste site para gerar o PDF.'); return; }
-      win.document.open();
-      win.document.write(html);
-      win.document.close();
+      if (inline) {
+        document.open();
+        document.write(html);
+        document.close();
+      } else {
+        var win = window.open('', '_blank');
+        if (!win) { alert('Permita popups neste site para gerar o PDF.'); return; }
+        win.document.open();
+        win.document.write(html);
+        win.document.close();
+      }
     }
 
     function fecharModalPDF() {
@@ -1041,6 +1047,9 @@
           if (json.success && json.data) {
             cartaData = json.data;
             renderizarCarta(cartaData);
+            if (params.get('pdf') === '1' && cartaData.pdf) {
+              abrirJanelaPDF(true);
+            }
           } else {
             document.getElementById('telaLoading').innerHTML =
               '<div style="font-size:48px">😔</div><div style="color:rgba(0,0,0,0.38);font-size:14px;margin-top:1rem">Cartinha não encontrada</div>';

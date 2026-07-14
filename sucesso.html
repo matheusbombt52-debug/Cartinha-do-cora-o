@@ -370,7 +370,7 @@
 
 
     document.getElementById('btnVerCartinha').href = cartinhaUrl;
-    document.getElementById('btnAbrirPDF').href = cartinhaUrl;
+    document.getElementById('btnAbrirPDF').href = cartinhaUrl + (cid ? '&' : '?') + 'pdf=1';
 
     function mostrarToast(msg) {
       var t = document.getElementById('toast');
