@@ -19,18 +19,21 @@
     button:focus, a:focus, input:focus, textarea:focus, select:focus { outline: none; }
 
     :root {
-      --pink: #e91e8c;
-      --pink-light: #ff6bb5;
-      --pink-dark: #c2185b;
-      --pink-bg: #fdf0f6;
-      --pink-100: #fce4ec;
-      --pink-200: #f8bbd0;
-      --bg: #fff5fa;
+      --pink: #F3399A;
+      --pink-light: #8B5CF6;
+      --pink-dark: #4B238E;
+      --pink-bg: #f5f0ff;
+      --pink-100: #ede9fe;
+      --pink-200: #ddd6fe;
+      --bg: #faf7ff;
       --card: #ffffff;
-      --card2: #fef0f7;
-      --text: #1a0010;
-      --muted: #7d3060;
-      --border: #f8bbd0;
+      --card2: #f5f0ff;
+      --text: #1B1B1B;
+      --muted: #6b4fa3;
+      --border: #ddd6fe;
+      --gold: #F6C85F;
+      --purple: #6C3CF0;
+      --purple-dark: #4B238E;
     }
 
     html { scroll-behavior: smooth; }
@@ -66,13 +69,13 @@
 
     /* ── HERO ── */
     .hero {
-      background: linear-gradient(180deg, #fce4ec 0%, #fff0f7 60%, var(--bg) 100%);
+      background: linear-gradient(180deg, #ede9fe 0%, #f5f0ff 60%, var(--bg) 100%);
       padding: 4rem 1.5rem 3rem; text-align: center;
     }
     /* Ícone pulsando */
     .hero-icon-wrap { position: relative; width: 100px; height: 100px; margin: 0 auto 2rem; }
     .hero-icon-wrap .ring {
-      position: absolute; border-radius: 50%; border: 2px solid rgba(233,30,140,0.18);
+      position: absolute; border-radius: 50%; border: 2px solid rgba(108,60,240,0.15);
       animation: pulseRing 2.4s ease-out infinite;
     }
     .hero-icon-wrap .ring:nth-child(1) { inset: -12px; animation-delay: 0s; }
@@ -89,7 +92,7 @@
       background: linear-gradient(135deg, var(--pink-light), var(--pink));
       display: flex; align-items: center; justify-content: center;
       font-size: 40px;
-      box-shadow: 0 8px 32px rgba(233,30,140,0.3);
+      box-shadow: 0 8px 32px rgba(108,60,240,0.25);
     }
     .hero-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
     .hero h1 { font-size: clamp(48px, 13vw, 72px); font-weight: 900; line-height: 1.05; color: var(--text); margin-bottom: 0.75rem; }
@@ -117,15 +120,15 @@
       display: inline-flex; align-items: center; gap: 8px;
       background: linear-gradient(135deg, var(--pink), var(--pink-light));
       color: #fff; font-size: 16px; font-weight: 700; padding: 16px 36px;
-      border-radius: 50px; box-shadow: 0 8px 32px rgba(233,30,140,0.35);
+      border-radius: 50px; box-shadow: 0 8px 32px rgba(108,60,240,0.28);
       transition: all 0.2s; width: 100%; max-width: 320px; justify-content: center;
       animation: pulsBtn 2.5s ease-in-out infinite;
     }
     @keyframes pulsBtn {
-      0%,100% { box-shadow: 0 8px 32px rgba(233,30,140,0.35); }
-      50%      { box-shadow: 0 8px 48px rgba(233,30,140,0.6), 0 0 0 8px rgba(233,30,140,0.1); }
+      0%,100% { box-shadow: 0 8px 32px rgba(108,60,240,0.28); }
+      50%      { box-shadow: 0 8px 48px rgba(108,60,240,0.5), 0 0 0 8px rgba(108,60,240,0.08); }
     }
-    .btn-hero:hover { transform: translateY(-2px); animation: none; box-shadow: 0 12px 36px rgba(233,30,140,0.5); }
+    .btn-hero:hover { transform: translateY(-2px); animation: none; box-shadow: 0 12px 36px rgba(108,60,240,0.42); }
     .hero-scroll { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 1.5rem; opacity: 0.7; }
 
 
@@ -135,11 +138,11 @@
     .theme-card {
       flex-shrink: 0; width: 200px; border-radius: 18px; overflow: hidden;
       border: 2px solid var(--border); scroll-snap-align: center;
-      background: var(--card); box-shadow: 0 4px 20px rgba(233,30,140,0.1);
+      background: var(--card); box-shadow: 0 4px 20px rgba(108,60,240,0.08);
     }
 
     /* ── SURPRESA DECK ── */
-    .surpresa-section { padding: 3rem 1.5rem 4rem; background: linear-gradient(160deg, #fce4ec 0%, #fdf0f6 100%); }
+    .surpresa-section { padding: 3rem 1.5rem 4rem; background: linear-gradient(160deg, #ede9fe 0%, #f5f0ff 100%); }
     .surpresa-eyebrow { font-size: 22px; text-align: center; margin-bottom: 0.25rem; }
     .surpresa-title { font-size: 26px; font-weight: 900; color: var(--pink-900); text-align: center; margin-bottom: 0.4rem; }
     .surpresa-sub { font-size: 14px; color: var(--muted); text-align: center; margin-bottom: 2.5rem; }
@@ -151,14 +154,14 @@
     }
     .deck-card {
       position: absolute; inset: 0;
-      background: linear-gradient(145deg, #ff9a6c, #ff6b9d);
+      background: linear-gradient(145deg, #6C3CF0, #F3399A);
       border-radius: 20px;
       padding: 1.5rem 1.5rem 1.25rem;
-      box-shadow: 0 8px 32px rgba(233,30,140,0.2);
+      box-shadow: 0 8px 32px rgba(108,60,240,0.15);
       cursor: grab; will-change: transform;
       transition: box-shadow 0.2s;
     }
-    .deck-card:active { cursor: grabbing; box-shadow: 0 16px 48px rgba(233,30,140,0.3); }
+    .deck-card:active { cursor: grabbing; box-shadow: 0 16px 48px rgba(108,60,240,0.25); }
     .deck-card h4 { font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 10px; text-align: center; text-shadow: 0 1px 4px rgba(0,0,0,0.15); }
     .deck-card p  { font-size: 13px; color: rgba(255,255,255,0.92); line-height: 1.65; text-align: center; }
     .deck-counter { text-align: center; font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: 0.08em; }
@@ -173,7 +176,7 @@
     .steps-list { display: flex; flex-direction: column; gap: 1rem; position: relative; }
     .steps-list::before {
       content: ''; position: absolute; left: 27px; top: 0; bottom: 0;
-      width: 2px; background: rgba(233,30,140,0.25); z-index: 0;
+      width: 2px; background: rgba(108,60,240,0.2); z-index: 0;
     }
     .step-item {
       background: var(--card); border: 1px solid var(--border); border-radius: 16px;
@@ -192,7 +195,7 @@
       font-size: 9px; font-weight: 800; color: #fff;
       display: flex; align-items: center; justify-content: center;
     }
-    .step-num-wrap.c1 { background: linear-gradient(135deg, #ff6bb5, #e91e8c); }
+    .step-num-wrap.c1 { background: linear-gradient(135deg, #8B5CF6, #F3399A); }
     .step-num-wrap.c2 { background: linear-gradient(135deg, #a78bfa, #7c3aed); }
     .step-num-wrap.c3 { background: linear-gradient(135deg, #fb923c, #ea580c); }
     .step-num-wrap.c4 { background: linear-gradient(135deg, #34d399, #059669); }
@@ -287,22 +290,22 @@
       display: flex; align-items: center; justify-content: center; font-size: 26px;
       margin-bottom: 4px;
     }
-    .wi-pink   { background: linear-gradient(135deg, #ff6bb5, #e91e8c); }
-    .wi-orange { background: linear-gradient(135deg, #ffb347, #e91e8c); }
-    .wi-teal   { background: linear-gradient(135deg, #f48fb1, #c2185b); }
-    .wi-purple { background: linear-gradient(135deg, #ce93d8, #e91e8c); }
-    .wi-green  { background: linear-gradient(135deg, #f06292, #ad1457); }
-    .wi-blue   { background: linear-gradient(135deg, #f8bbd0, #e91e8c); }
+    .wi-pink   { background: linear-gradient(135deg, #8B5CF6, #F3399A); }
+    .wi-orange { background: linear-gradient(135deg, #ffb347, #6C3CF0); }
+    .wi-teal   { background: linear-gradient(135deg, #a78bfa, #6C3CF0); }
+    .wi-purple { background: linear-gradient(135deg, #a78bfa, #F3399A); }
+    .wi-green  { background: linear-gradient(135deg, #8B5CF6, #4B238E); }
+    .wi-blue   { background: linear-gradient(135deg, #6C3CF0, #F3399A); }
     .who-card h3 { font-size: 14px; font-weight: 800; color: var(--text); line-height: 1.3; }
     .who-card p  { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
 
     /* ── CTA ── */
-    .cta-section { padding: 2rem 1.5rem; background: linear-gradient(160deg, #fce4ec 0%, #fdf0f6 100%); text-align: center; }
+    .cta-section { padding: 2rem 1.5rem; background: linear-gradient(160deg, #ede9fe 0%, #f5f0ff 100%); text-align: center; }
     .cta-box {
       background: var(--card); border: 1px solid var(--border);
       border-radius: 24px; padding: 2.5rem 2rem;
       max-width: 400px; margin: 0 auto;
-      box-shadow: 0 8px 40px rgba(233,30,140,0.1);
+      box-shadow: 0 8px 40px rgba(108,60,240,0.08);
     }
     .cta-tag {
       display: inline-block; background: var(--pink-100); border: 1px solid var(--pink-200);
@@ -316,10 +319,10 @@
       display: flex; align-items: center; justify-content: center; gap: 8px;
       background: linear-gradient(135deg, var(--pink), var(--pink-light));
       color: #fff; font-size: 16px; font-weight: 700; padding: 16px 24px;
-      border-radius: 50px; box-shadow: 0 8px 32px rgba(233,30,140,0.3);
+      border-radius: 50px; box-shadow: 0 8px 32px rgba(108,60,240,0.25);
       width: 100%; transition: all 0.2s;
     }
-    .btn-cta-full:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(233,30,140,0.4); }
+    .btn-cta-full:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(108,60,240,0.3); }
 
     /* ── TEMA MASCULINO (azul) nas telas de formulário ── */
     body[data-genero="M"] #telaEscolha,
@@ -385,7 +388,7 @@
     /* ── TELA DE ESCOLHA ── */
     #telaEscolha {
       display: none; position: fixed; inset: 0; z-index: 1000;
-      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%) !important;
+      background: linear-gradient(160deg, #f5f0ff 0%, #ede9fe 100%) !important;
       overflow: hidden; animation: fadeInTela 0.4s ease;
     }
     @keyframes fadeInTela { from{opacity:1;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
@@ -413,17 +416,17 @@
       width: 190px; background: var(--card);
       border: 2px solid var(--pink-200); border-radius: 18px;
       padding: 1rem 0.9rem 0.9rem; text-align: center;
-      box-shadow: 0 4px 20px rgba(233,30,140,0.1); cursor: pointer;
+      box-shadow: 0 4px 20px rgba(108,60,240,0.08); cursor: pointer;
     }
-    .tipo-wrap.tc .tipo-card { border-color: var(--pink); box-shadow: 0 6px 28px rgba(233,30,140,0.2); }
+    .tipo-wrap.tc .tipo-card { border-color: var(--pink); box-shadow: 0 6px 28px rgba(108,60,240,0.15); }
     .tipo-icon-box {
       width: 52px; height: 52px; border-radius: 14px; margin: 0 auto 0.5rem;
       display: flex; align-items: center; justify-content: center; font-size: 24px;
     }
-    .ti-pink   { background: linear-gradient(135deg,#ff6bb5,var(--pink)); }
-    .ti-purple { background: linear-gradient(135deg,#ce93d8,#ab47bc); }
-    .ti-orange { background: linear-gradient(135deg,#ffb347,#f06292); }
-    .ti-teal   { background: linear-gradient(135deg,#80deea,#26c6da); }
+    .ti-pink   { background: linear-gradient(135deg,#8B5CF6,var(--pink)); }
+    .ti-purple { background: linear-gradient(135deg,#a78bfa,#6C3CF0); }
+    .ti-orange { background: linear-gradient(135deg,#ffb347,#6C3CF0); }
+    .ti-teal   { background: linear-gradient(135deg,#a78bfa,#4B238E); }
     .tipo-label { font-size: 8px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--pink); margin-bottom: 3px; }
     .tipo-nome  { font-size: 14px; font-weight: 900; color: var(--text) !important; margin-bottom: 4px; line-height: 1.2; }
     .tipo-desc  { font-size: 10.5px; color: var(--muted) !important; line-height: 1.4; }
@@ -447,14 +450,14 @@
       display: flex; align-items: center; justify-content: center;
       background: linear-gradient(135deg, var(--pink), var(--pink-light));
       color: #fff; font-size: 15px; font-weight: 700; padding: 14px;
-      border-radius: 50px; box-shadow: 0 6px 20px rgba(233,30,140,0.3);
+      border-radius: 50px; box-shadow: 0 6px 20px rgba(108,60,240,0.25);
       width: 100%; margin-bottom: 8px; border: none; cursor: pointer;
     }
     .btn-voltar { background: none; border: none; font-size: 13px; color: var(--muted); cursor: pointer; width: 100%; padding: 4px; display: flex; align-items: center; justify-content: center; gap: 5px; }
     /* ── TELA FORMULÁRIO ── */
     #telaForm {
       display: none; position: fixed; inset: 0; z-index: 1001;
-      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%) !important;
+      background: linear-gradient(160deg, #f5f0ff 0%, #ede9fe 100%) !important;
       overflow-y: auto; animation: fadeInTela 0.4s ease;
     }
     .form-wrap { max-width: 420px; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
@@ -467,7 +470,7 @@
       font-size: 12px; font-weight: 800; transition: all 0.3s;
     }
     .step-ball.done { background: var(--pink); color: #fff; }
-    .step-ball.current { background: var(--pink); color: #fff; box-shadow: 0 0 0 4px rgba(233,30,140,0.2); }
+    .step-ball.current { background: var(--pink); color: #fff; box-shadow: 0 0 0 4px rgba(108,60,240,0.15); }
     .step-ball.todo { background: var(--pink-100); color: var(--muted); border: 1.5px solid var(--pink-200); }
     .step-line { flex: 1; height: 2px; background: var(--pink-200); }
     .step-line.done { background: var(--pink); }
@@ -482,7 +485,7 @@
     }
     .msg-avatar {
       width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
-      background: linear-gradient(135deg, #fce4ec, #f8bbd0);
+      background: linear-gradient(135deg, #ede9fe, #ddd6fe);
       display: flex; align-items: center; justify-content: center; font-size: 24px;
     }
     .msg-texto { font-size: 14px; color: var(--text); line-height: 1.6; font-weight: 500; }
@@ -497,7 +500,7 @@
       font-size: 15px; font-family: inherit; color: var(--text);
       background: var(--card); outline: none; transition: border-color 0.2s;
     }
-    .campo-input:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .campo-input:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(108,60,240,0.08); }
     .campo-input::placeholder { color: var(--muted); opacity: 0.7; }
 
     /* Botões do form */
@@ -511,12 +514,12 @@
     .btn-form-voltar:hover { border-color: var(--pink); color: var(--pink); }
     .btn-form-continuar {
       flex: 2; padding: 14px; border-radius: 50px; border: none;
-      background: linear-gradient(135deg, var(--pink, #e91e8c), var(--pink-light, #ff6bb5));
+      background: linear-gradient(135deg, var(--pink, #F3399A), var(--pink-light, #8B5CF6));
       font-size: 15px; font-weight: 700; color: #fff;
-      cursor: pointer; box-shadow: 0 6px 24px rgba(233,30,140,0.3);
+      cursor: pointer; box-shadow: 0 6px 24px rgba(108,60,240,0.25);
       transition: all 0.2s;
     }
-    .btn-form-continuar:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(233,30,140,0.4); }
+    .btn-form-continuar:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(108,60,240,0.3); }
     body[data-genero="M"] .btn-form-continuar {
       background: linear-gradient(135deg, #1565c0, #64b5f6);
       box-shadow: 0 6px 24px rgba(21,101,192,0.3);
@@ -580,9 +583,9 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
     }
     .pp-envelope {
-      width: 60px; height: 60px; background: linear-gradient(135deg, #fff5f9, #fce4ec);
+      width: 60px; height: 60px; background: linear-gradient(135deg, #f5f0ff, #ede9fe);
       border-radius: 16px; display: flex; align-items: center; justify-content: center;
-      font-size: 32px; box-shadow: 0 8px 32px rgba(233,30,140,0.4);
+      font-size: 32px; box-shadow: 0 8px 32px rgba(108,60,240,0.3);
       animation: floatEnvelope 3s ease-in-out infinite;
     }
     @keyframes floatEnvelope {
@@ -600,13 +603,13 @@
     /* Brilho de fundo */
     .pp-glow {
       position: absolute; width: 120px; height: 120px; border-radius: 50%;
-      background: radial-gradient(circle, rgba(233,30,140,0.25) 0%, transparent 70%);
+      background: radial-gradient(circle, rgba(108,60,240,0.2) 0%, transparent 70%);
       top: 50%; left: 50%; transform: translate(-50%, -60%); pointer-events: none;
     }
     /* ── PASSO 2 ── */
     #telaForm2 {
       display: none; position: fixed; inset: 0; z-index: 1002;
-      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      background: linear-gradient(160deg, #f5f0ff 0%, #ede9fe 100%);
       overflow-y: auto; animation: fadeInTela 0.4s ease;
     }
     .genero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 1.25rem; }
@@ -617,7 +620,7 @@
       transition: border-color 0.35s ease, background 0.35s ease, box-shadow 0.35s ease;
     }
     .genero-card:hover { border-color: var(--pink-400); }
-    .genero-card.selected { border-color: var(--pink) !important; background: #fff0f7; box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .genero-card.selected { border-color: var(--pink) !important; background: #f0ecff; box-shadow: 0 0 0 3px rgba(108,60,240,0.08); }
     .genero-emoji { font-size: 36px; display: block; margin-bottom: 6px; }
     .genero-label { font-size: 14px; font-weight: 700; color: var(--text); }
     .select-wrap { position: relative; margin-bottom: 1.25rem; }
@@ -630,11 +633,11 @@
       background: var(--card); outline: none; appearance: none;
       cursor: pointer; transition: border-color 0.2s;
     }
-    .campo-select:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .campo-select:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(108,60,240,0.08); }
     /* ── TELA FORM 3 ── */
     #telaForm3 {
       display: none; position: fixed; inset: 0; z-index: 1003;
-      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      background: linear-gradient(160deg, #f5f0ff 0%, #ede9fe 100%);
       overflow-y: auto; animation: fadeInTela 0.4s ease;
     }
     .msg-label-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
@@ -643,7 +646,7 @@
       background: linear-gradient(135deg, var(--pink), var(--pink-light));
       color: #fff; font-size: 12px; font-weight: 700; padding: 7px 14px;
       border-radius: 30px; border: none; cursor: pointer;
-      box-shadow: 0 4px 14px rgba(233,30,140,0.3); transition: all 0.2s;
+      box-shadow: 0 4px 14px rgba(108,60,240,0.25); transition: all 0.2s;
     }
     .btn-ia:hover { transform: translateY(-1px); }
     .btn-ia.loading { opacity: 0.7; pointer-events: none; }
@@ -654,14 +657,14 @@
       background: var(--card); outline: none; resize: vertical;
       transition: border-color 0.2s; line-height: 1.6;
     }
-    .campo-textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .campo-textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(108,60,240,0.08); }
     .campo-textarea::placeholder { color: var(--muted); opacity: 0.7; }
     .char-count { text-align: right; font-size: 11px; color: var(--muted); margin-top: 4px; }
     .campo-hint { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.5; }
     /* ── PASSO 4 ── */
     #telaForm4 {
       display: none; position: fixed; inset: 0; z-index: 1004;
-      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      background: linear-gradient(160deg, #f5f0ff 0%, #ede9fe 100%);
       overflow-y: auto; animation: fadeInTela 0.4s ease;
     }
     .opc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 1.25rem; }
@@ -670,13 +673,13 @@
       padding: 2rem 1rem 1.5rem; text-align: center;
       background: var(--card); cursor: pointer; transition: all 0.2s;
     }
-    .opc-card:hover { border-color: var(--pink); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(233,30,140,0.12); }
-    .opc-card.selected { border-color: var(--pink); background: #fff0f7; box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .opc-card:hover { border-color: var(--pink); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(108,60,240,0.1); }
+    .opc-card.selected { border-color: var(--pink); background: #f0ecff; box-shadow: 0 0 0 3px rgba(108,60,240,0.08); }
     .opc-icon-box {
       width: 56px; height: 56px; border-radius: 16px; margin: 0 auto 0.9rem;
       display: flex; align-items: center; justify-content: center; font-size: 28px;
     }
-    .opc-sim  { background: linear-gradient(135deg, #fce4ec, #f8bbd0); }
+    .opc-sim  { background: linear-gradient(135deg, #ede9fe, #ddd6fe); }
     .opc-nao  { background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
     .opc-label { font-size: 14px; font-weight: 700; color: var(--text); }
     .passo4-title { font-size: 18px; font-weight: 900; color: var(--text); margin-bottom: 0.4rem; line-height: 1.3; }
@@ -684,7 +687,7 @@
     /* ── TELA MÍDIA ── */
     #telaMidia {
       display: none; position: fixed; inset: 0; z-index: 1005;
-      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      background: linear-gradient(160deg, #f5f0ff 0%, #ede9fe 100%);
       overflow-y: auto; animation: fadeInTela 0.4s ease;
     }
     .midia-label { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
@@ -693,8 +696,8 @@
       background: var(--card); padding: 2rem 1rem;
       text-align: center; cursor: pointer; transition: all 0.2s; margin-bottom: 1.25rem;
     }
-    .upload-box:hover { border-color: var(--pink); background: #fff0f7; }
-    .upload-box.has-file { border-color: var(--pink); background: #fff0f7; border-style: solid; }
+    .upload-box:hover { border-color: var(--pink); background: #f0ecff; }
+    .upload-box.has-file { border-color: var(--pink); background: #f0ecff; border-style: solid; }
     .upload-icon { font-size: 36px; margin-bottom: 0.6rem; display: block; }
     .upload-text { font-size: 13px; color: var(--muted); line-height: 1.5; }
     .upload-text strong { color: var(--pink); }
@@ -734,7 +737,7 @@
     /* ── PASSO 5 ── */
     #telaForm5 {
       display: none; position: fixed; inset: 0; z-index: 1006;
-      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      background: linear-gradient(160deg, #f5f0ff 0%, #ede9fe 100%);
       overflow-y: auto; animation: fadeInTela 0.4s ease;
     }
     .opcoes-section { margin-bottom: 1.5rem; }
@@ -747,7 +750,7 @@
       display: flex; align-items: center; justify-content: center;
       font-size: 18px; color: transparent;
     }
-    .cor-item.sel { border-color: var(--pink); color: #fff; box-shadow: 0 0 0 3px rgba(233,30,140,0.25); }
+    .cor-item.sel { border-color: var(--pink); color: #fff; box-shadow: 0 0 0 3px rgba(108,60,240,0.2); }
     /* Animações */
     .anim-grid { display: flex; gap: 10px; flex-wrap: wrap; }
     .anim-item {
@@ -756,7 +759,7 @@
       transition: all 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center;
       gap: 5px; overflow: hidden; padding-bottom: 4px;
     }
-    .anim-item.sel { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.25); }
+    .anim-item.sel { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(108,60,240,0.2); }
     .anim-label { font-size: 9px; font-weight: 700; color: rgba(255,255,255,0.8); text-align: center; letter-spacing: 0.02em; line-height: 1; }
     /* Layout fotos */
     .layout-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -766,7 +769,7 @@
       background: var(--card); transition: all 0.2s;
     }
     .layout-item:hover { border-color: var(--pink); }
-    .layout-item.sel { border-color: var(--pink); background: #fff0f7; }
+    .layout-item.sel { border-color: var(--pink); background: #f0ecff; }
     .layout-item .l-icon { font-size: 28px; display: block; margin-bottom: 6px; }
     .layout-item .l-nome { font-size: 13px; font-weight: 700; color: var(--text); }
     /* Preview celular grande */
@@ -792,9 +795,9 @@
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
     }
     .pf-envelope {
-      width: 68px; height: 68px; background: linear-gradient(135deg, #fff5f9, #fce4ec);
+      width: 68px; height: 68px; background: linear-gradient(135deg, #f5f0ff, #ede9fe);
       border-radius: 18px; display: flex; align-items: center; justify-content: center;
-      font-size: 36px; box-shadow: 0 8px 32px rgba(233,30,140,0.4);
+      font-size: 36px; box-shadow: 0 8px 32px rgba(108,60,240,0.3);
       animation: floatEnvelope 3s ease-in-out infinite;
     }
     .pf-para { font-size: 10px; font-weight: 700; letter-spacing: 0.2em; color: rgba(255,255,255,0.45); font-family: 'Inter',sans-serif; text-transform: uppercase; }
@@ -814,7 +817,7 @@
     /* ── TELA FINALIZAÇÃO ── */
     #telaFinal {
       display: none; position: fixed; inset: 0; z-index: 1010;
-      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      background: linear-gradient(160deg, #f5f0ff 0%, #ede9fe 100%);
       overflow-y: auto; animation: fadeInTela 0.4s ease;
     }
     .final-wrap {
@@ -826,7 +829,7 @@
     .final-step { display: flex; flex-direction: column; align-items: center; gap: 6px; flex: 1; }
     .final-step-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--pink-200); }
     .final-step-dot.done { background: var(--pink); }
-    .final-step-dot.active { background: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.3); }
+    .final-step-dot.active { background: var(--pink); box-shadow: 0 0 0 3px rgba(108,60,240,0.25); }
     .final-step-label { font-size: 9px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
     .final-step-label.done { color: var(--pink); }
     .final-step-label.active { color: var(--pink-dark); }
@@ -835,10 +838,10 @@
     /* Avatar cachorro */
     .final-avatar {
       width: 90px; height: 90px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--pink), #ff6bb5);
+      background: linear-gradient(135deg, var(--purple), var(--pink));
       display: flex; align-items: center; justify-content: center;
       font-size: 48px; margin-bottom: 1.5rem;
-      box-shadow: 0 0 0 8px rgba(233,30,140,0.15), 0 0 0 16px rgba(233,30,140,0.07);
+      box-shadow: 0 0 0 8px rgba(108,60,240,0.12), 0 0 0 16px rgba(108,60,240,0.06);
     }
     /* Mensagem variável */
     .final-msg {
@@ -851,16 +854,16 @@
     /* Botão */
     .btn-comecar {
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      background: linear-gradient(135deg, var(--pink), #ff6bb5);
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
       color: #fff; font-size: 16px; font-weight: 700; padding: 16px 32px;
       border-radius: 50px; border: none; cursor: pointer; width: 100%;
-      box-shadow: 0 8px 32px rgba(233,30,140,0.4); transition: all 0.2s;
+      box-shadow: 0 8px 32px rgba(108,60,240,0.3); transition: all 0.2s;
     }
-    .btn-comecar:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(233,30,140,0.5); }
+    .btn-comecar:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(108,60,240,0.42); }
     /* ── TELA PLANOS ── */
     #telaPlanos {
       display: none; position: fixed; inset: 0; z-index: 1011;
-      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      background: linear-gradient(160deg, #f5f0ff 0%, #ede9fe 100%);
       overflow-y: auto; animation: fadeInTela 0.4s ease;
     }
     .planos-wrap { max-width: 400px; margin: 0 auto; padding: 2rem 1.25rem 5rem; }
@@ -885,7 +888,7 @@
       border: 2px solid var(--pink); border-radius: 20px;
       padding: 1.5rem 1.25rem; margin-bottom: 1.25rem;
       background: var(--card);
-      box-shadow: 0 4px 32px rgba(233,30,140,0.15);
+      box-shadow: 0 4px 32px rgba(108,60,240,0.12);
     }
     .plano-card-nome { font-size: 18px; font-weight: 900; color: var(--text); text-align: center; margin-bottom: 0.75rem; }
     .plano-preco-old { font-size: 13px; color: var(--muted); text-align: center; text-decoration: line-through; }
@@ -899,12 +902,12 @@
     /* Botão pagamento */
     .btn-pagamento {
       width: 100%; padding: 18px; border-radius: 50px; border: none;
-      background: linear-gradient(135deg, var(--pink), #ff6bb5);
+      background: linear-gradient(135deg, var(--pink), var(--pink-light));
       font-size: 16px; font-weight: 700; color: #fff;
-      cursor: pointer; box-shadow: 0 8px 32px rgba(233,30,140,0.4);
+      cursor: pointer; box-shadow: 0 8px 32px rgba(108,60,240,0.3);
       transition: all 0.2s; display: flex; flex-direction: column; align-items: center; gap: 2px;
     }
-    .btn-pagamento:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(233,30,140,0.5); }
+    .btn-pagamento:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(108,60,240,0.42); }
     .btn-pagamento span { font-size: 12px; opacity: 0.8; font-weight: 400; }
     /* ── MODAL PIX ── */
     .modal-overlay {
@@ -927,12 +930,12 @@
       border-radius: 14px; font-size: 15px; font-family: inherit;
       color: var(--text); background: var(--bg); outline: none; transition: border-color 0.2s;
     }
-    .modal-campo input:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .modal-campo input:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(108,60,240,0.08); }
     .btn-gerar-pix {
       width: 100%; padding: 15px; border-radius: 50px; border: none;
       background: linear-gradient(135deg, var(--pink), var(--pink-light));
       font-size: 15px; font-weight: 700; color: #fff; cursor: pointer;
-      box-shadow: 0 6px 24px rgba(233,30,140,0.3); transition: all 0.2s; margin-top: 0.5rem;
+      box-shadow: 0 6px 24px rgba(108,60,240,0.25); transition: all 0.2s; margin-top: 0.5rem;
     }
     .btn-gerar-pix:hover { transform: translateY(-1px); }
     .btn-gerar-pix:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
@@ -960,7 +963,7 @@
     /* ── PASSO 3 ── */
     #telaForm3 {
       display: none; position: fixed; inset: 0; z-index: 1003;
-      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      background: linear-gradient(160deg, #f5f0ff 0%, #ede9fe 100%);
       overflow-y: auto; animation: fadeInTela 0.4s ease;
     }
     .msg-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
@@ -970,7 +973,7 @@
       background: linear-gradient(135deg, var(--pink), var(--pink-light));
       color: #fff; font-size: 12px; font-weight: 700; padding: 7px 14px;
       border-radius: 20px; border: none; cursor: pointer;
-      box-shadow: 0 4px 16px rgba(233,30,140,0.25); transition: all 0.2s;
+      box-shadow: 0 4px 16px rgba(108,60,240,0.2); transition: all 0.2s;
     }
     .btn-ia:hover { transform: translateY(-1px); }
     .msg-textarea {
@@ -980,14 +983,14 @@
       background: var(--card); outline: none; resize: vertical;
       transition: border-color 0.2s; line-height: 1.6;
     }
-    .msg-textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(233,30,140,0.1); }
+    .msg-textarea:focus { border-color: var(--pink); box-shadow: 0 0 0 3px rgba(108,60,240,0.08); }
     .msg-textarea::placeholder { color: var(--muted); opacity: 0.7; }
     .msg-counter { font-size: 11px; color: var(--muted); text-align: right; margin-top: 4px; margin-bottom: 1.25rem; }
     .ia-gerando { display: none; text-align: center; padding: 1rem; font-size: 13px; color: var(--pink); font-weight: 600; }
     /* ── TELA PAGAMENTO ── */
     #telaPagamento {
       display: none; position: fixed; inset: 0; z-index: 1012;
-      background: linear-gradient(160deg, #fdf0f6 0%, #fce4ec 100%);
+      background: linear-gradient(160deg, #f5f0ff 0%, #ede9fe 100%);
       overflow-y: auto; animation: fadeInTela 0.4s ease;
     }
     .pag-wrap { max-width: 420px; margin: 0 auto; padding: 2rem 1.5rem 3rem; }
@@ -1011,7 +1014,7 @@
       background: var(--card); cursor: pointer; display: flex; align-items: center; gap: 8px;
       font-size: 14px; font-weight: 700; color: var(--muted); transition: all 0.2s;
     }
-    .pag-metodo-btn.active { border-color: var(--pink); color: var(--text); background: #fff0f7; }
+    .pag-metodo-btn.active { border-color: var(--pink); color: var(--text); background: #f0ecff; }
     .pag-metodo-btn .radio { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--pink-200); flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
     .pag-metodo-btn.active .radio { border-color: var(--pink); background: var(--pink); }
     .pag-metodo-btn.active .radio::after { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #fff; }
@@ -1045,7 +1048,7 @@
       width: 100%; padding: 16px; border-radius: 50px; border: none; outline: none;
       background: linear-gradient(135deg, var(--pink), var(--pink-light));
       font-size: 16px; font-weight: 700; color: #fff; cursor: pointer;
-      box-shadow: 0 8px 32px rgba(233,30,140,0.3); transition: all 0.2s; margin-bottom: 8px;
+      box-shadow: 0 8px 32px rgba(108,60,240,0.25); transition: all 0.2s; margin-bottom: 8px;
     }
     .btn-pagar:hover { transform: translateY(-2px); }
     .btn-pagar:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
@@ -1065,7 +1068,7 @@
       width: 280px; height: 170px; border-radius: 18px;
       background: linear-gradient(135deg, var(--pink-dark), var(--pink), var(--pink-light));
       padding: 1.25rem 1.5rem; position: relative; overflow: hidden;
-      box-shadow: 0 12px 40px rgba(233,30,140,0.35);
+      box-shadow: 0 12px 40px rgba(108,60,240,0.28);
       color: #fff; font-family: 'Inter', sans-serif;
     }
     .card-visual::before {
@@ -1152,8 +1155,8 @@
       <path d="M4 4 Q80 22 156 4" stroke="url(#pg)" stroke-width="3" stroke-linecap="round" fill="none"/>
       <defs>
         <linearGradient id="pg" x1="0" y1="0" x2="160" y2="0" gradientUnits="userSpaceOnUse">
-          <stop offset="0%" stop-color="#e91e8c"/>
-          <stop offset="100%" stop-color="#ff6bb5"/>
+          <stop offset="0%" stop-color="#F3399A"/>
+          <stop offset="100%" stop-color="#8B5CF6"/>
         </linearGradient>
       </defs>
     </svg>
@@ -1284,7 +1287,7 @@
             <p class="rc-text">"Fiz para o meu marido no aniversário de casamento. Ele chorou na frente dos filhos. Disse que foi o melhor presente que já recebeu."</p>
             <div class="rc-bottom">
               <div class="rc-user">
-                <div class="rc-av" style="background:#c2185b">L</div>
+                <div class="rc-av" style="background:#4B238E">L</div>
                 <div><div class="rc-name">Letícia A.</div><div class="rc-time">1 mês atrás</div></div>
               </div>
               <div class="rc-badge">✓ Verificado</div>
@@ -1373,7 +1376,7 @@
             <p class="rc-text">"Fiz para o meu marido no aniversário de casamento. Ele chorou na frente dos filhos. Disse que foi o melhor presente que já recebeu."</p>
             <div class="rc-bottom">
               <div class="rc-user">
-                <div class="rc-av" style="background:#c2185b">L</div>
+                <div class="rc-av" style="background:#4B238E">L</div>
                 <div><div class="rc-name">Letícia A.</div><div class="rc-time">1 mês atrás</div></div>
               </div>
               <div class="rc-badge">✓ Verificado</div>
@@ -1609,7 +1612,7 @@
     var wrap = document.createElement('div');
     wrap.className = 'hero-particles';
     hero.insertBefore(wrap, hero.firstChild);
-    var colors = ['rgba(233,30,140,0.3)','rgba(255,107,181,0.25)','rgba(248,187,208,0.4)','rgba(233,30,140,0.15)'];
+    var colors = ['rgba(108,60,240,0.25)','rgba(255,107,181,0.25)','rgba(248,187,208,0.4)','rgba(108,60,240,0.12)'];
     for (var i = 0; i < 18; i++) {
       var s = document.createElement('span');
       var size = 6 + Math.random() * 14;
@@ -2162,7 +2165,7 @@
         </div>
         <!-- BUMP COMBO -->
         <div id="bump-combo" onclick="selecionarBump('combo')" style="border:2px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none;position:relative">
-          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--pink),#ff6bb5);color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em">⭐ MELHOR OFERTA</div>
+          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--pink),var(--pink-light));color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em">⭐ MELHOR OFERTA</div>
           <div style="display:flex;align-items:center;justify-content:space-between">
             <div style="flex:1">
               <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:2px">Leve os 2: PDF + Ilimitadas</div>
@@ -2464,7 +2467,7 @@
         <div class="anim-item" data-a="coracoes" onclick="selecionarAnim(this)"><svg width="28" height="28" viewBox="0 0 36 36"><text x="4" y="22" font-size="14">❤️</text><text x="18" y="16" font-size="10">🩷</text><text x="10" y="32" font-size="9">❤️</text></svg><span class="anim-label">Corações</span></div>
         <div class="anim-item" data-a="estrelas" onclick="selecionarAnim(this)"><svg width="28" height="28" viewBox="0 0 36 36"><circle cx="8" cy="8" r="2.5" fill="white"/><circle cx="28" cy="12" r="1.5" fill="white" opacity=".7"/><circle cx="18" cy="26" r="2" fill="white" opacity=".9"/></svg><span class="anim-label">Estrelas</span></div>
         <div class="anim-item sel" data-a="nebulosa" onclick="selecionarAnim(this)"><svg width="28" height="28" viewBox="0 0 36 36"><defs><radialGradient id="neb2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#a855f7" stop-opacity="0.8"/><stop offset="100%" stop-color="#1a0a2e" stop-opacity="0"/></radialGradient></defs><circle cx="18" cy="18" r="14" fill="url(#neb2)"/></svg><span class="anim-label">Nebulosa</span></div>
-        <div class="anim-item" data-a="pixels" onclick="selecionarAnim(this)"><svg width="28" height="28" viewBox="0 0 36 36"><rect x="24" y="6" width="4" height="4" fill="#e91e8c" rx="1"/><rect x="8" y="18" width="3" height="3" fill="#60a5fa" rx="1"/><rect x="20" y="24" width="3" height="3" fill="#facc15" rx="1"/></svg><span class="anim-label">Pixels</span></div>
+        <div class="anim-item" data-a="pixels" onclick="selecionarAnim(this)"><svg width="28" height="28" viewBox="0 0 36 36"><rect x="24" y="6" width="4" height="4" fill="#F3399A" rx="1"/><rect x="8" y="18" width="3" height="3" fill="#60a5fa" rx="1"/><rect x="20" y="24" width="3" height="3" fill="#facc15" rx="1"/></svg><span class="anim-label">Pixels</span></div>
       </div>
     </div>
     <div class="opcoes-section" id="secaoLayout" style="display:none">
@@ -2581,7 +2584,7 @@
     <div class="escolha-top">
 
       <!-- Badge VIP — visível só no pack mode -->
-      <div id="vipBadge" style="display:none;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--pink),#ff6bb5);color:#fff;font-size:12px;font-weight:800;padding:7px 16px;border-radius:50px;margin-bottom:8px;text-align:center;">
+      <div id="vipBadge" style="display:none;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,var(--pink),var(--pink-light));color:#fff;font-size:12px;font-weight:800;padding:7px 16px;border-radius:50px;margin-bottom:8px;text-align:center;">
         ♾️ Área Ilimitada — Crie quantas cartinhas quiser
       </div>
 
@@ -2765,7 +2768,7 @@
         ctx.clearRect(0,0,200,400);
         var grd = ctx.createRadialGradient(100+Math.sin(angle)*15, 200+Math.cos(angle)*20, 0, 100, 200, 90);
         grd.addColorStop(0,'rgba(168,85,247,0.35)');
-        grd.addColorStop(0.5,'rgba(233,30,140,0.15)');
+        grd.addColorStop(0.5,'rgba(108,60,240,0.12)');
         grd.addColorStop(1,'rgba(0,0,0,0)');
         ctx.fillStyle = grd; ctx.fillRect(0,0,200,400);
         angle += 0.01;
@@ -2775,7 +2778,7 @@
 
     } else if (tipo === 'pixels') {
       var pixels = Array.from({length:14}, function() {
-        var cols = ['#e91e8c','#60a5fa','#facc15','#ffffff','#a855f7','#34d399'];
+        var cols = ['#F3399A','#60a5fa','#facc15','#ffffff','#6C3CF0','#34d399'];
         return { x:Math.random()*190, y:Math.random()*390, size:2+Math.random()*4, col:cols[Math.floor(Math.random()*cols.length)], op:Math.random(), dir:Math.random()>0.5?1:-1, spd:0.008+Math.random()*0.02 };
       });
       function drawPixels() {
@@ -2844,12 +2847,12 @@
       window._packDesconto = true;
       var bumpPackEl = document.getElementById('bump-pack');
       if (bumpPackEl) {
-        bumpPackEl.style.border = '2px solid #e91e8c';
-        bumpPackEl.style.background = '#fff0f6';
+        bumpPackEl.style.border = '2px solid #F3399A';
+        bumpPackEl.style.background = '#f0ecff';
         bumpPackEl.style.position = 'relative';
         bumpPackEl.style.paddingTop = '20px';
         bumpPackEl.innerHTML =
-          '<div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:9px;font-weight:800;padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em">🏷️ DESCONTO EXCLUSIVO</div>' +
+          '<div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#F3399A,#8B5CF6);color:#fff;font-size:9px;font-weight:800;padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em">🏷️ DESCONTO EXCLUSIVO</div>' +
           '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px">' +
             '<div style="flex:1">' +
               '<div style="font-size:18px;margin-bottom:4px">♾️</div>' +
@@ -2857,7 +2860,7 @@
               '<div style="font-size:11px;color:var(--muted);margin-bottom:8px">Crie quantas cartinhas quiser</div>' +
               '<div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">' +
                 '<span style="font-size:11px;color:var(--muted);text-decoration:line-through;font-weight:600">R$ 47</span>' +
-                '<span style="font-size:16px;font-weight:900;color:#e91e8c">+R$ 37,90</span>' +
+                '<span style="font-size:16px;font-weight:900;color:#F3399A">+R$ 37,90</span>' +
               '</div>' +
             '</div>' +
             '<div id="bumpCheck-pack" style="width:20px;height:20px;min-width:20px;border-radius:6px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s">' +
@@ -4103,10 +4106,10 @@
   position:fixed;top:1rem;right:.75rem;z-index:9999;
   max-width:270px;width:calc(100vw - 1.5rem);
   background:rgba(255,255,255,0.97);
-  border:1px solid rgba(233,30,140,.22);
+  border:1px solid rgba(108,60,240,.18);
   border-radius:18px;
   padding:13px 14px 13px 13px;
-  box-shadow:0 8px 32px rgba(233,30,140,.15),0 2px 12px rgba(0,0,0,.08);
+  box-shadow:0 8px 32px rgba(108,60,240,.12),0 2px 12px rgba(0,0,0,.08);
   backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
   display:none;align-items:center;gap:11px;
   transform:translateX(110%);
@@ -4118,10 +4121,10 @@
 <div id="notifProof" role="status" aria-live="polite">
   <div style="font-size:30px;line-height:1;flex-shrink:0">💌</div>
   <div style="flex:1;min-width:0">
-    <div id="notifNome" style="font-size:13px;font-weight:700;color:#1a0010;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div>
+    <div id="notifNome" style="font-size:13px;font-weight:700;color:#1B1B1B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></div>
     <div id="notifAcao" style="font-size:12px;color:rgba(26,0,16,.58);line-height:1.4;margin-top:2px"></div>
-    <div style="font-size:10px;color:#e91e8c;margin-top:5px;display:flex;align-items:center;gap:5px">
-      <span style="width:6px;height:6px;background:#e91e8c;border-radius:50%;display:inline-block;animation:pulseDot 1.4s ease-in-out infinite;flex-shrink:0"></span>
+    <div style="font-size:10px;color:#F3399A;margin-top:5px;display:flex;align-items:center;gap:5px">
+      <span style="width:6px;height:6px;background:#F3399A;border-radius:50%;display:inline-block;animation:pulseDot 1.4s ease-in-out infinite;flex-shrink:0"></span>
       Agora há pouco
     </div>
   </div>
