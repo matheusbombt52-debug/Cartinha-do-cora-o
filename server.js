@@ -63,6 +63,7 @@ if (certBuffer) {
 console.log('🔎 EFI_CLIENT_ID definido:', !!process.env.EFI_CLIENT_ID);
 console.log('🔎 EFI_CLIENT_SECRET definido:', !!process.env.EFI_CLIENT_SECRET);
 console.log('🔎 EFI_PIX_KEY definido:', !!process.env.EFI_PIX_KEY);
+console.log('🔎 UTMIFY_API_TOKEN definido:', !!process.env.UTMIFY_API_TOKEN);
 
 const EFI_BASE = 'https://pix.api.efipay.com.br';
 let _efiToken = null;
@@ -356,45 +357,61 @@ app.post('/webhook/efi', async (req, res) => {
 
 async function enviarPostbackUtmify(cartinha, pix) {
   const token = process.env.UTMIFY_API_TOKEN;
-  if (!token) return;
+  if (!token) {
+    console.warn('⚠️  UTMIFY_API_TOKEN não definido — postback ignorado para txid:', cartinha.pixTxid);
+    return;
+  }
+
+  const valor = parseFloat(cartinha.pixValor || '19.90');
+  const agora = new Date().toISOString().replace('T', ' ').split('.')[0];
+
+  const payload = {
+    order_id:      cartinha.pixTxid,
+    platform:      'custom',
+    payment_method: 'pix',
+    status:        'paid',
+    created_at:    agora,
+    approved_date: agora,
+    customer: {
+      name:     cartinha.nomeRemetente || 'Cliente',
+      email:    cartinha.email || null,
+      phone:    cartinha.telefone || null,
+      document: pix.pagador?.cpf || null,
+    },
+    products: [{
+      id:        'carta-do-coracao',
+      name:      'Carta do Coração',
+      plan_id:   'carta-do-coracao',
+      plan_name: 'Carta do Coração',
+      quantity:  1,
+      price:     valor,
+    }],
+    trackings: {
+      utm_source:   cartinha.utm_source   || null,
+      utm_medium:   cartinha.utm_medium   || null,
+      utm_campaign: cartinha.utm_campaign || null,
+      utm_content:  cartinha.utm_content  || null,
+      utm_term:     cartinha.utm_term     || null,
+      src:          cartinha.src          || null,
+      sck:          cartinha.sck          || null,
+    },
+    commissions: [
+      { description: 'Produtor', value: valor, type: 'producer' },
+    ],
+  };
 
   try {
-    await axios.post('https://api.utmify.com.br/api-credentials/orders', {
-      order_id:      cartinha.pixTxid,
-      platform:      'custom',
-      payment_method:'pix',
-      status:        'paid',
-      created_at:    new Date().toISOString().replace('T',' ').split('.')[0],
-      approved_date: new Date().toISOString().replace('T',' ').split('.')[0],
-      customer: {
-        name:     cartinha.nomeRemetente || 'Cliente',
-        email:    '',
-        phone:    '',
-        document: pix.pagador?.cpf || '',
-      },
-      products: [{
-        id:        'carta-do-coracao',
-        name:      'Carta do Coração',
-        plan_id:   'carta-do-coracao',
-        plan_name: 'Carta do Coração',
-        quantity:  1,
-        price:     parseFloat(cartinha.pixValor || '19.90'),
-      }],
-      trackings: {
-        utm_source:   cartinha.utm_source   || null,
-        utm_medium:   cartinha.utm_medium   || null,
-        utm_campaign: cartinha.utm_campaign || null,
-        utm_content:  cartinha.utm_content  || null,
-        utm_term:     cartinha.utm_term     || null,
-        src:          cartinha.src          || null,
-        sck:          cartinha.sck          || null,
-      },
-    }, {
-      headers: { 'x-api-token': token, 'Content-Type': 'application/json' },
-    });
-    console.log('✅ UTMify postback enviado para txid:', cartinha.pixTxid);
+    const resp = await axios.post(
+      'https://api.utmify.com.br/api-credentials/orders',
+      payload,
+      { headers: { 'x-api-token': token, 'Content-Type': 'application/json' } }
+    );
+    console.log('✅ UTMify postback enviado txid:', cartinha.pixTxid, '| status HTTP:', resp.status);
   } catch (e) {
-    console.error('UTMify postback erro:', e.response?.data || e.message);
+    console.error('❌ UTMify postback ERRO txid:', cartinha.pixTxid,
+      '| HTTP:', e.response?.status,
+      '| body:', JSON.stringify(e.response?.data),
+      '| msg:', e.message);
   }
 }
 
