@@ -1114,7 +1114,7 @@
       <div class="hero-phrase">❤️ Um presente para guardar para sempre.</div>
     </div>
     <p class="hero-desc">Uma cartinha digital personalizada com sua mensagem, fotos e música para criar uma lembrança que ficará para sempre no coração.</p>
-    <a href="#" class="btn-hero" onclick="abrirEscolha();return false;">❤️ Criar Minha Surpresa</a>
+    <a href="#" class="btn-hero" onclick="abrirForm();return false;">❤️ Criar Minha Surpresa</a>
     <p class="hero-scroll">ROLE PARA VER MAIS ↓</p>
   </section>
 
@@ -1164,7 +1164,7 @@
         </div>
       </div>
     </div>
-    <a href="#" class="btn-outline" onclick="abrirEscolha();return false;">❤️ Criar Minha Cartinha</a>
+    <a href="#" class="btn-outline" onclick="abrirForm();return false;">❤️ Criar Minha Cartinha</a>
   </section>
 
   <!-- AVALIAÇÕES -->
@@ -1410,7 +1410,7 @@
       <div class="cta-tag">❤️ Em menos de 5 minutos</div>
       <h2>Faça hoje uma lembrança que ela <span>nunca vai esquecer.</span></h2>
       <p>Algumas mensagens merecem muito mais do que um simples WhatsApp. Crie uma cartinha feita por você e transforme esse momento em uma lembrança para sempre.</p>
-      <a href="#" class="btn-cta-full" onclick="abrirEscolha();return false;">Criar minha cartinha ↗</a>
+      <a href="#" class="btn-cta-full" onclick="abrirForm();return false;">Criar minha cartinha ↗</a>
       <p style="font-size:12px;color:var(--muted);margin-top:1rem;">❤️ Mais de 12.450 pessoas já emocionaram alguém.</p>
     </div>
   </section>
@@ -3316,10 +3316,11 @@
   }
   function voltarDoPasso5() {
     document.getElementById('telaForm5').style.display = 'none';
-    // Volta para mídia ou form4 dependendo do caminho
-    if (document.getElementById('telaMidia').style.display !== 'none' || opcMidiaSel === 'sim') {
+    if (opcMidiaSel === 'sim') {
+      atualizarProgresso('telaMidia');
       document.getElementById('telaMidia').style.display = 'block';
     } else {
+      atualizarProgresso('telaForm4');
       document.getElementById('telaForm4').style.display = 'block';
     }
   }
@@ -3459,6 +3460,7 @@
   }
 
   function voltarParaForm4() {
+    atualizarProgresso('telaForm3');
     document.getElementById('telaMidia').style.display = 'none';
     document.getElementById('telaForm4').style.display = 'block';
   }
@@ -3496,12 +3498,12 @@
     selecionarOpc('nao');
   }
   function voltarParaForm3() {
+    atualizarProgresso('telaForm2');
     document.getElementById('telaForm4').style.display = 'none';
-    // Por enquanto volta para form2 (passo 3 ainda não existe)
     document.getElementById('telaForm2').style.display = 'block';
   }
-  // ── PASSO 3 FUNÇÃO DIRETA ──
   function voltarParaForm3do4() {
+    atualizarProgresso('telaForm2');
     document.getElementById('telaForm4').style.display = 'none';
     document.getElementById('telaForm3').style.display = 'block';
   }
@@ -3553,6 +3555,7 @@
   }
 
   function voltarParaForm2() {
+    atualizarProgresso('telaForm');
     document.getElementById('telaForm3').style.display = 'none';
     document.getElementById('telaForm2').style.display = 'block';
   }
@@ -3886,6 +3889,7 @@
 
 
   function voltarParaForm1() {
+    atualizarProgresso('telaEscolha');
     document.getElementById('telaForm2').style.display = 'none';
     document.getElementById('telaForm').style.display = 'block';
   }
@@ -3945,6 +3949,8 @@
 
   function abrirForm() {
     document.getElementById('telaEscolha').style.display = 'none';
+    atualizarProgresso('telaEscolha');
+    document.body.style.overflow = 'hidden';
     var t = document.getElementById('telaForm');
     t.style.display = 'block';
     t.scrollTop = 0;
@@ -3985,7 +3991,11 @@
 
   function voltarParaEscolha() {
     document.getElementById('telaForm').style.display = 'none';
-    document.getElementById('telaEscolha').style.display = 'block';
+    document.body.style.overflow = '';
+    var fill = document.getElementById('progressFill');
+    var wrap = document.getElementById('progressWrap');
+    if (fill) fill.style.width = '0%';
+    if (wrap) wrap.classList.remove('visible');
   }
 
   function abrirEscolha() {
@@ -4138,9 +4148,9 @@
     if (packId) {
       window._packMode = true;
       // Badge VIP ao abrir o funil
-      var origEscolha = window.abrirEscolha;
-      window.abrirEscolha = function() {
-        origEscolha();
+      var origForm = window.abrirForm;
+      window.abrirForm = function() {
+        origForm();
         var badge = document.getElementById('vipBadge');
         if (badge) badge.style.display = 'flex';
       };
@@ -4157,7 +4167,7 @@
     // Abrir funil direto se vier de ?criar
     if (params.get('criar') !== null) {
       setTimeout(function() {
-        abrirEscolha();
+        abrirForm();
         document.documentElement.style.transition = 'opacity 0.15s';
         document.documentElement.style.opacity = '1';
         if (!window._packMode) {
