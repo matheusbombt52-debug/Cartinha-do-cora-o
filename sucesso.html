@@ -201,13 +201,13 @@
         <div style="font-size:14px;font-weight:700;color:#e4e4e7;margin-bottom:.3rem">Transforme sua cartinha em presente físico</div>
         <div style="font-size:12px;color:#71717a;margin-bottom:.75rem;line-height:1.5">Imprima e entregue junto com flores. Preço exclusivo para você que já tem ilimitadas.</div>
         <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:1rem">
-          <span style="font-size:13px;color:#71717a;text-decoration:line-through">R$ 27,00</span>
-          <span style="font-size:22px;font-weight:900;color:#e91e8c">R$ 19,90</span>
-          <span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px">26% OFF</span>
+          <span style="font-size:13px;color:#71717a;text-decoration:line-through">R$ 37,00</span>
+          <span style="font-size:22px;font-weight:900;color:#e91e8c">R$ 27,00</span>
+          <span style="background:#dcfce7;color:#16a34a;font-size:10px;font-weight:800;padding:3px 8px;border-radius:20px">27% OFF</span>
         </div>
         <div id="pdfParaPackPixArea">
           <button onclick="comprarPDFParaPack()" style="width:100%;padding:13px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:14px;font-weight:800;cursor:pointer">
-            📄 Quero o PDF por R$ 19,90
+            📄 Quero o PDF por R$ 27,00
           </button>
         </div>
       </div>
@@ -645,7 +645,7 @@
         var resp = await fetch('/api/pix', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ nome: 'Cliente', cartinhaId: cid, valor: '19.90' }),
+          body: JSON.stringify({ nome: 'Cliente', cartinhaId: cid, valor: '27.00' }),
         });
         var data = await resp.json();
         if (data.success) {

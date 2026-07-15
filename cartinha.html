@@ -417,12 +417,12 @@
         <div style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.5">Baixe ou imprima sua cartinha para guardar no celular ou entregar pessoalmente</div>
       </div>
       <div style="background:rgba(233,30,140,.1);border:1px solid rgba(233,30,140,.25);border-radius:14px;padding:1rem;text-align:center;margin-bottom:1.25rem">
-        <div id="modalPDFPreco" style="font-size:26px;font-weight:900;color:#e91e8c">R$ 19,90</div>
+        <div id="modalPDFPreco" style="font-size:26px;font-weight:900;color:#e91e8c">R$ 27,00</div>
         <div style="font-size:11px;color:rgba(255,255,255,.4);margin-top:2px">pagamento único · liberação imediata</div>
       </div>
       <div id="pdfPixArea">
         <button id="btnGerarPixPDF" onclick="gerarPixPDF()" style="width:100%;padding:14px;border-radius:50px;border:none;background:linear-gradient(135deg,#e91e8c,#ff6bb5);color:#fff;font-size:15px;font-weight:800;cursor:pointer;margin-bottom:10px">
-          ◉ Gerar PIX R$ 19,90
+          ◉ Gerar PIX R$ 27,00
         </button>
       </div>
       <button onclick="fecharModalPDF()" style="width:100%;padding:11px;border-radius:50px;border:1.5px solid rgba(255,255,255,.15);background:transparent;color:rgba(255,255,255,.45);font-size:13px;font-weight:600;cursor:pointer">
@@ -899,8 +899,8 @@
     }
 
     var _pdfPixTimer = null;
-    var _precoPDF = '19.90';
-    var _precoPDFDisplay = 'R$ 19,90';
+    var _precoPDF = '27.00';
+    var _precoPDFDisplay = 'R$ 27,00';
 
     async function gerarPixPDF() {
       var btn = document.getElementById('btnGerarPixPDF');
@@ -986,7 +986,7 @@
       // PDF bloqueado — mostra cadeado se não comprou
       if (!d.pdf) {
         var btnPrint = document.getElementById('btnPrint');
-        if (btnPrint) btnPrint.innerHTML = '🔒 Baixar PDF por R$&nbsp;19,90';
+        if (btnPrint) btnPrint.innerHTML = '🔒 Baixar PDF por R$&nbsp;27,00';
       }
 
       // Partículas brancas para ficarem visíveis no fundo colorido
