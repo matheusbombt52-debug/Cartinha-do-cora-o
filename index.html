@@ -2038,217 +2038,204 @@
         <li>❤️ Sua cartinha fica disponível para sempre</li>
       </ul>
     </div>
-    <button class="btn-pagamento" onclick="abrirPagamento()">
-      Continuar para Pagamento
-      <span>→</span>
-    </button>
+    <!-- Pagamento inline -->
+    <div id="pagamentoInline" style="margin-top:1.5rem">
+      <p style="text-align:center;font-size:12px;color:var(--muted);margin-bottom:0.75rem">Etapa 3 de 3 — Último passo</p>
+      <div style="text-align:center;margin-bottom:1.25rem">
+        <div id="cronoContainer" style="display:inline-flex;align-items:center;gap:8px;background:var(--pink-100);border:1px solid var(--pink-200);border-radius:30px;padding:7px 16px">
+          <span style="font-size:14px">⏰</span>
+          <span style="font-size:13px;font-weight:700;color:var(--pink-dark)">🎁 Seu preço especial fica reservado por <span id="cronoPag" style="color:var(--pink);font-size:15px;font-weight:900">14:59</span></span>
+        </div>
+      </div>
+
+      <!-- Resumo do plano -->
+      <div class="pag-plano">
+        <div class="pag-plano-nome">Plano: Para Sempre ❤️</div>
+        <div class="pag-plano-preco" id="pagPlanoPreco">R$ 19,90</div>
+      </div>
+
+      <!-- SEÇÃO COMPARTILHADA: Nome + Bumps + Método -->
+      <div id="payShared">
+        <label class="campo-label">Quem está enviando essa surpresa?</label>
+        <div class="campo-wrap">
+          <span class="campo-icon">👤</span>
+          <input class="campo-input" id="pagNome" type="text" placeholder="Seu nome completo" />
+        </div>
+        <!-- ORDER BUMPS -->
+        <div style="margin:16px 0">
+          <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;text-align:center;margin-bottom:10px">🎁 Adicione à sua cartinha</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
+            <!-- BUMP PDF -->
+            <div id="bump-pdf" onclick="selecionarBump('pdf')" style="border:2px solid var(--border);border-radius:12px;padding:11px 10px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:18px">📄</span>
+                <div id="bumpCheck-pdf" style="width:18px;height:18px;border-radius:5px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0">
+                  <svg id="bumpCheckIcon-pdf" width="11" height="9" viewBox="0 0 11 9" style="display:none"><polyline points="1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div style="font-size:12px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:2px">PDF da Cartinha</div>
+              <div style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.3">Baixe e imprima</div>
+              <div style="font-size:14px;font-weight:900;color:var(--pink)">+R$ 27</div>
+            </div>
+            <!-- BUMP PACK -->
+            <div id="bump-pack" onclick="selecionarBump('pack')" style="border:2px solid var(--border);border-radius:12px;padding:11px 10px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none">
+              <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
+                <span style="font-size:18px">♾️</span>
+                <div id="bumpCheck-pack" style="width:18px;height:18px;border-radius:5px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0">
+                  <svg id="bumpCheckIcon-pack" width="11" height="9" viewBox="0 0 11 9" style="display:none"><polyline points="1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div style="font-size:12px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:2px">Cartinhas Ilimitadas</div>
+              <div style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.3">Crie quantas quiser</div>
+              <div style="font-size:14px;font-weight:900;color:var(--pink)">+R$ 47</div>
+            </div>
+          </div>
+          <!-- BUMP COMBO -->
+          <div id="bump-combo" onclick="selecionarBump('combo')" style="border:2px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none;position:relative">
+            <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--pink),var(--pink-light));color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em">⭐ MELHOR OFERTA</div>
+            <div style="display:flex;align-items:center;justify-content:space-between">
+              <div style="flex:1">
+                <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:2px">Leve os 2: PDF + Ilimitadas</div>
+                <div style="font-size:11px;color:var(--muted);margin-bottom:8px">PDF da cartinha + cartinhas ilimitadas</div>
+                <div style="display:flex;align-items:center;gap:8px">
+                  <span style="font-size:16px;font-weight:900;color:var(--pink)">R$ 67</span>
+                  <span style="font-size:11px;color:var(--muted);text-decoration:line-through">R$ 74</span>
+                  <span style="font-size:10px;font-weight:800;background:#dcfce7;color:#16a34a;padding:2px 7px;border-radius:20px">9% OFF</span>
+                </div>
+              </div>
+              <div id="bumpCheck-combo" style="width:22px;height:22px;min-width:22px;border-radius:6px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-left:12px">
+                <svg id="bumpCheckIcon-combo" width="13" height="11" viewBox="0 0 13 11" style="display:none"><polyline points="1.5 6 5 9.5 11.5 1.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- SELETOR DE MÉTODO — visível só com ?cartao=sim -->
+        <div id="blocoMetodos" style="display:none">
+          <p class="pag-metodo-label">Forma de pagamento</p>
+          <div class="pag-metodos">
+            <button class="pag-metodo-btn active" id="tabPix" onclick="selecionarMetodo('pix')">
+              <div class="radio"></div>
+              <span>◉ PIX</span>
+            </button>
+            <button class="pag-metodo-btn" id="tabCartao" onclick="selecionarMetodo('cartao')">
+              <div class="radio"></div>
+              <span>💳 Cartão</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMULÁRIO PIX -->
+      <div id="formPix">
+        <div class="pag-section-title">Pague com PIX</div>
+        <div class="pag-section-sub">Pagamento instantâneo. QR Code gerado na hora.</div>
+        <div id="pixCampos">
+          <button class="btn-pagar" id="btnPagarPix" onclick="processarPix()">◉ Gerar QR Code PIX  R$ 19,90</button>
+          <p style="text-align:center;font-size:11px;color:var(--muted);margin:0.4rem 0 0;">Pagamento via PIX • Liberação automática</p>
+          <p class="pag-seguro">🔒 Ambiente seguro • Liberação automática após o pagamento</p>
+        </div>
+        <!-- QR Code gerado -->
+        <div class="pix-result-box" id="pixResultBox" style="display:none">
+          <div class="pix-status-row" id="pixStatusRow">
+            <span class="pix-status-dot"></span>
+            <span id="pixStatusTxt">Aguardando pagamento…</span>
+          </div>
+          <img id="pixQrCode" src="" alt="QR Code PIX" style="width:200px;height:200px;margin:1rem auto;display:block;border-radius:12px;border:3px solid var(--pink-200)" />
+          <div id="pixCopiaCola" style="display:none"></div>
+          <button class="btn-copiar" id="btnCopiarPix" onclick="copiarPixCodigo()">📋 Copiar código PIX</button>
+          <!-- Botão de teste — só aparece com ?cartao=sim -->
+          <div id="btnTesteConfirmar" style="display:none;margin-top:12px">
+            <button onclick="_pixPagoConfirmado()" style="width:100%;padding:10px;border-radius:50px;border:2px dashed #f59e0b;background:transparent;color:#f59e0b;font-size:12px;font-weight:700;cursor:pointer">🧪 [TESTE] Simular pagamento confirmado</button>
+          </div>
+          <div id="pixConfirmado" style="display:none;text-align:center;padding:1rem 0">
+            <div style="font-size:48px;margin-bottom:0.5rem">🎉</div>
+            <p style="font-size:18px;font-weight:900;color:var(--pink);margin-bottom:0.25rem">Pagamento confirmado!</p>
+            <p style="font-size:13px;color:var(--muted)">Redirecionando para sua cartinha…</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FORMULÁRIO CARTÃO -->
+      <div id="formCartao" style="display:none">
+        <div class="pag-section-title">💳 Dados do Cartão</div>
+        <div class="pag-section-sub">Dados criptografados. Não armazenamos seu cartão.</div>
+
+        <label class="campo-label">Número do cartão</label>
+        <div class="campo-wrap" style="position:relative">
+          <span class="campo-icon">💳</span>
+          <input class="campo-input" id="cardNumero" type="tel" inputmode="numeric" placeholder="0000 0000 0000 0000" maxlength="19" oninput="onCardNumeroInput(this)" />
+          <span id="cardBandeiraIcon" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:800;color:var(--pink);pointer-events:none"></span>
+        </div>
+
+        <label class="campo-label">Nome impresso no cartão</label>
+        <div class="campo-wrap">
+          <span class="campo-icon">👤</span>
+          <input class="campo-input" id="cardNome" type="text" placeholder="NOME COMO NO CARTÃO" oninput="this.value=this.value.toUpperCase()" />
+        </div>
+
+        <label class="campo-label">CPF do titular</label>
+        <div class="campo-wrap">
+          <span class="campo-icon">📋</span>
+          <input class="campo-input" id="cardCPF" type="tel" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" oninput="onCpfInput(this)" />
+        </div>
+
+        <div class="card-row">
+          <div>
+            <label class="campo-label">Validade</label>
+            <div class="campo-wrap">
+              <span class="campo-icon">📅</span>
+              <input class="campo-input" id="cardValidade" type="tel" inputmode="numeric" placeholder="MM/AA" maxlength="5" oninput="onValidadeInput(this)" />
+            </div>
+          </div>
+          <div>
+            <label class="campo-label">CVV</label>
+            <div class="campo-wrap">
+              <span class="campo-icon">🔒</span>
+              <input class="campo-input" id="cardCVV" type="tel" inputmode="numeric" placeholder="123" maxlength="4" />
+            </div>
+          </div>
+        </div>
+
+        <label class="campo-label">Parcelas</label>
+        <div class="campo-wrap">
+          <span class="campo-icon">💰</span>
+          <select class="campo-input" id="cardParcelas" style="padding-left:42px">
+            <option value="1">1x de R$ 19,90 sem juros</option>
+          </select>
+        </div>
+
+        <div id="cardErro" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:1rem;margin-bottom:1rem;font-size:13px;color:#dc2626;line-height:1.5"></div>
+
+        <button class="btn-pagar" id="btnPagarCartao" onclick="processarCartao()">💳 Pagar com Cartão  R$ 19,90</button>
+        <p class="pag-seguro">🔒 Dados criptografados • Ambiente seguro • Efí Bank</p>
+      </div>
+
+      <p class="pag-seguro">🔒 Ambiente seguro • Liberação automática após o pagamento</p>
+
+      <!-- Urgência com frase variando uma por vez -->
+      <div class="pag-urgencia">
+        <div class="pag-urgencia-title">❤️ Por que vale a pena liberar sua cartinha?</div>
+        <div class="urg-frase-wrap">
+          <p class="urg-frase" id="urgFrase">💖 Imagine a reação quando essa pessoa abrir sua cartinha...<br>Esse momento pode ficar marcado para sempre.</p>
+        </div>
+        <div class="urg-dots" id="urgDots">
+          <span class="urg-dot active"></span>
+          <span class="urg-dot"></span>
+          <span class="urg-dot"></span>
+          <span class="urg-dot"></span>
+        </div>
+      </div>
+
+      <!-- Social proof -->
+      <div class="pag-proof">❤️ Mais de <strong>12.450 Cartas do Coração</strong> já emocionaram alguém especial.</div>
+
+    </div>
   </div>
 </div>
 
-<!-- TELA PAGAMENTO -->
-<div id="telaPagamento">
-  <div class="pag-wrap">
-
-    <!-- Steps -->
-    <div class="pag-steps">
-      <span class="pag-step active">Início</span>
-      <span class="pag-step-sep">›</span>
-      <span class="pag-step active">Escolher</span>
-      <span class="pag-step-sep">›</span>
-      <span class="pag-step active">Finalizar</span>
-    </div>
-    <p style="text-align:center;font-size:12px;color:var(--muted);margin-bottom:0.75rem">Etapa 3 de 3 Último passo</p>
-    <div style="text-align:center;margin-bottom:1.25rem">
-      <div id="cronoContainer" style="display:inline-flex;align-items:center;gap:8px;background:var(--pink-100);border:1px solid var(--pink-200);border-radius:30px;padding:7px 16px">
-        <span style="font-size:14px">⏰</span>
-        <span style="font-size:13px;font-weight:700;color:var(--pink-dark)">🎁 Seu preço especial fica reservado por <span id="cronoPag" style="color:var(--pink);font-size:15px;font-weight:900">14:59</span></span>
-      </div>
-    </div>
-
-    <!-- Resumo do plano -->
-    <div class="pag-plano">
-      <div class="pag-plano-nome">Plano: Para Sempre ❤️</div>
-      <div class="pag-plano-preco" id="pagPlanoPreco">R$ 19,90</div>
-    </div>
-
-    <!-- SEÇÃO COMPARTILHADA: Nome + Bumps + Método -->
-    <div id="payShared">
-      <label class="campo-label">Quem está enviando essa surpresa?</label>
-      <div class="campo-wrap">
-        <span class="campo-icon">👤</span>
-        <input class="campo-input" id="pagNome" type="text" placeholder="Seu nome completo" />
-      </div>
-      <!-- ORDER BUMPS -->
-      <div style="margin:16px 0">
-        <div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.12em;text-align:center;margin-bottom:10px">🎁 Adicione à sua cartinha</div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px">
-          <!-- BUMP PDF -->
-          <div id="bump-pdf" onclick="selecionarBump('pdf')" style="border:2px solid var(--border);border-radius:12px;padding:11px 10px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-              <span style="font-size:18px">📄</span>
-              <div id="bumpCheck-pdf" style="width:18px;height:18px;border-radius:5px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0">
-                <svg id="bumpCheckIcon-pdf" width="11" height="9" viewBox="0 0 11 9" style="display:none"><polyline points="1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-            </div>
-            <div style="font-size:12px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:2px">PDF da Cartinha</div>
-            <div style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.3">Baixe e imprima</div>
-            <div style="font-size:14px;font-weight:900;color:var(--pink)">+R$ 27</div>
-          </div>
-          <!-- BUMP PACK -->
-          <div id="bump-pack" onclick="selecionarBump('pack')" style="border:2px solid var(--border);border-radius:12px;padding:11px 10px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
-              <span style="font-size:18px">♾️</span>
-              <div id="bumpCheck-pack" style="width:18px;height:18px;border-radius:5px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0">
-                <svg id="bumpCheckIcon-pack" width="11" height="9" viewBox="0 0 11 9" style="display:none"><polyline points="1 4.5 4 7.5 10 1" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-            </div>
-            <div style="font-size:12px;font-weight:800;color:var(--text);line-height:1.3;margin-bottom:2px">Cartinhas Ilimitadas</div>
-            <div style="font-size:11px;color:var(--muted);margin-bottom:6px;line-height:1.3">Crie quantas quiser</div>
-            <div style="font-size:14px;font-weight:900;color:var(--pink)">+R$ 47</div>
-          </div>
-        </div>
-        <!-- BUMP COMBO -->
-        <div id="bump-combo" onclick="selecionarBump('combo')" style="border:2px solid var(--border);border-radius:12px;padding:12px 14px;background:var(--card);cursor:pointer;transition:all .2s;user-select:none;position:relative">
-          <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--pink),var(--pink-light));color:#fff;font-size:10px;font-weight:800;padding:3px 12px;border-radius:20px;white-space:nowrap;letter-spacing:.05em">⭐ MELHOR OFERTA</div>
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <div style="flex:1">
-              <div style="font-size:13px;font-weight:800;color:var(--text);margin-bottom:2px">Leve os 2: PDF + Ilimitadas</div>
-              <div style="font-size:11px;color:var(--muted);margin-bottom:8px">PDF da cartinha + cartinhas ilimitadas</div>
-              <div style="display:flex;align-items:center;gap:8px">
-                <span style="font-size:16px;font-weight:900;color:var(--pink)">R$ 67</span>
-                <span style="font-size:11px;color:var(--muted);text-decoration:line-through">R$ 74</span>
-                <span style="font-size:10px;font-weight:800;background:#dcfce7;color:#16a34a;padding:2px 7px;border-radius:20px">9% OFF</span>
-              </div>
-            </div>
-            <div id="bumpCheck-combo" style="width:22px;height:22px;min-width:22px;border-radius:6px;border:2px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-left:12px">
-              <svg id="bumpCheckIcon-combo" width="13" height="11" viewBox="0 0 13 11" style="display:none"><polyline points="1.5 6 5 9.5 11.5 1.5" stroke="#fff" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- SELETOR DE MÉTODO — visível só com ?cartao=sim -->
-      <div id="blocoMetodos" style="display:none">
-        <p class="pag-metodo-label">Forma de pagamento</p>
-        <div class="pag-metodos">
-          <button class="pag-metodo-btn active" id="tabPix" onclick="selecionarMetodo('pix')">
-            <div class="radio"></div>
-            <span>◉ PIX</span>
-          </button>
-          <button class="pag-metodo-btn" id="tabCartao" onclick="selecionarMetodo('cartao')">
-            <div class="radio"></div>
-            <span>💳 Cartão</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- FORMULÁRIO PIX -->
-    <div id="formPix">
-      <div class="pag-section-title">Pague com PIX</div>
-      <div class="pag-section-sub">Pagamento instantâneo. QR Code gerado na hora.</div>
-      <div id="pixCampos">
-        <button class="btn-pagar" id="btnPagarPix" onclick="processarPix()">◉ Gerar QR Code PIX  R$ 19,90</button>
-        <p style="text-align:center;font-size:11px;color:var(--muted);margin:0.4rem 0 0;">Pagamento via PIX • Liberação automática</p>
-        <p class="pag-seguro">🔒 Ambiente seguro • Liberação automática após o pagamento</p>
-      </div>
-      <!-- QR Code gerado -->
-      <div class="pix-result-box" id="pixResultBox" style="display:none">
-        <div class="pix-status-row" id="pixStatusRow">
-          <span class="pix-status-dot"></span>
-          <span id="pixStatusTxt">Aguardando pagamento…</span>
-        </div>
-        <img id="pixQrCode" src="" alt="QR Code PIX" style="width:200px;height:200px;margin:1rem auto;display:block;border-radius:12px;border:3px solid var(--pink-200)" />
-        <div id="pixCopiaCola" style="display:none"></div>
-        <button class="btn-copiar" id="btnCopiarPix" onclick="copiarPixCodigo()">📋 Copiar código PIX</button>
-        <!-- Botão de teste — só aparece com ?cartao=sim -->
-        <div id="btnTesteConfirmar" style="display:none;margin-top:12px">
-          <button onclick="_pixPagoConfirmado()" style="width:100%;padding:10px;border-radius:50px;border:2px dashed #f59e0b;background:transparent;color:#f59e0b;font-size:12px;font-weight:700;cursor:pointer">🧪 [TESTE] Simular pagamento confirmado</button>
-        </div>
-        <div id="pixConfirmado" style="display:none;text-align:center;padding:1rem 0">
-          <div style="font-size:48px;margin-bottom:0.5rem">🎉</div>
-          <p style="font-size:18px;font-weight:900;color:var(--pink);margin-bottom:0.25rem">Pagamento confirmado!</p>
-          <p style="font-size:13px;color:var(--muted)">Redirecionando para sua cartinha…</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- FORMULÁRIO CARTÃO -->
-    <div id="formCartao" style="display:none">
-      <div class="pag-section-title">💳 Dados do Cartão</div>
-      <div class="pag-section-sub">Dados criptografados. Não armazenamos seu cartão.</div>
-
-      <label class="campo-label">Número do cartão</label>
-      <div class="campo-wrap" style="position:relative">
-        <span class="campo-icon">💳</span>
-        <input class="campo-input" id="cardNumero" type="tel" inputmode="numeric" placeholder="0000 0000 0000 0000" maxlength="19" oninput="onCardNumeroInput(this)" />
-        <span id="cardBandeiraIcon" style="position:absolute;right:12px;top:50%;transform:translateY(-50%);font-size:11px;font-weight:800;color:var(--pink);pointer-events:none"></span>
-      </div>
-
-      <label class="campo-label">Nome impresso no cartão</label>
-      <div class="campo-wrap">
-        <span class="campo-icon">👤</span>
-        <input class="campo-input" id="cardNome" type="text" placeholder="NOME COMO NO CARTÃO" oninput="this.value=this.value.toUpperCase()" />
-      </div>
-
-      <label class="campo-label">CPF do titular</label>
-      <div class="campo-wrap">
-        <span class="campo-icon">📋</span>
-        <input class="campo-input" id="cardCPF" type="tel" inputmode="numeric" placeholder="000.000.000-00" maxlength="14" oninput="onCpfInput(this)" />
-      </div>
-
-      <div class="card-row">
-        <div>
-          <label class="campo-label">Validade</label>
-          <div class="campo-wrap">
-            <span class="campo-icon">📅</span>
-            <input class="campo-input" id="cardValidade" type="tel" inputmode="numeric" placeholder="MM/AA" maxlength="5" oninput="onValidadeInput(this)" />
-          </div>
-        </div>
-        <div>
-          <label class="campo-label">CVV</label>
-          <div class="campo-wrap">
-            <span class="campo-icon">🔒</span>
-            <input class="campo-input" id="cardCVV" type="tel" inputmode="numeric" placeholder="123" maxlength="4" />
-          </div>
-        </div>
-      </div>
-
-      <label class="campo-label">Parcelas</label>
-      <div class="campo-wrap">
-        <span class="campo-icon">💰</span>
-        <select class="campo-input" id="cardParcelas" style="padding-left:42px">
-          <option value="1">1x de R$ 19,90 sem juros</option>
-        </select>
-      </div>
-
-      <div id="cardErro" style="display:none;background:#fef2f2;border:1px solid #fecaca;border-radius:12px;padding:1rem;margin-bottom:1rem;font-size:13px;color:#dc2626;line-height:1.5"></div>
-
-      <button class="btn-pagar" id="btnPagarCartao" onclick="processarCartao()">💳 Pagar com Cartão  R$ 19,90</button>
-      <p class="pag-seguro">🔒 Dados criptografados • Ambiente seguro • Efí Bank</p>
-    </div>
-
-    <p class="pag-seguro">🔒 Ambiente seguro • Liberação automática após o pagamento</p>
-
-    <!-- Urgência com frase variando uma por vez -->
-    <div class="pag-urgencia">
-      <div class="pag-urgencia-title">❤️ Por que vale a pena liberar sua cartinha?</div>
-      <div class="urg-frase-wrap">
-        <p class="urg-frase" id="urgFrase">💖 Imagine a reação quando essa pessoa abrir sua cartinha...<br>Esse momento pode ficar marcado para sempre.</p>
-      </div>
-      <div class="urg-dots" id="urgDots">
-        <span class="urg-dot active"></span>
-        <span class="urg-dot"></span>
-        <span class="urg-dot"></span>
-        <span class="urg-dot"></span>
-      </div>
-    </div>
-
-    <!-- Social proof -->
-    <div class="pag-proof">❤️ Mais de <strong>12.450 Cartas do Coração</strong> já emocionaram alguém especial.</div>
-
-  </div>
-</div>
+<!-- TELA PAGAMENTO (placeholder) -->
+<div id="telaPagamento" style="display:none"></div>
 
 <!-- TELA FORMULÁRIO PASSO 4 -->
 <div id="telaForm4">
@@ -2765,10 +2752,9 @@
   // ── TELA PAGAMENTO ──
   function abrirPagamento() {
     atualizarProgresso('telaPagamento');
-    document.getElementById('telaPlanos').style.display = 'none';
-    var t = document.getElementById('telaPagamento');
-    t.style.display = 'block'; t.scrollTop = 0;
     iniciarCronometro();
+    var el = document.getElementById('pagamentoInline');
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     // Preencher nome com o nome do remetente
     var nr = document.getElementById('nomeRemetente');
     var pn = document.getElementById('pagNome');
