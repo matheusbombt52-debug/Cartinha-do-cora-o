@@ -3238,6 +3238,9 @@
     var t = document.getElementById('telaPlanos');
     t.style.display = 'block';
     t.scrollTop = 0;
+    var nr = document.getElementById('nomeRemetente');
+    var pn = document.getElementById('pagNome');
+    if (nr && pn && nr.value.trim()) pn.value = nr.value.trim();
     iniciarFrasesPlano();
   }
 
