@@ -804,6 +804,38 @@
       box-shadow: 0 8px 32px rgba(108,60,240,0.3); transition: all 0.2s;
     }
     .btn-comecar:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(108,60,240,0.42); }
+    /* ── PREP ANIMATION (tela final) ── */
+    .prep-panel {
+      width: 100%; background: var(--card); border-radius: 20px;
+      padding: 1.5rem 1.25rem 1.25rem; border: 1px solid var(--border);
+      box-shadow: 0 4px 24px rgba(108,60,240,0.1); margin: 0.5rem 0 1.5rem; text-align: left;
+    }
+    .prep-title {
+      font-size: 20px; font-weight: 900; color: var(--text); text-align: center;
+      margin-bottom: 0.35rem; transition: opacity 0.3s ease;
+    }
+    .prep-sub {
+      font-size: 13px; color: var(--muted); text-align: center;
+      margin-bottom: 1.25rem; line-height: 1.5; transition: opacity 0.3s ease;
+    }
+    .prep-steps { display: flex; flex-direction: column; gap: 9px; }
+    .prep-step {
+      display: flex; align-items: center; gap: 10px;
+      opacity: 0; transform: translateY(6px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+      font-size: 14px; font-weight: 600; color: var(--text);
+    }
+    .prep-step.show { opacity: 1; transform: translateY(0); }
+    .prep-check-icon {
+      width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+      color: #fff; font-size: 11px; font-weight: 900;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .prep-step-final .prep-check-icon { background: linear-gradient(135deg, var(--pink), var(--purple)); }
+    .prep-btn-hidden { opacity: 0 !important; pointer-events: none !important; }
+    @keyframes prepBtnReveal { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+    .btn-comecar.prep-revealed { animation: prepBtnReveal 0.4s ease forwards; }
     /* ── TELA PLANOS ── */
     #telaPlanos {
       display: none; position: fixed; inset: 0; z-index: 1011;
@@ -1994,9 +2026,19 @@
       <div class="final-step"><div class="final-step-dot active"></div><div class="final-step-label active">FINALIZAR</div></div>
     </div>
     <div class="final-avatar">🦊</div>
-    <div class="final-msg" id="finalMsg">Você chegou até aqui isso já diz muito sobre você! 🥹</div>
-    <p class="final-sub">Seu presente está pronto. Agora falta apenas liberar a cartinha.</p>
-    <button class="btn-comecar" onclick="abrirPlanos()">❤️ Liberar minha Cartinha</button>
+    <div class="prep-panel">
+      <div class="prep-title" id="prepTitle">❤️ Preparando sua surpresa...</div>
+      <div class="prep-sub" id="prepSub">Estamos finalizando tudo para que sua cartinha fique perfeita.</div>
+      <div class="prep-steps">
+        <div class="prep-step" id="pstep-0"><span class="prep-check-icon">✔</span><span>Nome confirmado</span></div>
+        <div class="prep-step" id="pstep-1"><span class="prep-check-icon">✔</span><span>Mensagem preparada</span></div>
+        <div class="prep-step" id="pstep-2"><span class="prep-check-icon">✔</span><span>Personalização concluída</span></div>
+        <div class="prep-step" id="pstep-3"><span class="prep-check-icon">✔</span><span>Link exclusivo criado</span></div>
+        <div class="prep-step" id="pstep-4"><span class="prep-check-icon">✔</span><span>QR Code reservado</span></div>
+        <div class="prep-step prep-step-final" id="pstep-5"><span class="prep-check-icon">✔</span><span>Tudo pronto!</span></div>
+      </div>
+    </div>
+    <button class="btn-comecar prep-btn-hidden" id="btnFinalLiberar" onclick="abrirPlanos()">❤️ Liberar minha Cartinha</button>
   </div>
 </div>
 
@@ -3260,27 +3302,40 @@
   }
 
   function iniciarFrasesFinal() {
-    var frases = [
-      'Sua cartinha já está criada. ✨<br>Falta só o último passo.',
-      'Imagine a emoção ao abrir essa cartinha... ❤️',
-      'Falta só um passo para transformar tudo isso em uma lembrança inesquecível. ✨'
-    ];
-    var el = document.getElementById('finalMsg');
-    if (!el) return;
-    var idx = 0;
-    el.innerHTML = frases[0];
-
-    function proxFrase() {
-      if (idx >= frases.length - 1) return; // Para na última
-      el.classList.add('fade');
-      setTimeout(function() {
-        idx++;
-        el.innerHTML = frases[idx];
-        el.classList.remove('fade');
-        setTimeout(proxFrase, 2800);
-      }, 500);
+    // Reset
+    for (var i = 0; i <= 5; i++) {
+      var s = document.getElementById('pstep-' + i);
+      if (s) s.classList.remove('show');
     }
-    setTimeout(proxFrase, 2800);
+    var btnF = document.getElementById('btnFinalLiberar');
+    if (btnF) { btnF.classList.add('prep-btn-hidden'); btnF.classList.remove('prep-revealed'); }
+    var title = document.getElementById('prepTitle');
+    var sub   = document.getElementById('prepSub');
+    if (title) { title.style.opacity = '1'; title.textContent = '❤️ Preparando sua surpresa...'; }
+    if (sub)   { sub.style.opacity   = '1'; sub.textContent   = 'Estamos finalizando tudo para que sua cartinha fique perfeita.'; }
+
+    // Revelar cada etapa
+    var delays = [300, 650, 1000, 1350, 1700, 2100];
+    delays.forEach(function(delay, idx) {
+      setTimeout(function() {
+        var el = document.getElementById('pstep-' + idx);
+        if (el) el.classList.add('show');
+      }, delay);
+    });
+
+    // Trocar título e subtítulo
+    setTimeout(function() {
+      var t = document.getElementById('prepTitle');
+      var s = document.getElementById('prepSub');
+      if (t) { t.style.opacity = '0'; setTimeout(function() { t.textContent = '✨ Sua cartinha está pronta!'; t.style.opacity = '1'; }, 300); }
+      if (s) { s.style.opacity = '0'; setTimeout(function() { s.textContent = 'Agora falta apenas liberar sua surpresa.'; s.style.opacity = '1'; }, 300); }
+    }, 2500);
+
+    // Revelar botão
+    setTimeout(function() {
+      var b = document.getElementById('btnFinalLiberar');
+      if (b) { b.classList.remove('prep-btn-hidden'); b.classList.add('prep-revealed'); }
+    }, 2900);
   }
 
   function irParaPasso5() {
