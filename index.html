@@ -2155,6 +2155,9 @@
             <span class="pix-status-dot"></span>
             <span id="pixStatusTxt">Aguardando pagamento…</span>
           </div>
+          <div style="text-align:center;margin:0.4rem 0 0">
+            <span style="font-size:22px;font-weight:900;color:var(--pink)" id="pixValorDisplay">R$ 19,90</span>
+          </div>
           <div style="text-align:center;margin:0.75rem 0 0.25rem">
             <div id="cronoContainer" style="display:inline-flex;align-items:center;gap:6px;background:var(--pink-100);border:1px solid var(--pink-200);border-radius:30px;padding:6px 14px">
               <span style="font-size:13px;font-weight:700;color:var(--pink-dark)">⏰ Sua oferta expira em <span id="cronoPag" style="color:var(--pink);font-size:14px;font-weight:900">7:59</span></span>
@@ -2932,6 +2935,8 @@
       var shared = document.getElementById('payShared');
       if (shared) shared.style.display = 'none';
       document.getElementById('pixResultBox').style.display = 'block';
+      var vd = document.getElementById('pixValorDisplay');
+      if (vd) vd.textContent = 'R$ ' + _bumpTotal.replace('.', ',');
       iniciarCronometro();
 
       // Disparar InitiateCheckout somente quando o QR Code é gerado
