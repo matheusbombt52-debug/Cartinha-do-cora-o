@@ -1610,7 +1610,7 @@
   function iniciarCronometro() {
     if (cronoIniciado) return;
     cronoIniciado = true;
-    var total = 14 * 60 + 59;
+    var total = 7 * 60 + 59;
     function tick() {
       var el = document.getElementById('cronoPag');
       if (!el) return;
@@ -2075,14 +2075,6 @@
     <p class="plano-sub">Sua cartinha fica salva com fotos, vídeos, áudios e um link exclusivo para reviver esse momento sempre que quiserem. ❤️</p>
     <!-- Pagamento inline -->
     <div id="pagamentoInline" style="margin-top:1.5rem">
-      <!-- Temporizador -->
-      <div style="text-align:center;margin-bottom:1.25rem">
-        <div id="cronoContainer" style="display:inline-flex;align-items:center;gap:8px;background:var(--pink-100);border:1px solid var(--pink-200);border-radius:30px;padding:7px 16px">
-          <span style="font-size:14px">⏰</span>
-          <span style="font-size:13px;font-weight:700;color:var(--pink-dark)">Este preço especial termina em <span id="cronoPag" style="color:var(--pink);font-size:15px;font-weight:900">14:59</span></span>
-        </div>
-      </div>
-
       <!-- SEÇÃO COMPARTILHADA: Nome + Bumps + Método -->
       <div id="payShared">
         <label class="campo-label">Quem está enviando essa surpresa?</label>
@@ -2167,6 +2159,11 @@
           <div class="pix-status-row" id="pixStatusRow">
             <span class="pix-status-dot"></span>
             <span id="pixStatusTxt">Aguardando pagamento…</span>
+          </div>
+          <div style="text-align:center;margin:0.75rem 0 0.25rem">
+            <div id="cronoContainer" style="display:inline-flex;align-items:center;gap:6px;background:var(--pink-100);border:1px solid var(--pink-200);border-radius:30px;padding:6px 14px">
+              <span style="font-size:13px;font-weight:700;color:var(--pink-dark)">⏰ Sua oferta expira em <span id="cronoPag" style="color:var(--pink);font-size:14px;font-weight:900">7:59</span></span>
+            </div>
           </div>
           <img id="pixQrCode" src="" alt="QR Code PIX" style="width:200px;height:200px;margin:1rem auto;display:block;border-radius:12px;border:3px solid var(--pink-200)" />
           <div id="pixCopiaCola" style="display:none"></div>
@@ -2952,6 +2949,7 @@
       var shared = document.getElementById('payShared');
       if (shared) shared.style.display = 'none';
       document.getElementById('pixResultBox').style.display = 'block';
+      iniciarCronometro();
 
       // Disparar InitiateCheckout somente quando o QR Code é gerado
       try { fbq('track', 'InitiateCheckout', { value: parseFloat(_bumpTotal), currency: 'BRL' }); } catch(e) {}
@@ -3237,7 +3235,6 @@
     var nr = document.getElementById('nomeRemetente');
     var pn = document.getElementById('pagNome');
     if (nr && pn && nr.value.trim()) pn.value = nr.value.trim();
-    iniciarCronometro();
     iniciarFrasesPlano();
   }
 
